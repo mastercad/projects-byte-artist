@@ -12,7 +12,7 @@ RUN composer install \
         --no-scripts
 
 # ─── Stage 2: PHP-FPM Runtime ─────────────────────────────────────────────────
-FROM php:8.3-fpm-alpine AS app
+FROM php:8.5-fpm-alpine AS app
 
 # Nur die minimal nötigen PHP-Extensions
 RUN apk add --no-cache \
