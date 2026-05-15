@@ -12,19 +12,14 @@ services:
       APP_ENV: prod
       APP_SECRET: "${APP_SECRET}"
     volumes:
-      # var/ in einem Named Volume damit Logs + Cache Container-Restarts überleben
       - app_var:/var/www/html/var
     healthcheck:
       test: ["CMD-SHELL", "nc -z 127.0.0.1 9000 || exit 1"]
       interval: 15s
       timeout:  5s
       retries:  5
-    networks:
-      - internal
 
   # ─── nginx ──────────────────────────────────────────────────────────────────
-  # Statische Assets sind im Image eingebaut (docker/nginx/Dockerfile).
-  # Kein Bind-Mount nötig – lokal `docker compose build nginx` nach Asset-Änderungen.
   nginx:
     build:
       context: .
@@ -37,12 +32,6 @@ services:
     depends_on:
       php:
         condition: service_healthy
-    networks:
-      - internal
 
 volumes:
   app_var:
-
-networks:
-  internal:
-    driver: bridge

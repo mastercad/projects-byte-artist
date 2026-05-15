@@ -77,12 +77,11 @@ jobs:
               docker login ghcr.io -u "${GHCR_USER}" --password-stdin
 
             # ── 4. Neue Images pullen ────────────────────────────────────────
-            docker compose -f docker-compose.yml -f docker-compose.prod.yml \
-              --env-file .env.docker pull
+            docker compose -f docker-compose.yml --env-file .env.docker pull
 
             # ── 5. Container neu starten ─────────────────────────────────────
-            docker compose -f docker-compose.yml -f docker-compose.prod.yml \
-              --env-file .env.docker up -d --remove-orphans
+            docker compose -f docker-compose.yml --env-file .env.docker \
+              up -d --remove-orphans
 
             # ── 6. Warten bis PHP-FPM healthy ist (max 60 s) ─────────────────
             for i in $(seq 1 12); do
