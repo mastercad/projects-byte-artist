@@ -1,0 +1,52 @@
+services:
+
+  # ─── PHP-FPM (Symfony) ──────────────────────────────────────────────────────
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${PHP_IMAGE:-ghcr.io/byte-artist/ba-projekte-php}:${IMAGE_TAG:-latest}
+    container_name: ba_projekte_php
+    restart: unless-stopped
+    environment:
+      APP_ENV: prod
+      APP_SECRET: "${APP_SECRET}"
+    volumes:
+      # var/ in einem Named Volume damit Logs + Cache Container-Restarts überleben
+      - app_var:/var/www/html/var
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z 127.0.0.1 9000 || exit 1"]
+      interval: 15s
+      timeout:  5s
+      retries:  5
+    networks:
+      - internal
+
+  # ─── nginx ──────────────────────────────────────────────────────────────────
+  # Statische Assets sind im Image eingebaut (docker/nginx/Dockerfile).
+  # Kein Bind-Mount nötig – lokal `docker compose build nginx` nach Asset-Änderungen.
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    image: ${NGINX_IMAGE:-ghcr.io/byte-artist/ba-projekte-nginx}:${IMAGE_TAG:-latest}
+    container_name: ba_projekte_nginx
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+    depends_on:
+      php:
+        condition: service_healthy
+    networks:
+      - internal
+      - proxy   # externes Netz für Traefik / Reverse-Proxy
+
+volumes:
+  app_var:
+
+networks:
+  internal:
+    driver: bridge
+  proxy:
+    external: true
+    name: traefik_proxy

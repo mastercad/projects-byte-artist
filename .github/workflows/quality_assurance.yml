@@ -1,0 +1,63 @@
+name: "Quality Assurance"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  # ── PHP: Lint, Symfony-Checks, Security ───────────────────────────────────
+  php:
+    name: "PHP QA"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: intl, zip, mbstring, xml, ctype, iconv, dom, filter, json
+          coverage: none
+
+      - name: Validate composer.json / composer.lock
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Security audit (composer audit)
+        run: composer audit --no-dev
+
+      - name: PHP syntax check (src/)
+        run: find src/ -name "*.php" -print0 | xargs -0 -P4 php -l | grep -v "^No syntax errors" || true
+
+      - name: Lint Twig templates
+        env:
+          APP_ENV: prod
+          APP_SECRET: ci_secret_for_linting_not_used_in_production
+        run: php bin/console lint:twig templates/ --env=prod
+
+      - name: Lint YAML configs
+        env:
+          APP_ENV: prod
+          APP_SECRET: ci_secret_for_linting_not_used_in_production
+        run: php bin/console lint:yaml config/ --parse-tags
+
+      - name: Lint Symfony DI container
+        env:
+          APP_ENV: prod
+          APP_SECRET: ci_secret_for_linting_not_used_in_production
+        run: php bin/console lint:container --env=prod

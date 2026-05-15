@@ -1,0 +1,37 @@
+{#
+  Partial: _steps.html.twig
+  Verwendung: {% include 'projects/_partials/_steps.html.twig' with { steps: [...] } %}
+
+  steps[] = { title: string, text: string }
+  Optional: steps[].code = { lang: string, filename: string, content: string }
+#}
+<div class="steps">
+    {% for step in steps %}
+        <div class="step">
+            <div class="step-number-wrap">
+                <div class="step-number">{{ loop.index }}</div>
+            </div>
+            <div class="step-content">
+                <h3>{{ step.title }}</h3>
+                <p>{{ step.text }}</p>
+                {% if step.code is defined and step.code %}
+                    <div class="code-block">
+                        <div class="code-block-header">
+                            <span class="code-block-lang">
+                                <i class="fas fa-code"></i>
+                                {{ step.code.lang }}
+                                {% if step.code.filename is defined and step.code.filename %}
+                                    &nbsp;·&nbsp; {{ step.code.filename }}
+                                {% endif %}
+                            </span>
+                            <button class="code-block-copy" type="button">
+                                <i class="fas fa-copy"></i> Kopieren
+                            </button>
+                        </div>
+                        <pre><code class="language-{{ step.code.lang }}">{{ step.code.content }}</code></pre>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

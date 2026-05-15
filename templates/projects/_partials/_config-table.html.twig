@@ -1,0 +1,26 @@
+{#
+  Partial: _config-table.html.twig
+  Verwendung: {% include 'projects/_partials/_config-table.html.twig' with { rows: [...] } %}
+
+  rows[] = { option: string, type: string, default: string, desc: string }
+#}
+<table class="config-table">
+    <thead>
+        <tr>
+            <th>Option</th>
+            <th>Typ</th>
+            <th>Standard</th>
+            <th>Beschreibung</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+            <tr>
+                <td>{{ row.option }}</td>
+                <td>{{ row.type }}</td>
+                <td>{{ row.default }}</td>
+                <td>{{ row.desc }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

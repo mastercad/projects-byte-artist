@@ -1,0 +1,101 @@
+name: "Deploy Application"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Benötigte GitHub Secrets:
+#   DEPLOY_SSH_HOST   – Server-Hostname oder IP
+#   DEPLOY_SSH_USER   – SSH-Login-User
+#   DEPLOY_SSH_KEY    – SSH-Private-Key (ED25519 empfohlen)
+#   DEPLOY_SSH_PORT   – SSH-Port (Standard: 22)
+#   DEPLOY_PATH       – Absoluter Pfad auf dem Server (z.B. /opt/ba-projekte)
+#   APP_SECRET        – Symfony APP_SECRET (≥32 Zufallszeichen)
+#   GHCR_TOKEN        – GitHub-Token mit read:packages + write:packages
+# ─────────────────────────────────────────────────────────────────────────────
+
+on:
+  # Auto-Deploy nach erfolgreichem Image-Build.
+  workflow_run:
+    workflows: ["Build & Push Docker Images"]
+    types: [completed]
+    branches: [main]
+  # Manuell: beliebigen Image-Tag deployen.
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Docker Image-Tag (Standard: latest)"
+        required: false
+        default: 'latest'
+
+jobs:
+  deploy:
+    name: "Deploy via Docker Compose"
+    runs-on: ubuntu-latest
+
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        env:
+          DEPLOY_PATH:  ${{ secrets.DEPLOY_PATH }}
+          APP_SECRET:   ${{ secrets.APP_SECRET }}
+          IMAGE_TAG:    ${{ inputs.image_tag || 'latest' }}
+          GHCR_TOKEN:   ${{ secrets.GHCR_TOKEN }}
+          GHCR_USER:    ${{ github.actor }}
+          REPO_OWNER:   ${{ github.repository_owner }}
+          REPO:         ${{ github.repository }}
+        with:
+          host:     ${{ secrets.DEPLOY_SSH_HOST }}
+          username: ${{ secrets.DEPLOY_SSH_USER }}
+          key:      ${{ secrets.DEPLOY_SSH_KEY }}
+          port:     ${{ secrets.DEPLOY_SSH_PORT || 22 }}
+          envs: DEPLOY_PATH,APP_SECRET,IMAGE_TAG,GHCR_TOKEN,GHCR_USER,REPO_OWNER,REPO
+          script: |
+            set -euo pipefail
+
+            # ── 1. Deploy-Verzeichnis + Repo sicherstellen ───────────────────
+            mkdir -p "${DEPLOY_PATH}"
+            if [ ! -d "${DEPLOY_PATH}/.git" ]; then
+              git clone "https://github.com/${REPO}.git" "${DEPLOY_PATH}"
+            fi
+            cd "${DEPLOY_PATH}"
+            git fetch origin main
+            git checkout main
+            git pull --ff-only origin main
+
+            # ── 2. .env.docker aus Dist-Template befüllen (idempotent) ───────
+            cp .env.docker.dist .env.docker
+            sed -i "s|^APP_SECRET=.*|APP_SECRET=${APP_SECRET}|"           .env.docker
+            sed -i "s|^PHP_IMAGE=.*|PHP_IMAGE=ghcr.io/${REPO_OWNER}/ba-projekte-php|"     .env.docker
+            sed -i "s|^NGINX_IMAGE=.*|NGINX_IMAGE=ghcr.io/${REPO_OWNER}/ba-projekte-nginx|" .env.docker
+            sed -i "s|^IMAGE_TAG=.*|IMAGE_TAG=${IMAGE_TAG}|"               .env.docker
+            chmod 600 .env.docker
+
+            # ── 3. GHCR Login ────────────────────────────────────────────────
+            printf '%s' "${GHCR_TOKEN}" | \
+              docker login ghcr.io -u "${GHCR_USER}" --password-stdin
+
+            # ── 4. Neue Images pullen ────────────────────────────────────────
+            docker compose -f docker-compose.yml --env-file .env.docker pull
+
+            # ── 5. Container neu starten ─────────────────────────────────────
+            docker compose -f docker-compose.yml --env-file .env.docker \
+              up -d --remove-orphans
+
+            # ── 6. Warten bis PHP-FPM healthy ist (max 60 s) ─────────────────
+            for i in $(seq 1 12); do
+              STATUS=$(docker inspect --format='{{.State.Health.Status}}' \
+                ba_projekte_php 2>/dev/null || echo "starting")
+              if [ "${STATUS}" = "healthy" ]; then
+                echo "PHP container ist healthy."
+                break
+              fi
+              echo "Warte auf PHP container (Versuch ${i}/12, Status: ${STATUS})…"
+              sleep 5
+            done
+
+            # ── 7. Dangling Images entfernen ──────────────────────────────────
+            docker image prune -f
+
+            echo "Deployment abgeschlossen."

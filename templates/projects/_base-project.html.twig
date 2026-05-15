@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.title }} | byte-artist.de{% endblock %}
+{% block meta_description %}{{ project.tagline }}{% endblock %}
+
+{% block nav_extra %}
+    <li><a href="{{ path('home') }}">← Alle Projekte</a></li>
+{% endblock %}
+
+{% block body %}
+<main class="page-main">
+
+    {# ── Hero ── #}
+    {% include 'projects/_partials/_hero.html.twig' with { hero: project } %}
+
+    <div class="page-content">
+        <div class="doc-layout">
+
+            {# ────────────────── HAUPTINHALT ────────────────── #}
+            <div class="doc-content">
+
+                {# ── Einleitung ── #}
+                <div class="prose">
+                    <h2 id="overview">Überblick</h2>
+                    <p>{{ project.intro }}</p>
+                </div>
+
+                {# ── Features ── #}
+                {% if features is defined and features %}
+                    <div class="prose">
+                        <h2 id="features">Features</h2>
+                    </div>
+                    {% include 'projects/_partials/_feature-grid.html.twig' with { features: features } %}
+                {% endif %}
+
+                {# ── Installation ── #}
+                {% if install_steps is defined and install_steps %}
+                    <div class="prose">
+                        <h2 id="installation">Installation</h2>
+                    </div>
+                    {% include 'projects/_partials/_steps.html.twig' with { steps: install_steps } %}
+                {% endif %}
+
+                {# ── Konfiguration ── #}
+                {% if config_rows is defined and config_rows %}
+                    <div class="prose">
+                        <h2 id="configuration">Konfiguration</h2>
+                        <p>Alle verfügbaren Optionen im Überblick:</p>
+                    </div>
+                    {% include 'projects/_partials/_config-table.html.twig' with { rows: config_rows } %}
+                {% endif %}
+
+                {# ── Hinweise / Callouts ── #}
+                {% if callouts is defined and callouts %}
+                    {% for c in callouts %}
+                        {% include 'projects/_partials/_callout.html.twig' with c %}
+                    {% endfor %}
+                {% endif %}
+
+                {# ── Content-Blöcke (beliebige Prose-Inhalte) ── #}
+                {% block doc_content %}{% endblock %}
+
+                {# ── Prev / Next Navigation ── #}
+                {% if nav is defined and nav %}
+                    <nav class="doc-nav" aria-label="Seitennavigation">
+                        {% if nav.prev is defined and nav.prev %}
+                            <a class="doc-nav-item doc-nav-item--prev" href="{{ path('project', { slug: nav.prev.slug }) }}">
+                                <span class="doc-nav-label">← Vorheriges Projekt</span>
+                                <span class="doc-nav-title">{{ nav.prev.title }}</span>
+                            </a>
+                        {% else %}
+                            <div></div>
+                        {% endif %}
+                        {% if nav.next is defined and nav.next %}
+                            <a class="doc-nav-item doc-nav-item--next" href="{{ path('project', { slug: nav.next.slug }) }}">
+                                <span class="doc-nav-label">Nächstes Projekt →</span>
+                                <span class="doc-nav-title">{{ nav.next.title }}</span>
+                            </a>
+                        {% endif %}
+                    </nav>
+                {% endif %}
+
+            </div>
+            {# /doc-content #}
+
+            {# ────────────────── TOC ────────────────── #}
+            {% if toc is defined and toc %}
+                <aside class="doc-toc">
+                    <p class="doc-toc-title">Inhalt</p>
+                    <ul class="doc-toc-list">
+                        {% for item in toc %}
+                            <li class="doc-toc-item{% if item.sub is defined and item.sub %} doc-toc-item--sub{% endif %}">
+                                <a href="#{{ item.id }}">{{ item.label }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </aside>
+            {% endif %}
+
+        </div>
+    </div>
+
+</main>
+{% endblock %}

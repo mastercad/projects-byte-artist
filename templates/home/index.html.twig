@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projekte | byte-artist.de{% endblock %}
+{% block meta_description %}Open-Source-Projekte von byte-artist — Dokumentationen, HowTos und technische Guides.{% endblock %}
+
+{% block body %}
+<main class="page-main">
+
+    {# ── Hero ── #}
+    <section style="position:relative; padding: calc(var(--nav-h) + 60px) 28px 72px; background: var(--bg-2); border-bottom: 1px solid var(--border); overflow: hidden;">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 10% 50%, rgba(200,144,96,0.05) 0%, transparent 60%);pointer-events:none;"></div>
+        <div style="max-width:1280px;margin:0 auto;position:relative;z-index:1;">
+            <span class="section-tag">Open Source</span>
+            <h1 style="font-size:clamp(36px,5vw,64px);margin-bottom:18px;line-height:1.15;">
+                Projekte &amp; Dokumentation
+            </h1>
+            <p style="font-size:18px;color:var(--text-2);max-width:600px;line-height:1.7;">
+                Technische Dokumentationen, Installations-Guides und HowTos für meine Open-Source-Projekte.
+            </p>
+        </div>
+    </section>
+
+    {# ── Projekte Grid ── #}
+    <div class="section">
+        <div class="cards-grid">
+            {% for project in projects %}
+                <article class="project-card animate-on-scroll">
+                    <div class="card-body">
+                        <div class="card-icon"><i class="{{ project.icon }}"></i></div>
+                        <h2 class="card-title">
+                            <a href="{{ path('project', { slug: project.slug }) }}">{{ project.title }}</a>
+                        </h2>
+                        <p class="card-desc">{{ project.description }}</p>
+                        <div class="tags mt-2">
+                            <span class="status-badge status-badge--{{ project.status }}">{{ project.status }}</span>
+                            {% for tag in project.tags %}
+                                <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card-footer-bar">
+                        <a class="card-link" href="{{ path('project', { slug: project.slug }) }}">
+                            Zur Doku <i class="fas fa-arrow-right"></i>
+                        </a>
+                        {% if project.github_url is defined and project.github_url %}
+                            <a class="btn-ghost" href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        {% endif %}
+                    </div>
+                </article>
+            {% else %}
+                <p style="color:var(--text-2);">Noch keine Projekte vorhanden.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</main>
+{% endblock %}

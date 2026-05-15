@@ -1,0 +1,82 @@
+{% extends 'projects/_base-project.html.twig' %}
+
+{#
+  Beispiel-Projektseite — zeigt alle Komponenten in der Praxis.
+  Diese Datei dient als Vorlage für neue Projekte.
+  Kopieren → umbenennen → Inhalte ersetzen.
+#}
+
+{% set project = {
+    title:      'Beispiel-Projekt',
+    tagline:    'Eine kurze, prägnante Beschreibung was dieses Projekt macht und warum es existiert.',
+    status:     'stable',
+    tags:       ['PHP 8.3', 'Symfony 7', 'Open Source'],
+    github_url: 'https://github.com/byte-artist/beispiel-projekt',
+    docs_url:   null,
+    intro: 'Dieses Projekt löst ein konkretes Problem auf elegante Art und Weise.
+            Es ist in PHP geschrieben und kann als Composer-Paket eingebunden werden.'
+} %}
+
+{% set toc = [
+    { id: 'overview',      label: 'Überblick' },
+    { id: 'features',      label: 'Features' },
+    { id: 'installation',  label: 'Installation' },
+    { id: 'configuration', label: 'Konfiguration' },
+    { id: 'usage',         label: 'Verwendung' },
+] %}
+
+{% set features = [
+    { icon: 'fas fa-bolt',       title: 'Schnell',       desc: 'Minimaler Overhead, maximale Performance.' },
+    { icon: 'fas fa-shield-alt', title: 'Sicher',        desc: 'Sicherheit ab Design, kein Nachdenken nötig.' },
+    { icon: 'fas fa-puzzle-piece', title: 'Modular',     desc: 'Nur einbinden was gebraucht wird.' },
+    { icon: 'fas fa-terminal',   title: 'CLI Support',   desc: 'Vollwertiger CLI-Befehlssatz inklusive.' },
+] %}
+
+{% set install_steps = [
+    {
+        title: 'Composer-Abhängigkeit hinzufügen',
+        text:  'Über Composer installieren — PHP 8.1+ und Symfony 6+ werden vorausgesetzt.',
+        code:  { lang: 'bash', content: 'composer require byte-artist/beispiel-projekt' }
+    },
+    {
+        title: 'Bundle registrieren',
+        text:  'Das Bundle wird bei Symfony Flex automatisch registriert. Bei manueller Installation config/bundles.php ergänzen.',
+        code:  { lang: 'php', filename: 'config/bundles.php', content: 'ByteArtist\\BeispielBundle\\BeispielBundle::class => [\'all\' => true],' }
+    },
+    {
+        title: 'Konfiguration anlegen',
+        text:  'Minimale Konfiguration in config/packages/beispiel.yaml anlegen:',
+        code:  { lang: 'yaml', filename: 'config/packages/beispiel.yaml', content: "beispiel:\n    enabled: true\n    option_a: 'wert'" }
+    },
+] %}
+
+{% set config_rows = [
+    { option: 'enabled',   type: 'bool',   default: 'true',  desc: 'Bundle global aktivieren oder deaktivieren.' },
+    { option: 'option_a',  type: 'string', default: 'null',  desc: 'Primäre Konfigurationsoption.' },
+    { option: 'cache_ttl', type: 'int',    default: '3600',  desc: 'Cache-Lebensdauer in Sekunden.' },
+] %}
+
+{% block doc_content %}
+    <div class="prose">
+        <h2 id="usage">Verwendung</h2>
+        <p>Nach der Installation steht der Service per Autowiring zur Verfügung:</p>
+    </div>
+
+    {% include 'projects/_partials/_code-block.html.twig' with {
+        lang: 'php',
+        filename: 'src/Controller/DemoController.php',
+        content: "use ByteArtist\\BeispielBundle\\Service\\BeispielService;\n\nclass DemoController extends AbstractController\n{\n    public function index(BeispielService $service): Response\n    {\n        $result = $service->doSomething();\n        return $this->json($result);\n    }\n}"
+    } %}
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'tip',
+        title: 'Profi-Tipp',
+        text:  'Den Service als <code>lazy</code> in services.yaml konfigurieren um den Boot-Overhead zu minimieren.'
+    } %}
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'warning',
+        title: 'Breaking Change in v2',
+        text:  'Ab Version 2.0 wurde die API überarbeitet — das Upgrade-Guide im GitHub-Repo beachten.'
+    } %}
+{% endblock %}

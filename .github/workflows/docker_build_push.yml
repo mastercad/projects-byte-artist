@@ -1,0 +1,115 @@
+name: "Build & Push Docker Images"
+
+# Läuft nach erfolgreichem QA auf main, bei Version-Tags oder manuell.
+on:
+  workflow_run:
+    workflows: ["Quality Assurance"]
+    types: [completed]
+    branches: [main]
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Zusätzlicher Image-Tag (z.B. v1.2.3). Standard: 'latest'."
+        required: false
+        default: ''
+
+env:
+  REGISTRY:     ghcr.io
+  PHP_IMAGE:    ghcr.io/${{ github.repository_owner }}/ba-projekte-php
+  NGINX_IMAGE:  ghcr.io/${{ github.repository_owner }}/ba-projekte-nginx
+
+jobs:
+  build-push:
+    name: "Build & Push"
+    runs-on: ubuntu-latest
+
+    # Nur ausführen wenn QA erfolgreich war (oder manuell/tag getriggert).
+    if: >
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      # ── Tags / Labels ────────────────────────────────────────────────────
+      - name: PHP image metadata
+        id: meta-php
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.PHP_IMAGE }}
+          tags: |
+            type=sha,prefix=sha-
+            type=ref,event=tag
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_run' }}
+            type=raw,value=${{ inputs.tag }},enable=${{ inputs.tag != '' }}
+
+      - name: nginx image metadata
+        id: meta-nginx
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.NGINX_IMAGE }}
+          tags: |
+            type=sha,prefix=sha-
+            type=ref,event=tag
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_run' }}
+            type=raw,value=${{ inputs.tag }},enable=${{ inputs.tag != '' }}
+
+      # ── Build & Push: PHP-FPM ────────────────────────────────────────────
+      - name: Build & push PHP image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags:   ${{ steps.meta-php.outputs.tags }}
+          labels: ${{ steps.meta-php.outputs.labels }}
+          cache-from: type=gha,scope=php-prod
+          cache-to:   type=gha,mode=max,scope=php-prod
+
+      # ── Build & Push: nginx ──────────────────────────────────────────────
+      - name: Build & push nginx image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/nginx/Dockerfile
+          push: true
+          tags:   ${{ steps.meta-nginx.outputs.tags }}
+          labels: ${{ steps.meta-nginx.outputs.labels }}
+          cache-from: type=gha,scope=nginx-prod
+          cache-to:   type=gha,mode=max,scope=nginx-prod
+
+      # ── Aufräumen: nur die 5 neuesten sha-Versionen behalten ────────────
+      - name: Delete old PHP image versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name:        ba-projekte-php
+          package-type:        container
+          min-versions-to-keep: 5
+          ignore-versions:     '^(latest|v\d+\..*)$'
+          token:               ${{ secrets.GHCR_TOKEN }}
+
+      - name: Delete old nginx image versions
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name:        ba-projekte-nginx
+          package-type:        container
+          min-versions-to-keep: 5
+          ignore-versions:     '^(latest|v\d+\..*)$'
+          token:               ${{ secrets.GHCR_TOKEN }}

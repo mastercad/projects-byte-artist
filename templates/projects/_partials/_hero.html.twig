@@ -1,0 +1,39 @@
+{#
+  Partial: _hero.html.twig
+  Verwendung: {% include 'projects/_partials/_hero.html.twig' with { hero: {...} } %}
+
+  hero = {
+    title:       string,
+    tagline:     string,
+    status:      'stable'|'beta'|'wip',
+    tags:        string[],
+    github_url:  string|null,
+    docs_url:    string|null,
+  }
+#}
+<header class="page-hero">
+    <div class="page-hero-inner">
+        <div class="page-hero-meta">
+            <span class="status-badge status-badge--{{ hero.status }}">{{ hero.status }}</span>
+            <div class="tags">
+                {% for tag in hero.tags %}
+                    <span class="tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <h1>{{ hero.title }}</h1>
+        <p class="page-hero-desc">{{ hero.tagline }}</p>
+        <div class="page-hero-meta mt-4">
+            {% if hero.github_url is defined and hero.github_url %}
+                <a class="btn-secondary" href="{{ hero.github_url }}" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            {% endif %}
+            {% if hero.docs_url is defined and hero.docs_url %}
+                <a class="btn-primary" href="{{ hero.docs_url }}">
+                    <i class="fas fa-book-open"></i> Dokumentation
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</header>

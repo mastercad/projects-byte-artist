@@ -1,0 +1,14 @@
+{#
+  Partial: _callout.html.twig
+  Verwendung: {% include 'projects/_partials/_callout.html.twig' with { type: 'info', title: '...', text: '...' } %}
+
+  type: 'info'|'warning'|'tip'|'danger'
+#}
+{% set icons = { info: 'fas fa-circle-info', warning: 'fas fa-triangle-exclamation', tip: 'fas fa-lightbulb', danger: 'fas fa-radiation' } %}
+<div class="callout callout--{{ type }}">
+    <span class="callout-icon"><i class="{{ icons[type] ?? icons.info }}"></i></span>
+    <div class="callout-body">
+        {% if title is defined and title %}<strong>{{ title }}</strong>{% endif %}
+        {{ text }}
+    </div>
+</div>
