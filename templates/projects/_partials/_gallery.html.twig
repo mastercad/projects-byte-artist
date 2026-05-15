@@ -1,0 +1,27 @@
+{#
+  Partial: _gallery.html.twig
+  Bildergalerie mit Lightbox.
+
+  images = [
+    { src: string, alt: string, caption: string|null },
+    ...
+  ]
+  cols: 2|3   – Spaltenanzahl, default: 3
+#}
+{% set cols = cols ?? 3 %}
+<div class="gallery gallery--{{ cols }}">
+    {% for img in images %}
+        <div class="gallery-item"
+             data-lightbox-src="{{ img.src }}"
+             data-lightbox-caption="{{ img.caption ?? img.alt }}"
+             role="button"
+             tabindex="0"
+             aria-label="Bild vergrößern: {{ img.alt }}">
+            <img src="{{ img.src }}" alt="{{ img.alt }}" loading="lazy">
+            {% if img.caption is defined and img.caption %}
+                <div class="gallery-item-caption">{{ img.caption }}</div>
+            {% endif %}
+            <div class="gallery-item-zoom"><i class="fas fa-expand"></i></div>
+        </div>
+    {% endfor %}
+</div>

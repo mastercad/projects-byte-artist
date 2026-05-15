@@ -1,0 +1,25 @@
+{#
+  Partial: _stats.html.twig
+  Kennzahlen-/KPI-Leiste.
+
+  stats = [
+    { value: string, label: string, icon: string|null },
+    ...
+  ]
+
+  Beispiel:
+    { value: '< 50ms', label: 'API Response Time', icon: 'fas fa-bolt' }
+    { value: '99.9%',  label: 'Uptime (SLA)',       icon: 'fas fa-shield' }
+    { value: '10 k',   label: 'Tägliche Anfragen',  icon: 'fas fa-chart-line' }
+#}
+<div class="stats-strip">
+    {% for stat in stats %}
+        <div class="stats-item animate-on-scroll stagger-{{ loop.index <= 6 ? loop.index : 6 }}">
+            {% if stat.icon is defined and stat.icon %}
+                <div class="stats-icon"><i class="{{ stat.icon }}"></i></div>
+            {% endif %}
+            <div class="stats-value">{{ stat.value }}</div>
+            <div class="stats-label">{{ stat.label }}</div>
+        </div>
+    {% endfor %}
+</div>

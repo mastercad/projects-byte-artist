@@ -1,0 +1,37 @@
+{#
+  Partial: _video.html.twig
+  Video-Einbettung (YouTube, Vimeo oder selbst gehostetes MP4).
+
+  video = {
+    type:    'youtube'|'vimeo'|'mp4',
+    src:     string,         – YouTube-Video-ID, Vimeo-Video-ID oder MP4-URL
+    title:   string,         – Barrierefreiheit / iframe title
+    caption: string|null,    – Bildunterschrift
+  }
+#}
+<figure class="video-embed">
+    <div class="video-embed-ratio">
+        {% if video.type == 'youtube' %}
+            <iframe
+                src="https://www.youtube-nocookie.com/embed/{{ video.src }}"
+                title="{{ video.title }}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"></iframe>
+        {% elseif video.type == 'vimeo' %}
+            <iframe
+                src="https://player.vimeo.com/video/{{ video.src }}"
+                title="{{ video.title }}"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                loading="lazy"></iframe>
+        {% else %}
+            <video controls preload="metadata" title="{{ video.title }}">
+                <source src="{{ video.src }}" type="video/mp4">
+            </video>
+        {% endif %}
+    </div>
+    {% if video.caption is defined and video.caption %}
+        <figcaption class="img-block-caption" style="padding: 8px 16px 14px;">{{ video.caption }}</figcaption>
+    {% endif %}
+</figure>

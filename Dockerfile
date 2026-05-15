@@ -35,15 +35,20 @@ WORKDIR /var/www/html
 COPY --from=composer /app/vendor ./vendor
 
 # App-Code
-COPY bin/     ./bin/
-COPY config/  ./config/
-COPY public/  ./public/
-COPY src/     ./src/
+COPY composer.json ./
+COPY bin/       ./bin/
+COPY config/    ./config/
+COPY public/    ./public/
+COPY src/       ./src/
 COPY templates/ ./templates/
 COPY .env.dist  .env
 
-# var/-Verzeichnis anlegen, Permissions setzen
-RUN mkdir -p var/cache var/log \
+# Korrekte Rechte: App-Code root:root 755/644, nur var/ für www-data
+RUN chmod 755 /var/www/html \
+    && find . -not -path './var/*' -type d -exec chmod 755 {} + \
+    && find . -not -path './var/*' -type f -exec chmod 644 {} + \
+    && chmod +x bin/console \
+    && mkdir -p var/cache var/log \
     && chown -R www-data:www-data var/
 
 # Symfony-Cache für Produktion warmup

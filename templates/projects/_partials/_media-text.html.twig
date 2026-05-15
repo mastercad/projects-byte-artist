@@ -1,0 +1,40 @@
+{#
+  Partial: _media-text.html.twig
+  Split-Layout: Bild/Screenshot + beschreibender Text nebeneinander.
+
+  image  = { src: string, alt: string }   – das Bild (links, oder rechts bei flip)
+  title:   string
+  text:    string                          – HTML erlaubt
+  points:  string[]|null                  – optionale Bullet-Liste (HTML erlaubt)
+  flip:    bool                           – Bild rechts, Text links; default: false
+  badge:   string|null                    – kleines Label über dem Titel
+  cta:     { label: string, url: string, icon: string|null }|null
+#}
+{% set flip = flip ?? false %}
+<div class="media-text{% if flip %} media-text--flip{% endif %}">
+    <div class="media-text-image">
+        <img src="{{ image.src }}" alt="{{ image.alt }}" loading="lazy">
+    </div>
+    <div class="media-text-copy">
+        {% if badge is defined and badge %}
+            <span class="media-text-badge">{{ badge }}</span>
+        {% endif %}
+        <h3 class="media-text-title">{{ title }}</h3>
+        <p class="media-text-body">{{ text|raw }}</p>
+        {% if points is defined and points %}
+            <ul class="media-text-points">
+                {% for point in points %}
+                    <li>{{ point|raw }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if cta is defined and cta %}
+            <div class="mt-4">
+                <a class="btn-secondary" href="{{ cta.url }}"
+                   {% if cta.url starts with 'http' %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                    {% if cta.icon is defined and cta.icon %}<i class="{{ cta.icon }}"></i> {% endif %}{{ cta.label }}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>

@@ -25,39 +25,7 @@
                     <p>{{ project.intro }}</p>
                 </div>
 
-                {# ── Features ── #}
-                {% if features is defined and features %}
-                    <div class="prose">
-                        <h2 id="features">Features</h2>
-                    </div>
-                    {% include 'projects/_partials/_feature-grid.html.twig' with { features: features } %}
-                {% endif %}
-
-                {# ── Installation ── #}
-                {% if install_steps is defined and install_steps %}
-                    <div class="prose">
-                        <h2 id="installation">Installation</h2>
-                    </div>
-                    {% include 'projects/_partials/_steps.html.twig' with { steps: install_steps } %}
-                {% endif %}
-
-                {# ── Konfiguration ── #}
-                {% if config_rows is defined and config_rows %}
-                    <div class="prose">
-                        <h2 id="configuration">Konfiguration</h2>
-                        <p>Alle verfügbaren Optionen im Überblick:</p>
-                    </div>
-                    {% include 'projects/_partials/_config-table.html.twig' with { rows: config_rows } %}
-                {% endif %}
-
-                {# ── Hinweise / Callouts ── #}
-                {% if callouts is defined and callouts %}
-                    {% for c in callouts %}
-                        {% include 'projects/_partials/_callout.html.twig' with c %}
-                    {% endfor %}
-                {% endif %}
-
-                {# ── Content-Blöcke (beliebige Prose-Inhalte) ── #}
+                {# ── Content-Blöcke — die Child-Template steuert die Reihenfolge vollständig ── #}
                 {% block doc_content %}{% endblock %}
 
                 {# ── Prev / Next Navigation ── #}

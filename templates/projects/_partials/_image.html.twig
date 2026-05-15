@@ -1,0 +1,20 @@
+{#
+  Partial: _image.html.twig
+  Einzelbild mit optionaler Bildunterschrift.
+
+  image = {
+    src:     string,                              – Bildpfad, z. B. '/assets/img/projekt/screen.png'
+    alt:     string,                              – Alt-Text (Pflicht)
+    caption: string|null,                         – Bildunterschrift
+    variant: 'contained'|'full'|'bordered',       – default: 'contained'
+  }
+#}
+{% set variant = image.variant ?? 'contained' %}
+<figure class="img-block img-block--{{ variant }}">
+    <div class="img-block-inner">
+        <img src="{{ image.src }}" alt="{{ image.alt }}" loading="lazy">
+    </div>
+    {% if image.caption is defined and image.caption %}
+        <figcaption class="img-block-caption">{{ image.caption }}</figcaption>
+    {% endif %}
+</figure>

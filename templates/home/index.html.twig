@@ -22,9 +22,10 @@
 
     {# ── Projekte Grid ── #}
     <div class="section">
-        <div class="cards-grid">
+        <div class="tag-filter-bar" id="tag-filter-bar" hidden></div>
+        <div class="cards-grid" id="projects-grid">
             {% for project in projects %}
-                <article class="project-card animate-on-scroll">
+                <article class="project-card animate-on-scroll" data-tags="{{ project.tags|join(',') }}">
                     <div class="card-body">
                         <div class="card-icon"><i class="{{ project.icon }}"></i></div>
                         <h2 class="card-title">
@@ -34,7 +35,7 @@
                         <div class="tags mt-2">
                             <span class="status-badge status-badge--{{ project.status }}">{{ project.status }}</span>
                             {% for tag in project.tags %}
-                                <span class="tag">{{ tag }}</span>
+                                <button class="tag tag--clickable" data-filter-tag="{{ tag }}">{{ tag }}</button>
                             {% endfor %}
                         </div>
                     </div>
@@ -53,6 +54,7 @@
                 <p style="color:var(--text-2);">Noch keine Projekte vorhanden.</p>
             {% endfor %}
         </div>
+        <nav class="pagination" id="pagination" aria-label="Seitennavigation" hidden></nav>
     </div>
 
 </main>

@@ -1,0 +1,25 @@
+{#
+  Partial: _screenshot.html.twig
+  Screenshot im Browser-Fenster-Rahmen (macOS-Style).
+
+  screenshot = {
+    src:     string,         – Bildpfad
+    alt:     string,         – Alt-Text
+    url:     string|null,    – Angezeigter URL-Bar-Text, z. B. 'app.beispiel.de/dashboard'
+    caption: string|null,    – Bildunterschrift unterhalb des Rahmens
+  }
+#}
+<figure class="screenshot-frame">
+    <div class="screenshot-frame-bar">
+        <div class="screenshot-frame-dots">
+            <span></span><span></span><span></span>
+        </div>
+        {% if screenshot.url is defined and screenshot.url %}
+            <div class="screenshot-frame-url">{{ screenshot.url }}</div>
+        {% endif %}
+    </div>
+    <img src="{{ screenshot.src }}" alt="{{ screenshot.alt }}" loading="lazy">
+    {% if screenshot.caption is defined and screenshot.caption %}
+        <figcaption class="img-block-caption" style="padding: 10px 16px 14px;">{{ screenshot.caption }}</figcaption>
+    {% endif %}
+</figure>

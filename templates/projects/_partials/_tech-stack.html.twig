@@ -1,0 +1,27 @@
+{#
+  Partial: _tech-stack.html.twig
+  Übersicht der eingesetzten Technologien.
+
+  items = [
+    { icon: 'fab fa-php',     name: 'PHP 8.3',      role: 'Backend',   color: '#8892bf' },
+    { icon: 'fab fa-symfony', name: 'Symfony 7',    role: 'Framework', color: '#1a1a1a' },
+    { icon: 'fas fa-database',name: 'PostgreSQL 16', role: 'Datenbank' },
+    ...
+  ]
+#}
+<div class="tech-stack">
+    {% for item in items %}
+        <div class="tech-item animate-on-scroll stagger-{{ loop.index <= 6 ? loop.index : 6 }}">
+            <div class="tech-item-icon"
+                 {% if item.color is defined and item.color %}style="color: {{ item.color }}"{% endif %}>
+                <i class="{{ item.icon }}"></i>
+            </div>
+            <div>
+                <div class="tech-item-name">{{ item.name }}</div>
+                {% if item.role is defined and item.role %}
+                    <div class="tech-item-role">{{ item.role }}</div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
