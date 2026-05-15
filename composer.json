@@ -1,8 +1,8 @@
 {
+    "name": "byte-artist/projekte",
+    "description": "Projektportfolio und Dokumentationsseite für byte-artist.de — gebaut mit Symfony 7 und Twig.",
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "stable",
-    "name": "byte-artist/projekte",
     "authors": [
         {
             "name": "Andreas Kempe",
