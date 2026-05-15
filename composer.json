@@ -2,6 +2,13 @@
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
+    "name": "byte-artist/projekte",
+    "authors": [
+        {
+            "name": "Andreas Kempe",
+            "email": "andreas.kempe@byte-artist.de"
+        }
+    ],
     "prefer-stable": true,
     "require": {
         "php": ">=8.2",
