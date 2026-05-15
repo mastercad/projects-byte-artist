@@ -23,7 +23,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: docker/nginx/Dockerfile
+      dockerfile: .docker/nginx/Dockerfile
     image: ${NGINX_IMAGE:-ghcr.io/byte-artist/ba-projekte-nginx}:${IMAGE_TAG:-latest}
     container_name: ba_projekte_nginx
     restart: unless-stopped

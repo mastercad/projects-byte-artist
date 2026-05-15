@@ -26,8 +26,8 @@ RUN apk add --no-cache \
     && rm -rf /var/cache/apk/*
 
 # PHP- und OPcache-Konfiguration
-COPY docker/php/php.ini     /usr/local/etc/php/conf.d/app.ini
-COPY docker/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY .docker/php/php.ini     /usr/local/etc/php/conf.d/app.ini
+COPY .docker/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 WORKDIR /var/www/html
 
