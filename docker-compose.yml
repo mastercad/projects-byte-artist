@@ -33,13 +33,12 @@ services:
     container_name: ba_projekte_nginx
     restart: unless-stopped
     ports:
-      - "${HTTP_PORT:-8080}:80"
+      - "${HTTP_PORT:-8050}:80"
     depends_on:
       php:
         condition: service_healthy
     networks:
       - internal
-      - proxy   # externes Netz für Traefik / Reverse-Proxy
 
 volumes:
   app_var:
@@ -47,6 +46,3 @@ volumes:
 networks:
   internal:
     driver: bridge
-  proxy:
-    external: true
-    name: traefik_proxy
