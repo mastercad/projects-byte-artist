@@ -1,15 +1,15 @@
 {
-  "name": "DJI Osmo Action 5 Pro - 1. Halbzeit",
+  "name": "Beispiel-Workflow",
   "shutdown_after": false,
-  "created_at": "2026-03-23T15:18:28",
+  "created_at": "2025-08-16T10:00:00",
   "job": {
     "id": "8473d60b",
     "enabled": true,
-    "name": "DJI Osmo Action 5 Pro - 1. Halbzeit",
+    "name": "Action-Kamera - 1. Halbzeit",
     "source_mode": "files",
     "files": [
       {
-        "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510112927_0001_D.MP4",
+        "source_path": "",
         "source_size_bytes": 0,
         "output_filename": "",
         "youtube_title": "",
@@ -25,7 +25,7 @@
         "title_card_before_merge": false
       },
       {
-        "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510115443_0002_D.MP4",
+        "source_path": "",
         "source_size_bytes": 0,
         "output_filename": "",
         "youtube_title": "",
@@ -41,7 +41,7 @@
         "title_card_before_merge": false
       },
       {
-        "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510122002_0003_D.MP4",
+        "source_path": "",
         "source_size_bytes": 0,
         "output_filename": "",
         "youtube_title": "",
@@ -58,7 +58,7 @@
       }
     ],
     "device_name": "",
-    "download_destination": "/media/andreas/Kaderblick/Spiel-Aufnahmen",
+    "download_destination": "",
     "delete_after_download": false,
     "source_folder": "",
     "file_pattern": "*.mp4",
@@ -88,12 +88,12 @@
     "youtube_segment_data": {},
     "youtube_kaderblick_video_type_id": 0,
     "youtube_kaderblick_camera_id": 0,
-    "merge_output_title": "2026-05-03 | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf | 1. Halbzeit",
-    "merge_output_playlist": "03.05.2026 | Sparkassenkreisoberliga | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf",
-    "merge_output_description": "📅 03.05.2026\n⚽ SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf\n🏆 Sparkassenkreisoberliga\n📍 Braunsdorf\n🎬 1. Halbzeit\n📷 DJI Osmo Action 5\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGWurgwitzSG90Braunsdorf #SSV1862Langburkersdorf #DJIOsmoAction5 #1Halbzeit #Kaderblick",
+    "merge_output_title": "2025-08-16 | FC Musterheim vs SV Mustergast | 1. Halbzeit",
+    "merge_output_playlist": "16.08.2025 | Musterliga | FC Musterheim vs SV Mustergast",
+    "merge_output_description": "📅 16.08.2025\n⚽ FC Musterheim vs SV Mustergast\n🏆 Musterliga\n📍 Musterstadt\n🎬 1. Halbzeit\n📷 Action-Kamera\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Musterliga #FCMusterheim #SVMustergast #ActionKamera #1Halbzeit #Kaderblick",
     "merge_match_data": {},
     "merge_segment_data": {
-      "camera": "DJI Osmo Action 5",
+      "camera": "Action-Kamera",
       "side": "",
       "half": 1,
       "part": 0,
@@ -225,11 +225,11 @@
     {
       "id": "8473d60b",
       "enabled": true,
-      "name": "DJI Osmo Action 5 Pro - 1. Halbzeit",
+      "name": "Action-Kamera - 1. Halbzeit",
       "source_mode": "files",
       "files": [
         {
-          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510112927_0001_D.MP4",
+          "source_path": "",
           "source_size_bytes": 0,
           "output_filename": "",
           "youtube_title": "",
@@ -245,7 +245,7 @@
           "title_card_before_merge": false
         },
         {
-          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510115443_0002_D.MP4",
+          "source_path": "",
           "source_size_bytes": 0,
           "output_filename": "",
           "youtube_title": "",
@@ -261,7 +261,7 @@
           "title_card_before_merge": false
         },
         {
-          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510122002_0003_D.MP4",
+          "source_path": "",
           "source_size_bytes": 0,
           "output_filename": "",
           "youtube_title": "",
@@ -278,7 +278,7 @@
         }
       ],
       "device_name": "",
-      "download_destination": "/media/andreas/Kaderblick/Spiel-Aufnahmen",
+      "download_destination": "",
       "delete_after_download": false,
       "source_folder": "",
       "file_pattern": "*.mp4",
@@ -308,12 +308,12 @@
       "youtube_segment_data": {},
       "youtube_kaderblick_video_type_id": 0,
       "youtube_kaderblick_camera_id": 0,
-      "merge_output_title": "2026-05-03 | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf | 1. Halbzeit",
-      "merge_output_playlist": "03.05.2026 | Sparkassenkreisoberliga | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf",
-      "merge_output_description": "📅 03.05.2026\n⚽ SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf\n🏆 Sparkassenkreisoberliga\n📍 Braunsdorf\n🎬 1. Halbzeit\n📷 DJI Osmo Action 5\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGWurgwitzSG90Braunsdorf #SSV1862Langburkersdorf #DJIOsmoAction5 #1Halbzeit #Kaderblick",
+      "merge_output_title": "2025-08-16 | FC Musterheim vs SV Mustergast | 1. Halbzeit",
+      "merge_output_playlist": "16.08.2025 | Musterliga | FC Musterheim vs SV Mustergast",
+      "merge_output_description": "📅 16.08.2025\n⚽ FC Musterheim vs SV Mustergast\n🏆 Musterliga\n📍 Musterstadt\n🎬 1. Halbzeit\n📷 Action-Kamera\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Musterliga #FCMusterheim #SVMustergast #ActionKamera #1Halbzeit #Kaderblick",
       "merge_match_data": {},
       "merge_segment_data": {
-        "camera": "DJI Osmo Action 5",
+        "camera": "Action-Kamera",
         "side": "",
         "half": 1,
         "part": 0,
@@ -444,11 +444,11 @@
     {
       "id": "ab3a71c2",
       "enabled": true,
-      "name": "DJI Osmo Action 5 Pro - 2. Halbzeit",
+      "name": "Action-Kamera - 2. Halbzeit",
       "source_mode": "files",
       "files": [
         {
-          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510123453_0004_D.MP4",
+          "source_path": "",
           "source_size_bytes": 0,
           "output_filename": "",
           "youtube_title": "",
@@ -464,7 +464,7 @@
           "title_card_before_merge": false
         },
         {
-          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510125958_0005_D.MP4",
+          "source_path": "",
           "source_size_bytes": 0,
           "output_filename": "",
           "youtube_title": "",
@@ -480,7 +480,7 @@
           "title_card_before_merge": false
         },
         {
-          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510132501_0006_D.MP4",
+          "source_path": "",
           "source_size_bytes": 0,
           "output_filename": "",
           "youtube_title": "",
@@ -497,7 +497,7 @@
         }
       ],
       "device_name": "",
-      "download_destination": "/media/andreas/Kaderblick/Spiel-Aufnahmen",
+      "download_destination": "",
       "delete_after_download": false,
       "source_folder": "",
       "file_pattern": "*.mp4",
@@ -527,12 +527,12 @@
       "youtube_segment_data": {},
       "youtube_kaderblick_video_type_id": 0,
       "youtube_kaderblick_camera_id": 0,
-      "merge_output_title": "2026-05-03 | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf | 2. Halbzeit",
-      "merge_output_playlist": "03.05.2026 | Sparkassenkreisoberliga | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf",
-      "merge_output_description": "📅 03.05.2026\n⚽ SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf\n🏆 Sparkassenkreisoberliga\n📍 Braunsdorf\n🎬 2. Halbzeit\n📷 DJI Osmo Action 5\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGWurgwitzSG90Braunsdorf #SSV1862Langburkersdorf #DJIOsmoAction5 #2Halbzeit #Kaderblick",
+      "merge_output_title": "2025-08-16 | FC Musterheim vs SV Mustergast | 2. Halbzeit",
+      "merge_output_playlist": "16.08.2025 | Musterliga | FC Musterheim vs SV Mustergast",
+      "merge_output_description": "📅 16.08.2025\n⚽ FC Musterheim vs SV Mustergast\n🏆 Musterliga\n📍 Musterstadt\n🎬 2. Halbzeit\n📷 Action-Kamera\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Musterliga #FCMusterheim #SVMustergast #ActionKamera #2Halbzeit #Kaderblick",
       "merge_match_data": {},
       "merge_segment_data": {
-        "camera": "DJI Osmo Action 5",
+        "camera": "Action-Kamera",
         "side": "",
         "half": 2,
         "part": 0,
@@ -667,8 +667,8 @@
       "source_mode": "pi_download",
       "files": [
         {
-          "source_path": "/media/andreas/Kaderblick/Spiel-Aufnahmen/Ligaspiele/Sparkassenkreisoberliga/03.05.2026 SpG SG Wurgwitz | SG 90 Braunsdorf vs. SSV 1862 Langburkersdorf/Kaderblick Kamera Links/raw/aufnahme_2026-05-03_20-03-39.mjpg",
-          "source_size_bytes": 336348044,
+          "source_path": "",
+          "source_size_bytes": 0,
           "output_filename": "",
           "youtube_title": "",
           "youtube_description": "",
@@ -706,9 +706,9 @@
       "audio_sync": true,
       "create_youtube_version": true,
       "upload_youtube": true,
-      "default_youtube_title": "2026-05-10 | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf | Links 1. Halbzeit",
-      "default_youtube_playlist": "10.05.2026 | Sparkassenkreisoberliga | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdo",
-      "default_youtube_description": "📅 10.05.2026\n⚽ SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf\n🏆 Sparkassenkreisoberliga\n📍 Seifersdorf\n🎬 1. Halbzeit | Seite: Links\n📷 Kaderblick Links\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGTSVSfdfHöckendorferFV #SpGWurgwitzSG90Braunsdorf #KaderblickLinks #Links #1Halbzeit #Kaderblick",
+      "default_youtube_title": "2025-08-16 | FC Musterheim vs SV Mustergast | Links 1. Halbzeit",
+      "default_youtube_playlist": "16.08.2025 | Musterliga | FC Musterheim vs SV Mustergast",
+      "default_youtube_description": "📅 16.08.2025\n⚽ FC Musterheim vs SV Mustergast\n🏆 Musterliga\n📍 Musterstadt\n🎬 1. Halbzeit | Seite: Links\n📷 Kaderblick Links\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Musterliga #FCMusterheim #SVMustergast #KaderblickLinks #Links #1Halbzeit #Kaderblick",
       "default_youtube_competition": "",
       "youtube_match_data": {},
       "youtube_segment_data": {
@@ -848,8 +848,8 @@
       "source_mode": "pi_download",
       "files": [
         {
-          "source_path": "/media/andreas/Kaderblick/Spiel-Aufnahmen/Ligaspiele/Sparkassenkreisoberliga/03.05.2026 SpG SG Wurgwitz | SG 90 Braunsdorf vs. SSV 1862 Langburkersdorf/Kaderblick Kamera Links/raw/aufnahme_2026-05-03_21-06-15.mjpg",
-          "source_size_bytes": 359280044,
+          "source_path": "",
+          "source_size_bytes": 0,
           "output_filename": "",
           "youtube_title": "",
           "youtube_description": "",
@@ -887,9 +887,9 @@
       "audio_sync": true,
       "create_youtube_version": true,
       "upload_youtube": true,
-      "default_youtube_title": "2026-05-10 | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf | Links 2. Halbzeit",
-      "default_youtube_playlist": "10.05.2026 | Sparkassenkreisoberliga | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdo",
-      "default_youtube_description": "📅 10.05.2026\n⚽ SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf\n🏆 Sparkassenkreisoberliga\n📍 Seifersdorf\n🎬 2. Halbzeit | Seite: Links\n📷 Kaderblick Links\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGTSVSfdfHöckendorferFV #SpGWurgwitzSG90Braunsdorf #KaderblickLinks #Links #2Halbzeit #Kaderblick",
+      "default_youtube_title": "2025-08-16 | FC Musterheim vs SV Mustergast | Links 2. Halbzeit",
+      "default_youtube_playlist": "16.08.2025 | Musterliga | FC Musterheim vs SV Mustergast",
+      "default_youtube_description": "📅 16.08.2025\n⚽ FC Musterheim vs SV Mustergast\n🏆 Musterliga\n📍 Musterstadt\n🎬 2. Halbzeit | Seite: Links\n📷 Kaderblick Links\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Musterliga #FCMusterheim #SVMustergast #KaderblickLinks #Links #2Halbzeit #Kaderblick",
       "default_youtube_competition": "",
       "youtube_match_data": {},
       "youtube_segment_data": {
@@ -1029,8 +1029,8 @@
       "source_mode": "pi_download",
       "files": [
         {
-          "source_path": "/media/andreas/Kaderblick/Spiel-Aufnahmen/Ligaspiele/Sparkassenkreisoberliga/03.05.2026 SpG SG Wurgwitz | SG 90 Braunsdorf vs. SSV 1862 Langburkersdorf/Kaderblick Kamera Rechts/raw/aufnahme_2026-05-03_19-03-27.mjpg",
-          "source_size_bytes": 85416945224,
+          "source_path": "",
+          "source_size_bytes": 0,
           "output_filename": "",
           "youtube_title": "",
           "youtube_description": "",
@@ -1068,9 +1068,9 @@
       "audio_sync": true,
       "create_youtube_version": true,
       "upload_youtube": true,
-      "default_youtube_title": "2026-05-03 | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf | Rechts 1. Halbzeit",
-      "default_youtube_playlist": "03.05.2026 | Sparkassenkreisoberliga | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf",
-      "default_youtube_description": "📅 03.05.2026\n⚽ SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf\n🏆 Sparkassenkreisoberliga\n📍 Braunsdorf\n🎬 1. Halbzeit | Seite: Rechts\n📷 Kaderblick Rechts\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGWurgwitzSG90Braunsdorf #SSV1862Langburkersdorf #KaderblickRechts #Rechts #1Halbzeit #Kaderblick",
+      "default_youtube_title": "2025-08-16 | FC Musterheim vs SV Mustergast | Rechts 1. Halbzeit",
+      "default_youtube_playlist": "16.08.2025 | Musterliga | FC Musterheim vs SV Mustergast",
+      "default_youtube_description": "📅 16.08.2025\n⚽ FC Musterheim vs SV Mustergast\n🏆 Musterliga\n📍 Musterstadt\n🎬 1. Halbzeit | Seite: Rechts\n📷 Kaderblick Rechts\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Musterliga #FCMusterheim #SVMustergast #KaderblickRechts #Rechts #1Halbzeit #Kaderblick",
       "default_youtube_competition": "",
       "youtube_match_data": {},
       "youtube_segment_data": {
@@ -1210,8 +1210,8 @@
       "source_mode": "pi_download",
       "files": [
         {
-          "source_path": "/media/andreas/Kaderblick/Spiel-Aufnahmen/Ligaspiele/Sparkassenkreisoberliga/03.05.2026 SpG SG Wurgwitz | SG 90 Braunsdorf vs. SSV 1862 Langburkersdorf/Kaderblick Kamera Rechts/raw/aufnahme_2026-05-03_20-06-04.mjpg",
-          "source_size_bytes": 359292044,
+          "source_path": "",
+          "source_size_bytes": 0,
           "output_filename": "",
           "youtube_title": "",
           "youtube_description": "",
@@ -1249,9 +1249,9 @@
       "audio_sync": true,
       "create_youtube_version": true,
       "upload_youtube": true,
-      "default_youtube_title": "2026-05-10 | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf | Rechts 2. Halbzeit",
-      "default_youtube_playlist": "10.05.2026 | Sparkassenkreisoberliga | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdo",
-      "default_youtube_description": "📅 10.05.2026\n⚽ SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf\n🏆 Sparkassenkreisoberliga\n📍 Seifersdorf\n🎬 2. Halbzeit | Seite: Rechts\n📷 Kaderblick Rechts\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGTSVSfdfHöckendorferFV #SpGWurgwitzSG90Braunsdorf #KaderblickRechts #Rechts #2Halbzeit #Kaderblick",
+      "default_youtube_title": "2025-08-16 | FC Musterheim vs SV Mustergast | Rechts 2. Halbzeit",
+      "default_youtube_playlist": "16.08.2025 | Musterliga | FC Musterheim vs SV Mustergast",
+      "default_youtube_description": "📅 16.08.2025\n⚽ FC Musterheim vs SV Mustergast\n🏆 Musterliga\n📍 Musterstadt\n🎬 2. Halbzeit | Seite: Rechts\n📷 Kaderblick Rechts\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Musterliga #FCMusterheim #SVMustergast #KaderblickRechts #Rechts #2Halbzeit #Kaderblick",
       "default_youtube_competition": "",
       "youtube_match_data": {},
       "youtube_segment_data": {
