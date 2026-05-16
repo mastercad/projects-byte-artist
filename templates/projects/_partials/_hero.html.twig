@@ -7,8 +7,11 @@
     tagline:     string,
     status:      'stable'|'beta'|'wip',
     tags:        string[],
-    github_url:  string|null,
-    docs_url:    string|null,
+    github_url:  string|null,   – Shortcut: rendert einen GitHub-Button (secondary)
+    docs_url:    string|null,   – Shortcut: rendert einen Dokumentations-Button (primary)
+    links:       [              – Beliebige weitere Buttons (optional)
+      { label: string, url: string, icon: string|null, style: 'primary'|'secondary'|'outline', extern: bool }
+    ]
   }
 #}
 <header class="page-hero">
@@ -17,11 +20,18 @@
             <span class="status-badge status-badge--{{ hero.status }}">{{ hero.status }}</span>
             <div class="tags">
                 {% for tag in hero.tags %}
-                    <span class="tag">{{ tag }}</span>
+                    <a class="tag" href="{{ path('home') }}?tag={{ tag|url_encode }}">{{ tag }}</a>
                 {% endfor %}
             </div>
         </div>
+        {% if hero.icon_img is defined and hero.icon_img %}
+        <div class="page-hero-title-row">
+            <img src="{{ hero.icon_img }}" alt="{{ hero.title }} Icon" class="page-hero-appicon">
+            <h1>{{ hero.title }}</h1>
+        </div>
+        {% else %}
         <h1>{{ hero.title }}</h1>
+        {% endif %}
         <p class="page-hero-desc">{{ hero.tagline }}</p>
         <div class="page-hero-meta mt-4">
             {% if hero.github_url is defined and hero.github_url %}
@@ -33,6 +43,15 @@
                 <a class="btn-primary" href="{{ hero.docs_url }}">
                     <i class="fas fa-book-open"></i> Dokumentation
                 </a>
+            {% endif %}
+            {% if hero.links is defined and hero.links %}
+                {% for link in hero.links %}
+                    <a class="btn-{{ link.style ?? 'secondary' }}"
+                       href="{{ link.url }}"
+                       {% if link.extern is defined and link.extern %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                        {% if link.icon is defined and link.icon %}<i class="{{ link.icon }}"></i> {% endif %}{{ link.label }}
+                    </a>
+                {% endfor %}
             {% endif %}
         </div>
     </div>

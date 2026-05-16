@@ -4,46 +4,35 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Service\ProjectRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class HomeController extends AbstractController
 {
-    /**
-     * Statische Projektliste — kein Datenbankzugriff.
-     * Neue Projekte hier eintragen und entsprechende Template-Datei anlegen.
-     */
-    private function getProjects(): array
-    {
-        return [
-            [
-                'slug'        => 'beispiel-projekt',
-                'title'       => 'Beispiel-Projekt',
-                'description' => 'Eine kurze, prägnante Beschreibung was dieses Projekt macht und warum es existiert.',
-                'icon'        => 'fas fa-box-open',
-                'status'      => 'stable',
-                'tags'        => ['PHP 8.3', 'Symfony 7'],
-                'github_url'  => 'https://github.com/byte-artist/beispiel-projekt',
-            ],
-            // Weitere Projekte hier eintragen:
-            // [
-            //     'slug'        => 'mein-projekt',
-            //     'title'       => 'Mein Projekt',
-            //     'description' => '...',
-            //     'icon'        => 'fas fa-code',
-            //     'status'      => 'beta',
-            //     'tags'        => ['PHP', 'MySQL'],
-            //     'github_url'  => null,
-            // ],
-        ];
-    }
+    public function __construct(
+        private readonly ProjectRegistry $registry,
+        #[Autowire('%kernel.environment%')] private readonly string $env,
+    ) {}
 
     #[Route('/', name: 'home')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $tag     = $request->query->get('tag') ?: null;
+        $page    = max(1, (int) $request->query->get('page', '1'));
+        $perPage = 9;
+
+        $result = $this->registry->retrieveFiltered($this->env, $tag, $page, $perPage);
+
         return $this->render('home/index.html.twig', [
-            'projects' => $this->getProjects(),
+            'projects'   => $result['projects'],
+            'activeTag'  => $tag,
+            'allTags'    => $this->registry->allTags($this->env),
+            'page'       => $result['page'],
+            'totalPages' => $result['totalPages'],
         ]);
     }
 }

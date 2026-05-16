@@ -1,0 +1,1388 @@
+{
+  "name": "DJI Osmo Action 5 Pro - 1. Halbzeit",
+  "shutdown_after": false,
+  "created_at": "2026-03-23T15:18:28",
+  "job": {
+    "id": "8473d60b",
+    "enabled": true,
+    "name": "DJI Osmo Action 5 Pro - 1. Halbzeit",
+    "source_mode": "files",
+    "files": [
+      {
+        "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510112927_0001_D.MP4",
+        "source_size_bytes": 0,
+        "output_filename": "",
+        "youtube_title": "",
+        "youtube_description": "",
+        "youtube_playlist": "",
+        "kaderblick_game_id": "",
+        "kaderblick_game_start": 0,
+        "kaderblick_video_type_id": 0,
+        "kaderblick_camera_id": 0,
+        "merge_group_id": "",
+        "title_card_subtitle": "",
+        "graph_source_id": "",
+        "title_card_before_merge": false
+      },
+      {
+        "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510115443_0002_D.MP4",
+        "source_size_bytes": 0,
+        "output_filename": "",
+        "youtube_title": "",
+        "youtube_description": "",
+        "youtube_playlist": "",
+        "kaderblick_game_id": "",
+        "kaderblick_game_start": 0,
+        "kaderblick_video_type_id": 0,
+        "kaderblick_camera_id": 0,
+        "merge_group_id": "",
+        "title_card_subtitle": "",
+        "graph_source_id": "",
+        "title_card_before_merge": false
+      },
+      {
+        "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510122002_0003_D.MP4",
+        "source_size_bytes": 0,
+        "output_filename": "",
+        "youtube_title": "",
+        "youtube_description": "",
+        "youtube_playlist": "",
+        "kaderblick_game_id": "",
+        "kaderblick_game_start": 0,
+        "kaderblick_video_type_id": 0,
+        "kaderblick_camera_id": 0,
+        "merge_group_id": "",
+        "title_card_subtitle": "",
+        "graph_source_id": "",
+        "title_card_before_merge": false
+      }
+    ],
+    "device_name": "",
+    "download_destination": "/media/andreas/Kaderblick/Spiel-Aufnahmen",
+    "delete_after_download": false,
+    "source_folder": "",
+    "file_pattern": "*.mp4",
+    "copy_destination": "",
+    "move_files": true,
+    "output_prefix": "",
+    "convert_enabled": false,
+    "encoder": "auto",
+    "crf": 18,
+    "preset": "medium",
+    "no_bframes": true,
+    "fps": 25,
+    "output_format": "mp4",
+    "output_resolution": "source",
+    "overwrite": false,
+    "merge_audio": false,
+    "amplify_audio": false,
+    "amplify_db": 12.0,
+    "audio_sync": false,
+    "create_youtube_version": true,
+    "upload_youtube": true,
+    "default_youtube_title": "",
+    "default_youtube_playlist": "",
+    "default_youtube_description": "",
+    "default_youtube_competition": "",
+    "youtube_match_data": {},
+    "youtube_segment_data": {},
+    "youtube_kaderblick_video_type_id": 0,
+    "youtube_kaderblick_camera_id": 0,
+    "merge_output_title": "2026-05-03 | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf | 1. Halbzeit",
+    "merge_output_playlist": "03.05.2026 | Sparkassenkreisoberliga | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf",
+    "merge_output_description": "📅 03.05.2026\n⚽ SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf\n🏆 Sparkassenkreisoberliga\n📍 Braunsdorf\n🎬 1. Halbzeit\n📷 DJI Osmo Action 5\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGWurgwitzSG90Braunsdorf #SSV1862Langburkersdorf #DJIOsmoAction5 #1Halbzeit #Kaderblick",
+    "merge_match_data": {},
+    "merge_segment_data": {
+      "camera": "DJI Osmo Action 5",
+      "side": "",
+      "half": 1,
+      "part": 0,
+      "type_name": "1. Halbzeit"
+    },
+    "merge_output_kaderblick_video_type_id": 2,
+    "merge_output_kaderblick_camera_id": 1,
+    "merge_encoder": "auto",
+    "merge_crf": 18,
+    "merge_preset": "slow",
+    "merge_no_bframes": true,
+    "merge_fps": 0,
+    "merge_output_format": "source",
+    "merge_output_resolution": "source",
+    "upload_kaderblick": true,
+    "default_kaderblick_game_id": "",
+    "default_kaderblick_video_type_id": 2,
+    "default_kaderblick_camera_id": 1,
+    "yt_version_encoder": "auto",
+    "yt_version_crf": 0,
+    "yt_version_preset": "medium",
+    "yt_version_no_bframes": true,
+    "yt_version_fps": 0,
+    "yt_version_output_format": "source",
+    "yt_version_output_resolution": "source",
+    "title_card_enabled": false,
+    "title_card_logo_path": "",
+    "title_card_duration": 3.0,
+    "title_card_bg_color": "#000000",
+    "title_card_fg_color": "#FFFFFF",
+    "title_card_home_team": "",
+    "title_card_away_team": "",
+    "title_card_date": "",
+    "graph_nodes": [
+      {
+        "id": "source_files-3ed957",
+        "type": "source_files",
+        "x": 74.01199930939225,
+        "y": 237.90473893022482
+      },
+      {
+        "id": "merge-6a8f9e",
+        "type": "merge",
+        "x": 364.9996678798355,
+        "y": 226.9727096456902
+      },
+      {
+        "id": "youtube_upload-2d980c",
+        "type": "youtube_upload",
+        "x": 659.768396588719,
+        "y": 627.4088174670611
+      },
+      {
+        "id": "yt_version-cd9559",
+        "type": "yt_version",
+        "x": 360.0,
+        "y": 629.6941784344194
+      },
+      {
+        "id": "kaderblick-19caf8",
+        "type": "kaderblick",
+        "x": 958.0819134189072,
+        "y": 620.40051446295
+      },
+      {
+        "id": "validate_surface-95c120",
+        "type": "validate_surface",
+        "x": 360.0,
+        "y": 364.0
+      },
+      {
+        "id": "repair-7cfe9b",
+        "type": "repair",
+        "x": 360.00000000000006,
+        "y": 499.3554464377976
+      },
+      {
+        "id": "stop-de49ff",
+        "type": "stop",
+        "x": 649.769060829048,
+        "y": 361.7422615071159
+      },
+      {
+        "id": "convert-2636d1",
+        "type": "convert",
+        "x": 655.9309994762723,
+        "y": 222.12712612246054
+      }
+    ],
+    "graph_edges": [
+      {
+        "source": "source_files-3ed957",
+        "target": "merge-6a8f9e"
+      },
+      {
+        "source": "yt_version-cd9559",
+        "target": "youtube_upload-2d980c"
+      },
+      {
+        "source": "youtube_upload-2d980c",
+        "target": "kaderblick-19caf8"
+      },
+      {
+        "source": "merge-6a8f9e",
+        "target": "validate_surface-95c120"
+      },
+      {
+        "source": "validate_surface-95c120",
+        "target": "yt_version-cd9559",
+        "branch": "ok"
+      },
+      {
+        "source": "validate_surface-95c120",
+        "target": "repair-7cfe9b",
+        "branch": "repairable"
+      },
+      {
+        "source": "repair-7cfe9b",
+        "target": "yt_version-cd9559"
+      },
+      {
+        "source": "validate_surface-95c120",
+        "target": "stop-de49ff",
+        "branch": "irreparable"
+      }
+    ]
+  },
+  "jobs": [
+    {
+      "id": "8473d60b",
+      "enabled": true,
+      "name": "DJI Osmo Action 5 Pro - 1. Halbzeit",
+      "source_mode": "files",
+      "files": [
+        {
+          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510112927_0001_D.MP4",
+          "source_size_bytes": 0,
+          "output_filename": "",
+          "youtube_title": "",
+          "youtube_description": "",
+          "youtube_playlist": "",
+          "kaderblick_game_id": "",
+          "kaderblick_game_start": 0,
+          "kaderblick_video_type_id": 0,
+          "kaderblick_camera_id": 0,
+          "merge_group_id": "",
+          "title_card_subtitle": "",
+          "graph_source_id": "",
+          "title_card_before_merge": false
+        },
+        {
+          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510115443_0002_D.MP4",
+          "source_size_bytes": 0,
+          "output_filename": "",
+          "youtube_title": "",
+          "youtube_description": "",
+          "youtube_playlist": "",
+          "kaderblick_game_id": "",
+          "kaderblick_game_start": 0,
+          "kaderblick_video_type_id": 0,
+          "kaderblick_camera_id": 0,
+          "merge_group_id": "",
+          "title_card_subtitle": "",
+          "graph_source_id": "",
+          "title_card_before_merge": false
+        },
+        {
+          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510122002_0003_D.MP4",
+          "source_size_bytes": 0,
+          "output_filename": "",
+          "youtube_title": "",
+          "youtube_description": "",
+          "youtube_playlist": "",
+          "kaderblick_game_id": "",
+          "kaderblick_game_start": 0,
+          "kaderblick_video_type_id": 0,
+          "kaderblick_camera_id": 0,
+          "merge_group_id": "",
+          "title_card_subtitle": "",
+          "graph_source_id": "",
+          "title_card_before_merge": false
+        }
+      ],
+      "device_name": "",
+      "download_destination": "/media/andreas/Kaderblick/Spiel-Aufnahmen",
+      "delete_after_download": false,
+      "source_folder": "",
+      "file_pattern": "*.mp4",
+      "copy_destination": "",
+      "move_files": true,
+      "output_prefix": "",
+      "convert_enabled": false,
+      "encoder": "auto",
+      "crf": 18,
+      "preset": "medium",
+      "no_bframes": true,
+      "fps": 25,
+      "output_format": "mp4",
+      "output_resolution": "source",
+      "overwrite": false,
+      "merge_audio": false,
+      "amplify_audio": false,
+      "amplify_db": 12.0,
+      "audio_sync": false,
+      "create_youtube_version": true,
+      "upload_youtube": true,
+      "default_youtube_title": "",
+      "default_youtube_playlist": "",
+      "default_youtube_description": "",
+      "default_youtube_competition": "",
+      "youtube_match_data": {},
+      "youtube_segment_data": {},
+      "youtube_kaderblick_video_type_id": 0,
+      "youtube_kaderblick_camera_id": 0,
+      "merge_output_title": "2026-05-03 | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf | 1. Halbzeit",
+      "merge_output_playlist": "03.05.2026 | Sparkassenkreisoberliga | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf",
+      "merge_output_description": "📅 03.05.2026\n⚽ SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf\n🏆 Sparkassenkreisoberliga\n📍 Braunsdorf\n🎬 1. Halbzeit\n📷 DJI Osmo Action 5\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGWurgwitzSG90Braunsdorf #SSV1862Langburkersdorf #DJIOsmoAction5 #1Halbzeit #Kaderblick",
+      "merge_match_data": {},
+      "merge_segment_data": {
+        "camera": "DJI Osmo Action 5",
+        "side": "",
+        "half": 1,
+        "part": 0,
+        "type_name": "1. Halbzeit"
+      },
+      "merge_output_kaderblick_video_type_id": 2,
+      "merge_output_kaderblick_camera_id": 1,
+      "merge_encoder": "auto",
+      "merge_crf": 18,
+      "merge_preset": "slow",
+      "merge_no_bframes": true,
+      "merge_fps": 0,
+      "merge_output_format": "source",
+      "merge_output_resolution": "source",
+      "upload_kaderblick": true,
+      "default_kaderblick_game_id": "",
+      "default_kaderblick_video_type_id": 2,
+      "default_kaderblick_camera_id": 1,
+      "yt_version_encoder": "auto",
+      "yt_version_crf": 0,
+      "yt_version_preset": "medium",
+      "yt_version_no_bframes": true,
+      "yt_version_fps": 0,
+      "yt_version_output_format": "source",
+      "yt_version_output_resolution": "source",
+      "title_card_enabled": false,
+      "title_card_logo_path": "",
+      "title_card_duration": 3.0,
+      "title_card_bg_color": "#000000",
+      "title_card_fg_color": "#FFFFFF",
+      "title_card_home_team": "",
+      "title_card_away_team": "",
+      "title_card_date": "",
+      "graph_nodes": [
+        {
+          "id": "source_files-3ed957",
+          "type": "source_files",
+          "x": 74.01199930939225,
+          "y": 237.90473893022482
+        },
+        {
+          "id": "merge-6a8f9e",
+          "type": "merge",
+          "x": 364.9996678798355,
+          "y": 226.9727096456902
+        },
+        {
+          "id": "youtube_upload-2d980c",
+          "type": "youtube_upload",
+          "x": 659.768396588719,
+          "y": 627.4088174670611
+        },
+        {
+          "id": "yt_version-cd9559",
+          "type": "yt_version",
+          "x": 360.0,
+          "y": 629.6941784344194
+        },
+        {
+          "id": "kaderblick-19caf8",
+          "type": "kaderblick",
+          "x": 958.0819134189072,
+          "y": 620.40051446295
+        },
+        {
+          "id": "validate_surface-95c120",
+          "type": "validate_surface",
+          "x": 360.0,
+          "y": 364.0
+        },
+        {
+          "id": "repair-7cfe9b",
+          "type": "repair",
+          "x": 360.00000000000006,
+          "y": 499.3554464377976
+        },
+        {
+          "id": "stop-de49ff",
+          "type": "stop",
+          "x": 649.769060829048,
+          "y": 361.7422615071159
+        },
+        {
+          "id": "convert-2636d1",
+          "type": "convert",
+          "x": 655.9309994762723,
+          "y": 222.12712612246054
+        }
+      ],
+      "graph_edges": [
+        {
+          "source": "source_files-3ed957",
+          "target": "merge-6a8f9e"
+        },
+        {
+          "source": "yt_version-cd9559",
+          "target": "youtube_upload-2d980c"
+        },
+        {
+          "source": "youtube_upload-2d980c",
+          "target": "kaderblick-19caf8"
+        },
+        {
+          "source": "merge-6a8f9e",
+          "target": "validate_surface-95c120"
+        },
+        {
+          "source": "validate_surface-95c120",
+          "target": "yt_version-cd9559",
+          "branch": "ok"
+        },
+        {
+          "source": "validate_surface-95c120",
+          "target": "repair-7cfe9b",
+          "branch": "repairable"
+        },
+        {
+          "source": "repair-7cfe9b",
+          "target": "yt_version-cd9559"
+        },
+        {
+          "source": "validate_surface-95c120",
+          "target": "stop-de49ff",
+          "branch": "irreparable"
+        }
+      ]
+    },
+    {
+      "id": "ab3a71c2",
+      "enabled": true,
+      "name": "DJI Osmo Action 5 Pro - 2. Halbzeit",
+      "source_mode": "files",
+      "files": [
+        {
+          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510123453_0004_D.MP4",
+          "source_size_bytes": 0,
+          "output_filename": "",
+          "youtube_title": "",
+          "youtube_description": "",
+          "youtube_playlist": "",
+          "kaderblick_game_id": "",
+          "kaderblick_game_start": 0,
+          "kaderblick_video_type_id": 0,
+          "kaderblick_camera_id": 0,
+          "merge_group_id": "",
+          "title_card_subtitle": "",
+          "graph_source_id": "",
+          "title_card_before_merge": false
+        },
+        {
+          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510125958_0005_D.MP4",
+          "source_size_bytes": 0,
+          "output_filename": "",
+          "youtube_title": "",
+          "youtube_description": "",
+          "youtube_playlist": "",
+          "kaderblick_game_id": "",
+          "kaderblick_game_start": 0,
+          "kaderblick_video_type_id": 0,
+          "kaderblick_camera_id": 0,
+          "merge_group_id": "",
+          "title_card_subtitle": "",
+          "graph_source_id": "",
+          "title_card_before_merge": false
+        },
+        {
+          "source_path": "/media/andreas/01D8-0250/DCIM/DJI_001/DJI_20260510132501_0006_D.MP4",
+          "source_size_bytes": 0,
+          "output_filename": "",
+          "youtube_title": "",
+          "youtube_description": "",
+          "youtube_playlist": "",
+          "kaderblick_game_id": "",
+          "kaderblick_game_start": 0,
+          "kaderblick_video_type_id": 0,
+          "kaderblick_camera_id": 0,
+          "merge_group_id": "",
+          "title_card_subtitle": "",
+          "graph_source_id": "",
+          "title_card_before_merge": false
+        }
+      ],
+      "device_name": "",
+      "download_destination": "/media/andreas/Kaderblick/Spiel-Aufnahmen",
+      "delete_after_download": false,
+      "source_folder": "",
+      "file_pattern": "*.mp4",
+      "copy_destination": "",
+      "move_files": true,
+      "output_prefix": "",
+      "convert_enabled": false,
+      "encoder": "auto",
+      "crf": 18,
+      "preset": "medium",
+      "no_bframes": true,
+      "fps": 25,
+      "output_format": "mp4",
+      "output_resolution": "source",
+      "overwrite": false,
+      "merge_audio": false,
+      "amplify_audio": false,
+      "amplify_db": 6.0,
+      "audio_sync": false,
+      "create_youtube_version": true,
+      "upload_youtube": true,
+      "default_youtube_title": "",
+      "default_youtube_playlist": "",
+      "default_youtube_description": "",
+      "default_youtube_competition": "",
+      "youtube_match_data": {},
+      "youtube_segment_data": {},
+      "youtube_kaderblick_video_type_id": 0,
+      "youtube_kaderblick_camera_id": 0,
+      "merge_output_title": "2026-05-03 | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf | 2. Halbzeit",
+      "merge_output_playlist": "03.05.2026 | Sparkassenkreisoberliga | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf",
+      "merge_output_description": "📅 03.05.2026\n⚽ SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf\n🏆 Sparkassenkreisoberliga\n📍 Braunsdorf\n🎬 2. Halbzeit\n📷 DJI Osmo Action 5\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGWurgwitzSG90Braunsdorf #SSV1862Langburkersdorf #DJIOsmoAction5 #2Halbzeit #Kaderblick",
+      "merge_match_data": {},
+      "merge_segment_data": {
+        "camera": "DJI Osmo Action 5",
+        "side": "",
+        "half": 2,
+        "part": 0,
+        "type_name": "2. Halbzeit"
+      },
+      "merge_output_kaderblick_video_type_id": 3,
+      "merge_output_kaderblick_camera_id": 1,
+      "merge_encoder": "auto",
+      "merge_crf": 18,
+      "merge_preset": "slow",
+      "merge_no_bframes": true,
+      "merge_fps": 0,
+      "merge_output_format": "source",
+      "merge_output_resolution": "source",
+      "upload_kaderblick": true,
+      "default_kaderblick_game_id": "",
+      "default_kaderblick_video_type_id": 3,
+      "default_kaderblick_camera_id": 1,
+      "yt_version_encoder": "inherit",
+      "yt_version_crf": 0,
+      "yt_version_preset": "medium",
+      "yt_version_no_bframes": true,
+      "yt_version_fps": 0,
+      "yt_version_output_format": "source",
+      "yt_version_output_resolution": "source",
+      "title_card_enabled": false,
+      "title_card_logo_path": "",
+      "title_card_duration": 3.0,
+      "title_card_bg_color": "#000000",
+      "title_card_fg_color": "#FFFFFF",
+      "title_card_home_team": "",
+      "title_card_away_team": "",
+      "title_card_date": "",
+      "graph_nodes": [
+        {
+          "id": "source_files-5c18b5",
+          "type": "source_files",
+          "x": -2935.0,
+          "y": -1480.2680996352199
+        },
+        {
+          "id": "merge-83694a",
+          "type": "merge",
+          "x": -2608.2680996352196,
+          "y": -1464.5361992704395
+        },
+        {
+          "id": "validate_surface-4cf18d",
+          "type": "validate_surface",
+          "x": -2616.5361992704393,
+          "y": -1326.0
+        },
+        {
+          "id": "repair-d2b1c0",
+          "type": "repair",
+          "x": -2620.0,
+          "y": -1203.0
+        },
+        {
+          "id": "stop-15a268",
+          "type": "stop",
+          "x": -2311.149456521739,
+          "y": -1323.7065217391307
+        },
+        {
+          "id": "yt_version-05aded",
+          "type": "yt_version",
+          "x": -2609.0,
+          "y": -1057.2680996352196
+        },
+        {
+          "id": "youtube_upload-453aa8",
+          "type": "youtube_upload",
+          "x": -2318.0000000000005,
+          "y": -1059.5361992704395
+        },
+        {
+          "id": "kaderblick-0e1f0c",
+          "type": "kaderblick",
+          "x": -2049.0,
+          "y": -1061.2680996352196
+        },
+        {
+          "id": "titlecard-d87456",
+          "type": "titlecard",
+          "x": -2307.0434782608695,
+          "y": -1468.7282608695652
+        }
+      ],
+      "graph_edges": [
+        {
+          "source": "source_files-5c18b5",
+          "target": "merge-83694a"
+        },
+        {
+          "source": "merge-83694a",
+          "target": "validate_surface-4cf18d"
+        },
+        {
+          "source": "validate_surface-4cf18d",
+          "target": "repair-d2b1c0",
+          "branch": "repairable"
+        },
+        {
+          "source": "validate_surface-4cf18d",
+          "target": "stop-15a268",
+          "branch": "irreparable"
+        },
+        {
+          "source": "validate_surface-4cf18d",
+          "target": "yt_version-05aded",
+          "branch": "ok"
+        },
+        {
+          "source": "repair-d2b1c0",
+          "target": "yt_version-05aded"
+        },
+        {
+          "source": "yt_version-05aded",
+          "target": "youtube_upload-453aa8"
+        },
+        {
+          "source": "youtube_upload-453aa8",
+          "target": "kaderblick-0e1f0c"
+        }
+      ]
+    },
+    {
+      "id": "9ded0bc4",
+      "enabled": true,
+      "name": "Kaderblick Kamera Links - 1. Halbzeit",
+      "source_mode": "pi_download",
+      "files": [
+        {
+          "source_path": "/media/andreas/Kaderblick/Spiel-Aufnahmen/Ligaspiele/Sparkassenkreisoberliga/03.05.2026 SpG SG Wurgwitz | SG 90 Braunsdorf vs. SSV 1862 Langburkersdorf/Kaderblick Kamera Links/raw/aufnahme_2026-05-03_20-03-39.mjpg",
+          "source_size_bytes": 336348044,
+          "output_filename": "",
+          "youtube_title": "",
+          "youtube_description": "",
+          "youtube_playlist": "",
+          "kaderblick_game_id": "",
+          "kaderblick_game_start": 0,
+          "kaderblick_video_type_id": 0,
+          "kaderblick_camera_id": 0,
+          "merge_group_id": "",
+          "title_card_subtitle": "",
+          "graph_source_id": "",
+          "title_card_before_merge": false
+        }
+      ],
+      "device_name": "Kaderblick Kamera Links",
+      "download_destination": "",
+      "delete_after_download": true,
+      "source_folder": "",
+      "file_pattern": "*.mp4",
+      "copy_destination": "",
+      "move_files": false,
+      "output_prefix": "",
+      "convert_enabled": true,
+      "encoder": "auto",
+      "crf": 12,
+      "preset": "slow",
+      "no_bframes": true,
+      "fps": 25,
+      "output_format": "mp4",
+      "output_resolution": "source",
+      "overwrite": false,
+      "merge_audio": true,
+      "amplify_audio": true,
+      "amplify_db": 12.0,
+      "audio_sync": true,
+      "create_youtube_version": true,
+      "upload_youtube": true,
+      "default_youtube_title": "2026-05-10 | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf | Links 1. Halbzeit",
+      "default_youtube_playlist": "10.05.2026 | Sparkassenkreisoberliga | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdo",
+      "default_youtube_description": "📅 10.05.2026\n⚽ SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf\n🏆 Sparkassenkreisoberliga\n📍 Seifersdorf\n🎬 1. Halbzeit | Seite: Links\n📷 Kaderblick Links\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGTSVSfdfHöckendorferFV #SpGWurgwitzSG90Braunsdorf #KaderblickLinks #Links #1Halbzeit #Kaderblick",
+      "default_youtube_competition": "",
+      "youtube_match_data": {},
+      "youtube_segment_data": {
+        "camera": "Kaderblick Links",
+        "side": "Links",
+        "half": 1,
+        "part": 0,
+        "type_name": "1. Halbzeit"
+      },
+      "youtube_kaderblick_video_type_id": 2,
+      "youtube_kaderblick_camera_id": 6,
+      "merge_output_title": "",
+      "merge_output_playlist": "",
+      "merge_output_description": "",
+      "merge_match_data": {},
+      "merge_segment_data": {},
+      "merge_output_kaderblick_video_type_id": 0,
+      "merge_output_kaderblick_camera_id": 0,
+      "merge_encoder": "inherit",
+      "merge_crf": 0,
+      "merge_preset": "medium",
+      "merge_no_bframes": true,
+      "merge_fps": 0,
+      "merge_output_format": "source",
+      "merge_output_resolution": "source",
+      "upload_kaderblick": true,
+      "default_kaderblick_game_id": "",
+      "default_kaderblick_video_type_id": 2,
+      "default_kaderblick_camera_id": 6,
+      "yt_version_encoder": "auto",
+      "yt_version_crf": 18,
+      "yt_version_preset": "slow",
+      "yt_version_no_bframes": true,
+      "yt_version_fps": 0,
+      "yt_version_output_format": "source",
+      "yt_version_output_resolution": "source",
+      "title_card_enabled": false,
+      "title_card_logo_path": "",
+      "title_card_duration": 3.0,
+      "title_card_bg_color": "#000000",
+      "title_card_fg_color": "#FFFFFF",
+      "title_card_home_team": "",
+      "title_card_away_team": "",
+      "title_card_date": "",
+      "graph_nodes": [
+        {
+          "id": "source_pi_download-53a9ad",
+          "type": "source_pi_download",
+          "x": -1259.5508675759675,
+          "y": -582.8982648480661
+        },
+        {
+          "id": "convert-f7bd63",
+          "type": "convert",
+          "x": -1258.449132424034,
+          "y": -451.3473972720995
+        },
+        {
+          "id": "validate_surface-e38210",
+          "type": "validate_surface",
+          "x": -1261.0,
+          "y": -326.0
+        },
+        {
+          "id": "repair-c730df",
+          "type": "repair",
+          "x": -922.0,
+          "y": -352.0
+        },
+        {
+          "id": "yt_version-f25d50",
+          "type": "yt_version",
+          "x": -1262.0,
+          "y": -179.0
+        },
+        {
+          "id": "stop-63e841",
+          "type": "stop",
+          "x": -909.0000000000001,
+          "y": -217.44913242403317
+        },
+        {
+          "id": "youtube_upload-92b581",
+          "type": "youtube_upload",
+          "x": -1252.5508675759672,
+          "y": -41.63095060585134
+        },
+        {
+          "id": "kaderblick-0ff223",
+          "type": "kaderblick",
+          "x": -1266.8434851519335,
+          "y": 103.19586757596682
+        }
+      ],
+      "graph_edges": [
+        {
+          "source": "source_pi_download-53a9ad",
+          "target": "convert-f7bd63"
+        },
+        {
+          "source": "convert-f7bd63",
+          "target": "validate_surface-e38210"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "repair-c730df",
+          "branch": "repairable"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "yt_version-f25d50",
+          "branch": "ok"
+        },
+        {
+          "source": "repair-c730df",
+          "target": "yt_version-f25d50"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "stop-63e841",
+          "branch": "irreparable"
+        },
+        {
+          "source": "yt_version-f25d50",
+          "target": "youtube_upload-92b581"
+        },
+        {
+          "source": "youtube_upload-92b581",
+          "target": "kaderblick-0ff223"
+        }
+      ]
+    },
+    {
+      "id": "53f88fe4",
+      "enabled": true,
+      "name": "Kaderblick Kamera Links - 2. Halbzeit",
+      "source_mode": "pi_download",
+      "files": [
+        {
+          "source_path": "/media/andreas/Kaderblick/Spiel-Aufnahmen/Ligaspiele/Sparkassenkreisoberliga/03.05.2026 SpG SG Wurgwitz | SG 90 Braunsdorf vs. SSV 1862 Langburkersdorf/Kaderblick Kamera Links/raw/aufnahme_2026-05-03_21-06-15.mjpg",
+          "source_size_bytes": 359280044,
+          "output_filename": "",
+          "youtube_title": "",
+          "youtube_description": "",
+          "youtube_playlist": "",
+          "kaderblick_game_id": "",
+          "kaderblick_game_start": 0,
+          "kaderblick_video_type_id": 0,
+          "kaderblick_camera_id": 0,
+          "merge_group_id": "",
+          "title_card_subtitle": "",
+          "graph_source_id": "",
+          "title_card_before_merge": false
+        }
+      ],
+      "device_name": "Kaderblick Kamera Links",
+      "download_destination": "",
+      "delete_after_download": true,
+      "source_folder": "",
+      "file_pattern": "*.mp4",
+      "copy_destination": "",
+      "move_files": false,
+      "output_prefix": "",
+      "convert_enabled": true,
+      "encoder": "auto",
+      "crf": 12,
+      "preset": "slow",
+      "no_bframes": true,
+      "fps": 25,
+      "output_format": "mp4",
+      "output_resolution": "source",
+      "overwrite": false,
+      "merge_audio": true,
+      "amplify_audio": true,
+      "amplify_db": 12.0,
+      "audio_sync": true,
+      "create_youtube_version": true,
+      "upload_youtube": true,
+      "default_youtube_title": "2026-05-10 | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf | Links 2. Halbzeit",
+      "default_youtube_playlist": "10.05.2026 | Sparkassenkreisoberliga | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdo",
+      "default_youtube_description": "📅 10.05.2026\n⚽ SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf\n🏆 Sparkassenkreisoberliga\n📍 Seifersdorf\n🎬 2. Halbzeit | Seite: Links\n📷 Kaderblick Links\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGTSVSfdfHöckendorferFV #SpGWurgwitzSG90Braunsdorf #KaderblickLinks #Links #2Halbzeit #Kaderblick",
+      "default_youtube_competition": "",
+      "youtube_match_data": {},
+      "youtube_segment_data": {
+        "camera": "Kaderblick Links",
+        "side": "Links",
+        "half": 2,
+        "part": 0,
+        "type_name": "2. Halbzeit"
+      },
+      "youtube_kaderblick_video_type_id": 3,
+      "youtube_kaderblick_camera_id": 6,
+      "merge_output_title": "",
+      "merge_output_playlist": "",
+      "merge_output_description": "",
+      "merge_match_data": {},
+      "merge_segment_data": {},
+      "merge_output_kaderblick_video_type_id": 0,
+      "merge_output_kaderblick_camera_id": 0,
+      "merge_encoder": "inherit",
+      "merge_crf": 0,
+      "merge_preset": "medium",
+      "merge_no_bframes": true,
+      "merge_fps": 0,
+      "merge_output_format": "source",
+      "merge_output_resolution": "source",
+      "upload_kaderblick": true,
+      "default_kaderblick_game_id": "",
+      "default_kaderblick_video_type_id": 3,
+      "default_kaderblick_camera_id": 6,
+      "yt_version_encoder": "auto",
+      "yt_version_crf": 18,
+      "yt_version_preset": "slow",
+      "yt_version_no_bframes": true,
+      "yt_version_fps": 0,
+      "yt_version_output_format": "source",
+      "yt_version_output_resolution": "source",
+      "title_card_enabled": false,
+      "title_card_logo_path": "",
+      "title_card_duration": 3.0,
+      "title_card_bg_color": "#000000",
+      "title_card_fg_color": "#FFFFFF",
+      "title_card_home_team": "",
+      "title_card_away_team": "",
+      "title_card_date": "",
+      "graph_nodes": [
+        {
+          "id": "convert-f7bd63",
+          "type": "convert",
+          "x": -1260.0,
+          "y": -456.0
+        },
+        {
+          "id": "validate_surface-e38210",
+          "type": "validate_surface",
+          "x": -1261.0,
+          "y": -326.0
+        },
+        {
+          "id": "repair-c730df",
+          "type": "repair",
+          "x": -922.0,
+          "y": -352.0
+        },
+        {
+          "id": "yt_version-f25d50",
+          "type": "yt_version",
+          "x": -1258.9999999999998,
+          "y": -175.54672392955803
+        },
+        {
+          "id": "stop-63e841",
+          "type": "stop",
+          "x": -909.0,
+          "y": -219.0
+        },
+        {
+          "id": "youtube_upload-92b581",
+          "type": "youtube_upload",
+          "x": -1255.5467239295583,
+          "y": -44.45327607044199
+        },
+        {
+          "id": "kaderblick-0ff223",
+          "type": "kaderblick",
+          "x": -1264.7417500000001,
+          "y": 97.99999999999997
+        },
+        {
+          "id": "source_pi_download-e352e1",
+          "type": "source_pi_download",
+          "x": -1260.5800025897786,
+          "y": -592.395265020718
+        }
+      ],
+      "graph_edges": [
+        {
+          "source": "convert-f7bd63",
+          "target": "validate_surface-e38210"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "repair-c730df",
+          "branch": "repairable"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "yt_version-f25d50",
+          "branch": "ok"
+        },
+        {
+          "source": "repair-c730df",
+          "target": "yt_version-f25d50"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "stop-63e841",
+          "branch": "irreparable"
+        },
+        {
+          "source": "yt_version-f25d50",
+          "target": "youtube_upload-92b581"
+        },
+        {
+          "source": "youtube_upload-92b581",
+          "target": "kaderblick-0ff223"
+        },
+        {
+          "source": "source_pi_download-e352e1",
+          "target": "convert-f7bd63"
+        }
+      ]
+    },
+    {
+      "id": "a9bd227b",
+      "enabled": true,
+      "name": "Kaderblick Kamera Rechts - 1. Halbzeit",
+      "source_mode": "pi_download",
+      "files": [
+        {
+          "source_path": "/media/andreas/Kaderblick/Spiel-Aufnahmen/Ligaspiele/Sparkassenkreisoberliga/03.05.2026 SpG SG Wurgwitz | SG 90 Braunsdorf vs. SSV 1862 Langburkersdorf/Kaderblick Kamera Rechts/raw/aufnahme_2026-05-03_19-03-27.mjpg",
+          "source_size_bytes": 85416945224,
+          "output_filename": "",
+          "youtube_title": "",
+          "youtube_description": "",
+          "youtube_playlist": "",
+          "kaderblick_game_id": "",
+          "kaderblick_game_start": 0,
+          "kaderblick_video_type_id": 0,
+          "kaderblick_camera_id": 0,
+          "merge_group_id": "",
+          "title_card_subtitle": "",
+          "graph_source_id": "",
+          "title_card_before_merge": false
+        }
+      ],
+      "device_name": "Kaderblick Kamera Rechts",
+      "download_destination": "",
+      "delete_after_download": true,
+      "source_folder": "",
+      "file_pattern": "*.mp4",
+      "copy_destination": "",
+      "move_files": false,
+      "output_prefix": "",
+      "convert_enabled": true,
+      "encoder": "auto",
+      "crf": 12,
+      "preset": "slow",
+      "no_bframes": true,
+      "fps": 25,
+      "output_format": "mp4",
+      "output_resolution": "source",
+      "overwrite": false,
+      "merge_audio": true,
+      "amplify_audio": true,
+      "amplify_db": 12.0,
+      "audio_sync": true,
+      "create_youtube_version": true,
+      "upload_youtube": true,
+      "default_youtube_title": "2026-05-03 | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf | Rechts 1. Halbzeit",
+      "default_youtube_playlist": "03.05.2026 | Sparkassenkreisoberliga | SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf",
+      "default_youtube_description": "📅 03.05.2026\n⚽ SpG Wurgwitz/​SG 90 Braunsdorf vs SSV 1862 Langburkersdorf\n🏆 Sparkassenkreisoberliga\n📍 Braunsdorf\n🎬 1. Halbzeit | Seite: Rechts\n📷 Kaderblick Rechts\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGWurgwitzSG90Braunsdorf #SSV1862Langburkersdorf #KaderblickRechts #Rechts #1Halbzeit #Kaderblick",
+      "default_youtube_competition": "",
+      "youtube_match_data": {},
+      "youtube_segment_data": {
+        "camera": "Kaderblick Rechts",
+        "side": "Rechts",
+        "half": 1,
+        "part": 0,
+        "type_name": "1. Halbzeit"
+      },
+      "youtube_kaderblick_video_type_id": 2,
+      "youtube_kaderblick_camera_id": 7,
+      "merge_output_title": "",
+      "merge_output_playlist": "",
+      "merge_output_description": "",
+      "merge_match_data": {},
+      "merge_segment_data": {},
+      "merge_output_kaderblick_video_type_id": 0,
+      "merge_output_kaderblick_camera_id": 0,
+      "merge_encoder": "inherit",
+      "merge_crf": 0,
+      "merge_preset": "medium",
+      "merge_no_bframes": true,
+      "merge_fps": 0,
+      "merge_output_format": "source",
+      "merge_output_resolution": "source",
+      "upload_kaderblick": true,
+      "default_kaderblick_game_id": "",
+      "default_kaderblick_video_type_id": 2,
+      "default_kaderblick_camera_id": 7,
+      "yt_version_encoder": "auto",
+      "yt_version_crf": 18,
+      "yt_version_preset": "slow",
+      "yt_version_no_bframes": true,
+      "yt_version_fps": 0,
+      "yt_version_output_format": "source",
+      "yt_version_output_resolution": "source",
+      "title_card_enabled": false,
+      "title_card_logo_path": "",
+      "title_card_duration": 3.0,
+      "title_card_bg_color": "#000000",
+      "title_card_fg_color": "#FFFFFF",
+      "title_card_home_team": "",
+      "title_card_away_team": "",
+      "title_card_date": "",
+      "graph_nodes": [
+        {
+          "id": "source_pi_download-53a9ad",
+          "type": "source_pi_download",
+          "x": -1261.1499999999996,
+          "y": -590.0
+        },
+        {
+          "id": "convert-f7bd63",
+          "type": "convert",
+          "x": -1263.0934478591157,
+          "y": -451.3598282113259
+        },
+        {
+          "id": "validate_surface-e38210",
+          "type": "validate_surface",
+          "x": -1261.0,
+          "y": -326.0
+        },
+        {
+          "id": "repair-c730df",
+          "type": "repair",
+          "x": -922.0,
+          "y": -352.0
+        },
+        {
+          "id": "yt_version-f25d50",
+          "type": "yt_version",
+          "x": -1259.0,
+          "y": -174.0
+        },
+        {
+          "id": "stop-63e841",
+          "type": "stop",
+          "x": -909.0,
+          "y": -219.0
+        },
+        {
+          "id": "youtube_upload-92b581",
+          "type": "youtube_upload",
+          "x": -1253.546723929558,
+          "y": -43.453276070441994
+        },
+        {
+          "id": "kaderblick-0ff223",
+          "type": "kaderblick",
+          "x": -1260.7,
+          "y": 98.0
+        }
+      ],
+      "graph_edges": [
+        {
+          "source": "source_pi_download-53a9ad",
+          "target": "convert-f7bd63"
+        },
+        {
+          "source": "convert-f7bd63",
+          "target": "validate_surface-e38210"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "repair-c730df",
+          "branch": "repairable"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "yt_version-f25d50",
+          "branch": "ok"
+        },
+        {
+          "source": "repair-c730df",
+          "target": "yt_version-f25d50"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "stop-63e841",
+          "branch": "irreparable"
+        },
+        {
+          "source": "yt_version-f25d50",
+          "target": "youtube_upload-92b581"
+        },
+        {
+          "source": "youtube_upload-92b581",
+          "target": "kaderblick-0ff223"
+        }
+      ]
+    },
+    {
+      "id": "a1e7b864",
+      "enabled": true,
+      "name": "Kaderblick Kamera Rechts - 2. Halbzeit",
+      "source_mode": "pi_download",
+      "files": [
+        {
+          "source_path": "/media/andreas/Kaderblick/Spiel-Aufnahmen/Ligaspiele/Sparkassenkreisoberliga/03.05.2026 SpG SG Wurgwitz | SG 90 Braunsdorf vs. SSV 1862 Langburkersdorf/Kaderblick Kamera Rechts/raw/aufnahme_2026-05-03_20-06-04.mjpg",
+          "source_size_bytes": 359292044,
+          "output_filename": "",
+          "youtube_title": "",
+          "youtube_description": "",
+          "youtube_playlist": "",
+          "kaderblick_game_id": "",
+          "kaderblick_game_start": 0,
+          "kaderblick_video_type_id": 0,
+          "kaderblick_camera_id": 0,
+          "merge_group_id": "",
+          "title_card_subtitle": "",
+          "graph_source_id": "",
+          "title_card_before_merge": false
+        }
+      ],
+      "device_name": "Kaderblick Kamera Rechts",
+      "download_destination": "",
+      "delete_after_download": true,
+      "source_folder": "",
+      "file_pattern": "*.mp4",
+      "copy_destination": "",
+      "move_files": false,
+      "output_prefix": "",
+      "convert_enabled": true,
+      "encoder": "auto",
+      "crf": 12,
+      "preset": "slow",
+      "no_bframes": true,
+      "fps": 25,
+      "output_format": "mp4",
+      "output_resolution": "source",
+      "overwrite": false,
+      "merge_audio": true,
+      "amplify_audio": true,
+      "amplify_db": 12.0,
+      "audio_sync": true,
+      "create_youtube_version": true,
+      "upload_youtube": true,
+      "default_youtube_title": "2026-05-10 | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf | Rechts 2. Halbzeit",
+      "default_youtube_playlist": "10.05.2026 | Sparkassenkreisoberliga | SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdo",
+      "default_youtube_description": "📅 10.05.2026\n⚽ SpG TSV Sfdf/​Höckendorfer FV vs SpG Wurgwitz/​SG 90 Braunsdorf\n🏆 Sparkassenkreisoberliga\n📍 Seifersdorf\n🎬 2. Halbzeit | Seite: Rechts\n📷 Kaderblick Rechts\n\nautomatisch hochgeladen mit Kaderblick Video-Manager\n\n#Fußball #Sport #Sparkassenkreisoberliga #SpGTSVSfdfHöckendorferFV #SpGWurgwitzSG90Braunsdorf #KaderblickRechts #Rechts #2Halbzeit #Kaderblick",
+      "default_youtube_competition": "",
+      "youtube_match_data": {},
+      "youtube_segment_data": {
+        "camera": "Kaderblick Rechts",
+        "side": "Rechts",
+        "half": 2,
+        "part": 0,
+        "type_name": "2. Halbzeit"
+      },
+      "youtube_kaderblick_video_type_id": 3,
+      "youtube_kaderblick_camera_id": 7,
+      "merge_output_title": "",
+      "merge_output_playlist": "",
+      "merge_output_description": "",
+      "merge_match_data": {},
+      "merge_segment_data": {},
+      "merge_output_kaderblick_video_type_id": 0,
+      "merge_output_kaderblick_camera_id": 0,
+      "merge_encoder": "inherit",
+      "merge_crf": 0,
+      "merge_preset": "medium",
+      "merge_no_bframes": true,
+      "merge_fps": 0,
+      "merge_output_format": "source",
+      "merge_output_resolution": "source",
+      "upload_kaderblick": true,
+      "default_kaderblick_game_id": "",
+      "default_kaderblick_video_type_id": 3,
+      "default_kaderblick_camera_id": 7,
+      "yt_version_encoder": "auto",
+      "yt_version_crf": 18,
+      "yt_version_preset": "slow",
+      "yt_version_no_bframes": true,
+      "yt_version_fps": 0,
+      "yt_version_output_format": "source",
+      "yt_version_output_resolution": "source",
+      "title_card_enabled": false,
+      "title_card_logo_path": "",
+      "title_card_duration": 3.0,
+      "title_card_bg_color": "#000000",
+      "title_card_fg_color": "#FFFFFF",
+      "title_card_home_team": "",
+      "title_card_away_team": "",
+      "title_card_date": "",
+      "graph_nodes": [
+        {
+          "id": "source_pi_download-53a9ad",
+          "type": "source_pi_download",
+          "x": -1257.0,
+          "y": -587.0
+        },
+        {
+          "id": "convert-f7bd63",
+          "type": "convert",
+          "x": -1260.0,
+          "y": -456.0
+        },
+        {
+          "id": "validate_surface-e38210",
+          "type": "validate_surface",
+          "x": -1261.0,
+          "y": -326.0
+        },
+        {
+          "id": "repair-c730df",
+          "type": "repair",
+          "x": -922.0,
+          "y": -352.0
+        },
+        {
+          "id": "yt_version-f25d50",
+          "type": "yt_version",
+          "x": -1259.0,
+          "y": -174.0
+        },
+        {
+          "id": "stop-63e841",
+          "type": "stop",
+          "x": -909.0,
+          "y": -219.0
+        },
+        {
+          "id": "youtube_upload-92b581",
+          "type": "youtube_upload",
+          "x": -1250.9999999999998,
+          "y": -44.453276070441994
+        },
+        {
+          "id": "kaderblick-0ff223",
+          "type": "kaderblick",
+          "x": -1260.7,
+          "y": 98.0
+        }
+      ],
+      "graph_edges": [
+        {
+          "source": "source_pi_download-53a9ad",
+          "target": "convert-f7bd63"
+        },
+        {
+          "source": "convert-f7bd63",
+          "target": "validate_surface-e38210"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "repair-c730df",
+          "branch": "repairable"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "yt_version-f25d50",
+          "branch": "ok"
+        },
+        {
+          "source": "repair-c730df",
+          "target": "yt_version-f25d50"
+        },
+        {
+          "source": "validate_surface-e38210",
+          "target": "stop-63e841",
+          "branch": "irreparable"
+        },
+        {
+          "source": "yt_version-f25d50",
+          "target": "youtube_upload-92b581"
+        },
+        {
+          "source": "youtube_upload-92b581",
+          "target": "kaderblick-0ff223"
+        }
+      ]
+    }
+  ]
+}

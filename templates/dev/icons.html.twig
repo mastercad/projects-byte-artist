@@ -1,0 +1,492 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Icon-Übersicht (Dev) | byte-artist.de{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .dev-icons-header {
+            background: var(--card);
+            border-bottom: 2px solid var(--accent);
+            padding: calc(var(--nav-h) + 28px) 32px 24px;
+        }
+
+        .dev-icons-header h1 {
+            font-size: 1.4rem;
+            color: var(--text);
+            margin: 0 0 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dev-badge {
+            font-size: 0.65rem;
+            font-family: monospace;
+            background: var(--accent);
+            color: #000;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-weight: 700;
+            letter-spacing: .05em;
+        }
+
+        .dev-icons-header p {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        /* ── controls bar ───────────────────────────────────────────── */
+        .dev-icons-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 14px 32px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: var(--nav-h);
+            z-index: 10;
+        }
+
+        .dev-icons-search {
+            flex: 1;
+            min-width: 200px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            padding: 9px 14px 9px 38px;
+            outline: none;
+            transition: border-color .15s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23888' viewBox='0 0 24 24'%3E%3Cpath d='M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12A6 6 0 0110 4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: 16px;
+            background-position: 12px center;
+        }
+
+        .dev-icons-search:focus { border-color: var(--accent); }
+
+        .style-btn {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 7px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-family: monospace;
+            transition: background .15s, color .15s, border-color .15s;
+        }
+
+        .style-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+        }
+
+        .dev-icons-count {
+            font-size: 0.8rem;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        /* ── category sections ──────────────────────────────────────── */
+        .dev-category {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dev-category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            cursor: pointer;
+            user-select: none;
+            background: var(--bg);
+            transition: background .12s;
+        }
+
+        .dev-category-header:hover {
+            background: color-mix(in srgb, var(--accent) 6%, var(--bg));
+        }
+
+        .dev-category-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            flex: 1;
+        }
+
+        .dev-category-count {
+            font-size: 0.72rem;
+            font-family: monospace;
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .dev-category-toggle {
+            font-size: 0.75rem;
+            color: var(--muted);
+            transition: transform .2s;
+        }
+
+        .dev-category.collapsed .dev-category-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .dev-category-body {
+            overflow: hidden;
+        }
+
+        .dev-category.collapsed .dev-category-body {
+            display: none;
+        }
+
+        /* ── icon grid ──────────────────────────────────────────────── */
+        .dev-icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 8px;
+            padding: 12px 32px 20px;
+        }
+
+        .icon-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 8px 10px;
+            cursor: pointer;
+            transition: border-color .15s, background .15s, transform .1s;
+            user-select: none;
+        }
+
+        .icon-card:hover {
+            border-color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 8%, var(--card));
+            transform: translateY(-2px);
+        }
+
+        .icon-card:active { transform: scale(0.96); }
+
+        .icon-card i {
+            font-size: 1.5rem;
+            color: var(--accent);
+            width: 28px;
+            text-align: center;
+        }
+
+        .icon-card-name {
+            font-size: 0.65rem;
+            color: var(--muted);
+            font-family: monospace;
+            text-align: center;
+            word-break: break-all;
+            line-height: 1.3;
+        }
+
+        /* ── states ─────────────────────────────────────────────────── */
+        .dev-icons-empty {
+            padding: 60px 32px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .dev-icons-loading {
+            padding: 60px 32px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .dev-icons-loading i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: block;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── toast ───────────────────────────────────────────────────── */
+        .copy-toast {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--accent);
+            color: #000;
+            font-family: monospace;
+            font-size: 0.8rem;
+            padding: 8px 18px;
+            border-radius: 20px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .2s, transform .2s;
+            z-index: 9999;
+            white-space: nowrap;
+        }
+
+        .copy-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .dev-icons-controls { padding: 12px 16px; }
+            .dev-category-header { padding: 12px 16px; }
+            .dev-icons-grid { padding: 10px 16px 16px; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="dev-icons-header">
+        <h1>
+            <i class="fas fa-icons"></i>
+            Font Awesome Icon-Übersicht
+            <span class="dev-badge">DEV</span>
+        </h1>
+        <p>Klick auf ein Icon kopiert den HTML-Snippet in die Zwischenablage.</p>
+    </div>
+
+    <div class="dev-icons-controls">
+        <input
+            class="dev-icons-search"
+            id="icon-search"
+            type="search"
+            placeholder="Icon suchen …"
+            autocomplete="off"
+            autofocus
+        >
+        <div id="style-btns" style="display:flex;gap:6px">
+            <button class="style-btn active" data-prefix="fa-solid">solid</button>
+            <button class="style-btn" data-prefix="fa-regular">regular</button>
+            <button class="style-btn" data-prefix="fa-brands">brands</button>
+        </div>
+        <span class="dev-icons-count" id="icon-count"></span>
+    </div>
+
+    <div id="icon-grid-wrap">
+        <div class="dev-icons-loading">
+            <i class="fas fa-spinner"></i>
+            Icons werden geladen …
+        </div>
+    </div>
+
+    <div class="copy-toast" id="copy-toast"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+    (() => {
+        const FAMILIES_URL   = 'https://unpkg.com/@fortawesome/fontawesome-free@7.0.1/metadata/icon-families.json';
+        const CATEGORIES_URL = 'https://unpkg.com/@fortawesome/fontawesome-free@7.0.1/metadata/categories.yml';
+
+        // icon name → Set<'solid'|'regular'|'brands'>
+        const iconMap = {};
+        // [{key, label, icons: string[]}]
+        let categories = [];
+
+        let activePrefix = 'fa-solid';
+        let searchQuery  = '';
+
+        const gridWrap   = document.getElementById('icon-grid-wrap');
+        const searchInput = document.getElementById('icon-search');
+        const countEl    = document.getElementById('icon-count');
+        const toast      = document.getElementById('copy-toast');
+        let toastTimer   = null;
+
+        // ── load data in parallel ─────────────────────────────────────
+        Promise.all([
+            fetch(FAMILIES_URL).then(r => { if (!r.ok) throw r.status; return r.json(); }),
+            fetch(CATEGORIES_URL).then(r => { if (!r.ok) throw r.status; return r.text(); }),
+        ]).then(([families, yml]) => {
+            // parse icon-families.json
+            for (const [name, info] of Object.entries(families)) {
+                const styles = new Set();
+                for (const fs of (info.familyStylesByLicense?.free ?? [])) {
+                    if (fs.style === 'solid')   styles.add('solid');
+                    if (fs.style === 'regular') styles.add('regular');
+                    if (fs.style === 'brands')  styles.add('brands');
+                }
+                if (styles.size > 0) iconMap[name] = styles;
+            }
+
+            // parse categories.yml (simple state machine — no library needed)
+            categories = parseYaml(yml);
+
+            render();
+        }).catch(err => {
+            gridWrap.innerHTML = `<div class="dev-icons-empty"><i class="fas fa-triangle-exclamation"></i><br>Daten konnten nicht geladen werden (${err}).</div>`;
+        });
+
+        // ── YAML parser ───────────────────────────────────────────────
+        function parseYaml(text) {
+            const result = [];
+            let cur = null;
+            let inIcons = false;
+            for (const raw of text.split('\n')) {
+                const line = raw.trimEnd();
+                let m;
+                // top-level key "word:" (no leading spaces)
+                if ((m = line.match(/^([a-z][a-z0-9-]*):$/))) {
+                    if (cur) result.push(cur);
+                    cur = { key: m[1], label: m[1], icons: [] };
+                    inIcons = false;
+                    continue;
+                }
+                if (!cur) continue;
+                if ((m = line.match(/^\s+label:\s+(.+)$/))) {
+                    cur.label = m[1].trim().replace(/^['"]|['"]$/g, '');
+                    continue;
+                }
+                if (line.match(/^\s+icons:\s*$/)) { inIcons = true; continue; }
+                if (inIcons && (m = line.match(/^\s+-\s+'?([a-z0-9-]+)'?$/))) {
+                    cur.icons.push(m[1]);
+                }
+            }
+            if (cur) result.push(cur);
+            return result;
+        }
+
+        // ── render ────────────────────────────────────────────────────
+        function currentStyle() { return activePrefix.replace('fa-', ''); }
+
+        function makeCard(name) {
+            const card = document.createElement('div');
+            card.className = 'icon-card';
+            card.title = 'Klick zum Kopieren';
+            card.innerHTML = `<i class="${activePrefix} fa-${name}"></i><span class="icon-card-name">fa-${name}</span>`;
+            card.addEventListener('click', () => copyIcon(name));
+            return card;
+        }
+
+        function makeGrid(names) {
+            const grid = document.createElement('div');
+            grid.className = 'dev-icons-grid';
+            names.forEach(n => grid.appendChild(makeCard(n)));
+            return grid;
+        }
+
+        function render() {
+            const q     = searchQuery.toLowerCase();
+            const style = currentStyle();
+            const wrap  = document.createElement('div');
+            let total   = 0;
+
+            if (q) {
+                // ── flat search result ─────────────────────────────────
+                const matches = Object.keys(iconMap)
+                    .filter(n => iconMap[n].has(style) && n.includes(q))
+                    .sort();
+                total = matches.length;
+                if (matches.length === 0) {
+                    wrap.innerHTML = '<div class="dev-icons-empty">Keine Icons gefunden.</div>';
+                } else {
+                    wrap.appendChild(makeGrid(matches));
+                }
+            } else {
+                // ── grouped by category ────────────────────────────────
+                const categorized = new Set();
+
+                for (const cat of categories) {
+                    const names = cat.icons
+                        .filter(n => (n in iconMap) && iconMap[n].has(style));
+                    if (names.length === 0) continue;
+                    names.forEach(n => categorized.add(n));
+                    total += names.length;
+
+                    const section = document.createElement('div');
+                    section.className = 'dev-category';
+                    section.innerHTML = `
+                        <div class="dev-category-header">
+                            <span class="dev-category-label">${escHtml(cat.label)}</span>
+                            <span class="dev-category-count">${names.length}</span>
+                            <i class="fas fa-chevron-down dev-category-toggle"></i>
+                        </div>
+                        <div class="dev-category-body"></div>`;
+                    section.querySelector('.dev-category-body').appendChild(makeGrid(names));
+                    section.querySelector('.dev-category-header').addEventListener('click', () => {
+                        section.classList.toggle('collapsed');
+                    });
+                    wrap.appendChild(section);
+                }
+
+                // uncategorized (brands mostly)
+                const uncategorized = Object.keys(iconMap)
+                    .filter(n => iconMap[n].has(style) && !categorized.has(n))
+                    .sort();
+                if (uncategorized.length > 0) {
+                    total += uncategorized.length;
+                    const section = document.createElement('div');
+                    section.className = 'dev-category';
+                    section.innerHTML = `
+                        <div class="dev-category-header">
+                            <span class="dev-category-label">Sonstige</span>
+                            <span class="dev-category-count">${uncategorized.length}</span>
+                            <i class="fas fa-chevron-down dev-category-toggle"></i>
+                        </div>
+                        <div class="dev-category-body"></div>`;
+                    section.querySelector('.dev-category-body').appendChild(makeGrid(uncategorized));
+                    section.querySelector('.dev-category-header').addEventListener('click', () => {
+                        section.classList.toggle('collapsed');
+                    });
+                    wrap.appendChild(section);
+                }
+
+                if (total === 0) {
+                    wrap.innerHTML = '<div class="dev-icons-empty">Keine Icons verfügbar.</div>';
+                }
+            }
+
+            countEl.textContent = total + ' Icons';
+            gridWrap.innerHTML  = '';
+            gridWrap.appendChild(wrap);
+        }
+
+        // ── copy ──────────────────────────────────────────────────────
+        function copyIcon(name) {
+            const classes = `${activePrefix} fa-${name}`;
+            navigator.clipboard.writeText(classes).then(() => showToast(classes));
+        }
+
+        function showToast(text) {
+            toast.textContent = 'Kopiert: ' + text;
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+
+        function escHtml(s) {
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // ── events ────────────────────────────────────────────────────
+        searchInput.addEventListener('input', () => {
+            searchQuery = searchInput.value;
+            render();
+        });
+
+        document.getElementById('style-btns').addEventListener('click', e => {
+            const btn = e.target.closest('.style-btn');
+            if (!btn) return;
+            document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activePrefix = btn.dataset.prefix;
+            render();
+        });
+    })();
+    </script>
+{% endblock %}

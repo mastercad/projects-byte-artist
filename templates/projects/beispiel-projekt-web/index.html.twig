@@ -1,0 +1,276 @@
+{% extends 'projects/_base-project.html.twig' %}
+
+{#
+  Beispiel-Projektseite — zeigt alle verfügbaren Komponenten in der Praxis.
+  Dient als Vorlage für neue Projekte: kopieren → umbenennen → Inhalte ersetzen.
+
+  ── Bildpfade ──────────────────────────────────────────────────────────────
+  Die verwendeten Bildpfade sind Platzhalter. Eigene Screenshots ablegen unter
+  public/assets/img/<projekt-slug>/ und die src-Werte entsprechend anpassen.
+  ──────────────────────────────────────────────────────────────────────────
+#}
+
+{% set project = {
+    tagline:    'Echtzeit-Monitoring und Alerting für verteilte Symfony-Anwendungen — mit historischen Metriken, Trace-Visualisierung und Team-Benachrichtigungen.',
+    docs_url:   null,
+    intro: 'Chronos Dashboard ist eine selbst gehostete Monitoring-Plattform speziell für PHP-Anwendungen.
+            Es sammelt Laufzeit-Metriken, visualisiert Request-Traces und verschickt smarte Alerts über
+            Slack, E-Mail oder Webhooks — ohne externe Abhängigkeiten wie Datadog oder New Relic.'
+} %}
+
+{% set toc = [
+    { id: 'overview',      label: 'Überblick' },
+    { id: 'stats',         label: 'Kennzahlen' },
+    { id: 'architecture',  label: 'Architektur' },
+    { id: 'features',      label: 'Features' },
+    { id: 'screenshots',   label: 'Screenshots' },
+    { id: 'tech-stack',    label: 'Tech-Stack' },
+    { id: 'installation',  label: 'Installation' },
+    { id: 'configuration', label: 'Konfiguration' },
+    { id: 'usage',         label: 'Verwendung' },
+    { id: 'demo',          label: 'Demo-Video' },
+] %}
+
+{% set features = [
+    { icon: 'fas fa-gauge-high',    title: 'Echtzeit-Metriken',       desc: 'CPU, Memory, DB-Queries, Cache-Hit-Rate und HTTP-Throughput — live im Browser per WebSocket.' },
+    { icon: 'fas fa-route',         title: 'Request-Tracing',         desc: 'Distributed Tracing über mehrere Services mit Flamegraph-Visualisierung und SQL-Analyse.' },
+    { icon: 'fas fa-bell',          title: 'Intelligentes Alerting',  desc: 'Regelbasierte Alerts mit konfigurierbaren Schwellenwerten, Cooldowns und Eskalationsstufen.' },
+    { icon: 'fas fa-chart-line',    title: 'Historische Metriken',    desc: 'TimeSeries-Daten für bis zu 12 Monate mit frei konfigurierbaren Dashboards und Aggregationen.' },
+    { icon: 'fas fa-users',         title: 'Team-Management',         desc: 'Rollen, Benachrichtigungsprofile und On-Call-Rotation direkt im Dashboard verwalten.' },
+    { icon: 'fas fa-plug',          title: 'Integrations-SDK',        desc: 'PHP-SDK zum Einbetten in bestehende Symfony-Projekte via Composer in unter 5 Minuten.' },
+    { icon: 'fas fa-shield-halved', title: 'SSO & Audit-Log',         desc: 'SAML 2.0 / OIDC Single Sign-On und unveränderlicher Audit-Trail aller Konfigurationsänderungen.' },
+    { icon: 'fas fa-server',        title: 'Self-hosted',             desc: 'Vollständig selbst gehostet. Keine Cloud-Pflicht, keine Datenweitergabe, Docker-ready.' },
+] %}
+
+{% set install_steps = [
+    {
+        title: 'Repository klonen und Abhängigkeiten installieren',
+        text:  'PHP 8.3+, Composer 2 und Docker (für PostgreSQL + Redis) werden vorausgesetzt.',
+        code:  { lang: 'bash', content: "git clone https://github.com/byte-artist/chronos-dashboard.git\ncd chronos-dashboard\ncomposer install --no-dev --optimize-autoloader" }
+    },
+    {
+        title: 'Umgebungsvariablen konfigurieren',
+        text:  'Die .env.example in .env.local kopieren und Datenbankverbindung sowie App-Secret eintragen.',
+        code:  { lang: 'bash', filename: '.env.local', content: "APP_ENV=prod\nAPP_SECRET=<sicherer-zufallsstring>\nDATABASE_URL=\"postgresql://chronos:secret@127.0.0.1:5432/chronos?serverVersion=16\"\nREDIS_URL=redis://127.0.0.1:6379\nMAILER_DSN=smtp://user:pass@smtp.example.com:587" }
+    },
+    {
+        title: 'Datenbank initialisieren und Assets bauen',
+        text:  'Migrations ausführen und den initialen Admin-Account anlegen.',
+        code:  { lang: 'bash', content: "php bin/console doctrine:migrations:migrate --no-interaction\nphp bin/console chronos:admin:create admin@example.com\nnpm ci && npm run build" }
+    },
+    {
+        title: 'Mit Docker Compose starten (optional)',
+        text:  'Alternativ steht ein vollständiges Docker-Compose-Setup bereit, das PostgreSQL, Redis und den PHP-FPM-Container orchestriert.',
+        code:  { lang: 'bash', content: "docker compose up -d\ndocker compose exec app php bin/console doctrine:migrations:migrate --no-interaction" }
+    },
+] %}
+
+{% set config_rows = [
+    { option: 'retention_days',      type: 'int',     default: '90',     desc: 'Wie viele Tage Metriken aufbewahrt werden. Höhere Werte brauchen mehr Disk-Space.' },
+    { option: 'sampling_rate',       type: 'float',   default: '1.0',    desc: 'Anteil der Requests der getraced wird. 0.1 = 10 %, empfohlen für High-Traffic.' },
+    { option: 'alert_cooldown',      type: 'int',     default: '300',    desc: 'Mindestabstand zwischen zwei Alerts gleicher Regel in Sekunden.' },
+    { option: 'websocket_port',      type: 'int',     default: '9001',   desc: 'Port des integrierten Ratchet-WebSocket-Servers.' },
+    { option: 'slack_webhook_url',   type: 'string',  default: 'null',   desc: 'Slack Incoming Webhook URL für Alert-Benachrichtigungen.' },
+    { option: 'sso_enabled',         type: 'bool',    default: 'false',  desc: 'SAML 2.0 / OIDC Single Sign-On aktivieren.' },
+    { option: 'sso_provider_url',    type: 'string',  default: 'null',   desc: 'IdP-Metadaten-URL (nur relevant wenn sso_enabled = true).' },
+    { option: 'max_services',        type: 'int',     default: '50',     desc: 'Maximale Anzahl registrierter Services pro Instanz.' },
+] %}
+
+{% block doc_content %}
+
+    {# ── Kennzahlen ── #}
+    <div class="prose">
+        <h2 id="stats">Kennzahlen</h2>
+        <p>Chronos Dashboard wurde in Produktionsumgebungen bei mehreren Teams getestet und validiert:</p>
+    </div>
+
+    {% include 'projects/_partials/_stats.html.twig' with { stats: [
+        { value: '< 2ms',  label: 'SDK Overhead pro Request',  icon: 'fas fa-bolt' },
+        { value: '99.9%',  label: 'Uptime (eigene Instanz)',    icon: 'fas fa-shield' },
+        { value: '12 Mo',  label: 'Metriken-Retention',         icon: 'fas fa-database' },
+        { value: '50+',    label: 'Services pro Instanz',       icon: 'fas fa-server' },
+        { value: '< 5 Min',label: 'SDK-Integration',            icon: 'fas fa-plug' },
+    ] } %}
+
+    {# ── Architektur ── #}
+    <div class="prose">
+        <h2 id="architecture">Architektur</h2>
+        <p>
+            Das System besteht aus drei Schichten: dem PHP-SDK (in die eigene Anwendung eingebettet),
+            einem zentralen Ingest-Service und dem Dashboard-Frontend. Daten fließen asynchron über
+            eine Redis-Queue, sodass der Monitoring-Overhead die eigentliche Anwendung nicht blockiert.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_media-text.html.twig' with {
+        image: { src: '/assets/img/beispiel-projekt/architecture-diagram.png', alt: 'Chronos Architektur-Diagramm' },
+        badge: 'Systemarchitektur',
+        title: 'Asynchrone Metrik-Pipeline',
+        text:  'Das PHP-SDK schreibt Metriken und Traces in einen lokalen In-Memory-Buffer und flushed
+                diese am Request-Ende asynchron in eine Redis-Liste. Ein Symfony-Worker konsumiert die
+                Queue, aggregiert die Rohdaten und persistiert sie in PostgreSQL — ohne den Response-Cycle
+                der eigentlichen Anwendung zu blockieren.',
+        points: [
+            '<strong>PHP-SDK</strong> — Composer-Paket, kein Symfony-Bundle erforderlich',
+            '<strong>Ingest Worker</strong> — Symfony Messenger Consumer, horizontal skalierbar',
+            '<strong>TimeSeries Store</strong> — PostgreSQL mit TimescaleDB Extension',
+            '<strong>Realtime Layer</strong> — Ratchet WebSocket Server für Live-Metriken',
+            '<strong>Alert Engine</strong> — regelbasiert mit konfigurierbarem Cooldown und Routing',
+        ]
+    } %}
+
+    {% include 'projects/_partials/_media-text.html.twig' with {
+        image: { src: '/assets/img/beispiel-projekt/alert-flow.png', alt: 'Alert-Flow Diagramm' },
+        badge: 'Alerting',
+        title: 'Smarte Alert-Logik',
+        text:  'Die Alert Engine evaluiert Regeln in konfigurierbaren Intervallen. Alerts werden erst
+                ausgelöst wenn eine Bedingung für mehrere aufeinanderfolgende Checks erfüllt ist
+                ("for duration") — das eliminiert False Positives durch kurzfristige Spitzen.',
+        points: [
+            'Schwellenwert-Regeln für jede Metrik konfigurierbar',
+            'Cooldown verhindert Alert-Flooding',
+            'Eskalationsstufen: Slack → E-Mail → PagerDuty-Webhook',
+            'Stille-Fenster für geplante Wartungen',
+        ],
+        flip: true
+    } %}
+
+    {# ── Features ── #}
+    <div class="prose">
+        <h2 id="features">Features</h2>
+    </div>
+    {% include 'projects/_partials/_feature-grid.html.twig' with { features: features } %}
+
+    {# ── Screenshots ── #}
+    <div class="prose">
+        <h2 id="screenshots">Screenshots</h2>
+        <p>Einblick in die wichtigsten Bereiche des Dashboards:</p>
+    </div>
+
+    {% include 'projects/_partials/_screenshot.html.twig' with { screenshot: {
+        src:     '/assets/img/beispiel-projekt/dashboard-overview.png',
+        alt:     'Chronos Dashboard — Übersichtsseite',
+        url:     'chronos.example.com/dashboard',
+        caption: 'Die Hauptübersicht zeigt alle Services auf einen Blick mit Live-Status, Fehlerrate und Response-Zeit.'
+    } } %}
+
+    {% include 'projects/_partials/_gallery.html.twig' with {
+        cols: 3,
+        images: [
+            { src: '/assets/img/beispiel-projekt/screen-metrics.png',    alt: 'Metriken-Ansicht',     caption: 'Zeitreihen für CPU, Memory und DB-Queries mit frei wählbarem Zeitbereich' },
+            { src: '/assets/img/beispiel-projekt/screen-traces.png',     alt: 'Trace-Explorer',       caption: 'Flamegraph-Visualisierung eines Request-Traces mit SQL-Breakdown' },
+            { src: '/assets/img/beispiel-projekt/screen-alerts.png',     alt: 'Alert-Verwaltung',     caption: 'Alert-Regeln und Benachrichtigungsprofile im Überblick' },
+            { src: '/assets/img/beispiel-projekt/screen-team.png',       alt: 'Team-Management',      caption: 'Rollen, On-Call-Rotation und Benachrichtigungsprofile verwalten' },
+            { src: '/assets/img/beispiel-projekt/screen-service.png',    alt: 'Service-Detail',       caption: 'Detail-Ansicht eines einzelnen Services mit Endpunkt-Breakdown' },
+            { src: '/assets/img/beispiel-projekt/screen-darkmode.png',   alt: 'Mobile Dark Mode',     caption: 'Vollständig responsive — auch auf Mobilgeräten nutzbar' },
+        ]
+    } %}
+
+    {# ── Tech-Stack ── #}
+    <div class="prose">
+        <h2 id="tech-stack">Tech-Stack</h2>
+        <p>Chronos setzt ausschließlich auf battle-tested Open-Source-Technologien:</p>
+    </div>
+
+    {% include 'projects/_partials/_tech-stack.html.twig' with { items: [
+        { icon: 'fab fa-php',      name: 'PHP 8.3',         role: 'Backend',       color: '#8892bf' },
+        { icon: 'fas fa-s',        name: 'Symfony 7',       role: 'Framework' },
+        { icon: 'fas fa-database', name: 'PostgreSQL 16',   role: 'Persistenz',    color: '#336791' },
+        { icon: 'fas fa-server',   name: 'TimescaleDB',     role: 'TimeSeries',    color: '#f6820d' },
+        { icon: 'fas fa-fire',     name: 'Redis 7',         role: 'Queue / Cache', color: '#dc382d' },
+        { icon: 'fab fa-docker',   name: 'Docker',          role: 'Deployment',    color: '#2496ed' },
+        { icon: 'fas fa-plug',     name: 'Ratchet',         role: 'WebSocket' },
+        { icon: 'fab fa-js',       name: 'Alpine.js',       role: 'Frontend',      color: '#77c1d2' },
+        { icon: 'fas fa-chart-bar',name: 'Chart.js',        role: 'Visualisierung',color: '#ff6384' },
+    ] } %}
+
+    {# ── Installation ── #}
+    <div class="prose">
+        <h2 id="installation">Installation</h2>
+    </div>
+    {% include 'projects/_partials/_steps.html.twig' with { steps: install_steps } %}
+
+    {# ── Konfiguration ── #}
+    <div class="prose">
+        <h2 id="configuration">Konfiguration</h2>
+        <p>Alle verfügbaren Optionen im Überblick:</p>
+    </div>
+    {% include 'projects/_partials/_config-table.html.twig' with { rows: config_rows } %}
+
+    {# ── Verwendung ── #}
+    <div class="prose">
+        <h2 id="usage">Verwendung</h2>
+        <h3>SDK in eigene Anwendung einbinden</h3>
+        <p>
+            Das Chronos PHP-SDK lässt sich per Composer einbinden. Ein Symfony-Bundle steht bereit,
+            das die Instrumentierung automatisch konfiguriert. Für andere Frameworks steht ein
+            framework-agnostischer Client zur Verfügung.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_code-block.html.twig' with {
+        lang: 'bash',
+        content: 'composer require byte-artist/chronos-sdk'
+    } %}
+
+    <div class="prose">
+        <h3>Automatische Instrumentierung (Symfony)</h3>
+        <p>Mit dem Symfony-Bundle werden alle HTTP-Requests, Doctrine-Queries und Messenger-Messages
+           automatisch getract — ohne einzelne Controller anfassen zu müssen:</p>
+    </div>
+
+    {% include 'projects/_partials/_code-block.html.twig' with {
+        lang: 'yaml',
+        filename: 'config/packages/chronos.yaml',
+        content: "chronos:\n    dsn: '%env(CHRONOS_DSN)%'   # wss://chronos.example.com\n    service_name: 'meine-app'\n    environment: '%kernel.environment%'\n    sampling_rate: 0.25          # 25 % aller Requests tracen\n    auto_instrument:\n        doctrine: true\n        http_client: true\n        messenger: true"
+    } %}
+
+    <div class="prose">
+        <h3>Manuelle Instrumentierung</h3>
+        <p>Kritische Codestellen lassen sich mit dem <code>Tracer</code>-Service granular instrumentieren:</p>
+    </div>
+
+    {% include 'projects/_partials/_code-block.html.twig' with {
+        lang: 'php',
+        filename: 'src/Service/ReportGenerator.php',
+        content: "use ByteArtist\\ChronosSDK\\Tracer;\n\nclass ReportGenerator\n{\n    public function __construct(private readonly Tracer $tracer) {}\n\n    public function generate(int $reportId): Report\n    {\n        $span = $this->tracer->startSpan('report.generate', [\n            'report.id'   => $reportId,\n            'report.type' => 'monthly',\n        ]);\n\n        try {\n            $data = $this->fetchData($reportId);\n            $pdf  = $this->renderPdf($data);\n            $span->setStatus('ok');\n            return $pdf;\n        } catch (\\Throwable $e) {\n            $span->recordException($e);\n            throw $e;\n        } finally {\n            $span->end();\n        }\n    }\n}"
+    } %}
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'tip',
+        title: 'Sampling in Produktion',
+        text:  'In High-Traffic-Umgebungen empfiehlt sich ein <code>sampling_rate</code> von 0.05–0.1.
+                Fehlerhafte Requests werden unabhängig vom Sampling-Wert immer vollständig getraced.'
+    } %}
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'warning',
+        title: 'Breaking Change in v3.0',
+        text:  'Ab Version 3.0 wurde das Tracer-Interface überarbeitet. <code>startSpan()</code> gibt
+                jetzt immer ein <code>SpanInterface</code> zurück. Das Upgrade-Guide im GitHub-Repo
+                enthält eine vollständige Migrationsliste.'
+    } %}
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'info',
+        title: 'Datenschutz',
+        text:  'Das SDK sendet keine Daten an externe Dienste. Alle Traces landen ausschließlich auf
+                der selbst gehosteten Chronos-Instanz. SQL-Queries werden standardmäßig mit
+                Platzhaltern gespeichert (keine Werte).'
+    } %}
+
+    {# ── Demo-Video ── #}
+    <div class="prose">
+        <h2 id="demo">Demo-Video</h2>
+        <p>Eine vollständige Walkthrough des Dashboards — von der Installation bis zum ersten Alert:</p>
+    </div>
+
+    {% include 'projects/_partials/_video.html.twig' with { video: {
+        type:    'youtube',
+        src:     'dQw4w9WgXcQ',
+        title:   'Chronos Dashboard — vollständige Demo',
+        caption: 'Laufzeit ca. 12 Minuten — von der Docker-Installation bis zum ersten produktiven Alert.'
+    } } %}
+
+{% endblock %}
+

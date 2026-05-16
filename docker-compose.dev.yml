@@ -1,0 +1,46 @@
+# ─── Lokale Entwicklung ───────────────────────────────────────────────────────
+# Start: docker compose -f docker-compose.dev.yml up --build
+#
+# - Kein Rebuild bei Code-Änderungen nötig (src/, templates/, config/, public/)
+# - APP_ENV=dev → Symfony-Cache wird automatisch invalidiert
+# - vendor/ wird vom Host eingebunden (composer install lokal ausführen)
+# - var/ läuft in einem named Volume → www-data hat Schreibrechte ohne
+#   Konflikte mit dem Host-User
+
+services:
+
+  # ─── PHP-FPM (Symfony, Dev) ─────────────────────────────────────────────────
+  php:
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile.dev
+    container_name: ba_projekte_php_dev
+    environment:
+      APP_ENV: dev
+      APP_SECRET: dev-secret-local-only
+    volumes:
+      # Gesamter Projekt-Code live vom Host
+      - .:/var/www/html
+      # var/ als eigenes Volume → Schreibrechte für www-data, kein Permission-Krach
+      - var_dev:/var/www/html/var
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z 127.0.0.1 9000 || exit 1"]
+      interval: 10s
+      timeout:  5s
+      retries:  5
+
+  # ─── nginx ──────────────────────────────────────────────────────────────────
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: ba_projekte_nginx_dev
+    ports:
+      - "${HTTP_PORT:-8050}:80"
+    volumes:
+      - .docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./public:/var/www/html/public:ro
+    depends_on:
+      php:
+        condition: service_healthy
+
+volumes:
+  var_dev:

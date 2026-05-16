@@ -210,126 +210,46 @@ function initGalleryLightbox() {
     });
 }
 
-/* ─── Tag Filter + Pagination ─── */
-function initTagFilter() {
-    var grid       = document.getElementById('projects-grid');
-    var bar        = document.getElementById('tag-filter-bar');
-    var pagination = document.getElementById('pagination');
-    if (!grid) return;
+/* ─── Dev Dropdown ─── */
+function initDevDropdown() {
+    var dropdown = document.querySelector('.nav-dev-dropdown');
+    if (!dropdown) return;
+    var btn  = dropdown.querySelector('.nav-dev-btn');
+    var menu = dropdown.querySelector('.nav-dev-menu');
+    if (!btn || !menu) return;
 
-    var allCards   = Array.from(grid.querySelectorAll('.project-card'));
-    if (!allCards.length) return;
-
-    var PER_PAGE   = 9;
-    var activeTag  = null;
-    var currentPage = 1;
-
-    /* alle eindeutigen Tags einmalig aus dem DOM sammeln */
-    var allTags = [];
-    allCards.forEach(function(card) {
-        (card.dataset.tags || '').split(',').forEach(function(t) {
-            t = t.trim();
-            if (t && allTags.indexOf(t) === -1) allTags.push(t);
-        });
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+        menu.hidden = open;
     });
 
-    function filteredCards() {
-        if (!activeTag) return allCards;
-        return allCards.filter(function(card) {
-            return (card.dataset.tags || '').split(',').map(function(t) { return t.trim(); }).indexOf(activeTag) !== -1;
-        });
-    }
-
-    function renderPage(page) {
-        var visible = filteredCards();
-        var totalPages = Math.ceil(visible.length / PER_PAGE);
-        currentPage = Math.min(page, totalPages) || 1;
-        var start = (currentPage - 1) * PER_PAGE;
-        var end   = start + PER_PAGE;
-
-        allCards.forEach(function(card) { card.hidden = true; });
-        visible.slice(start, end).forEach(function(card) { card.hidden = false; });
-
-        /* aktive Tags auf Cards markieren */
-        grid.querySelectorAll('.tag--clickable').forEach(function(b) {
-            b.classList.toggle('tag--active', b.dataset.filterTag === activeTag);
-        });
-
-        /* Pagination */
-        if (pagination) {
-            pagination.innerHTML = '';
-            pagination.hidden = totalPages <= 1;
-            for (var i = 1; i <= totalPages; i++) {
-                var btn = document.createElement('button');
-                btn.className = 'pagination-btn' + (i === currentPage ? ' active' : '');
-                btn.textContent = i;
-                btn.dataset.page = i;
-                pagination.appendChild(btn);
-            }
-        }
-    }
-
-    function renderBar() {
-        if (!bar) return;
-        if (!activeTag) { bar.hidden = true; bar.innerHTML = ''; return; }
-        bar.innerHTML = '';
-        var resetBtn = document.createElement('button');
-        resetBtn.className = 'tag-filter';
-        resetBtn.textContent = '✕ Alle anzeigen';
-        resetBtn.addEventListener('click', function() { activeTag = null; renderBar(); renderPage(1); });
-        bar.appendChild(resetBtn);
-        allTags.forEach(function(t) {
-            var btn = document.createElement('button');
-            btn.className = 'tag-filter' + (t === activeTag ? ' tag-filter--active' : '');
-            btn.textContent = t;
-            btn.dataset.tag = t;
-            bar.appendChild(btn);
-        });
-        bar.hidden = false;
-    }
-
-    /* Klick auf Tag in der Bar */
-    if (bar) {
-        bar.addEventListener('click', function(e) {
-            var btn = e.target.closest('[data-tag]');
-            if (!btn) return;
-            activeTag = btn.dataset.tag === activeTag ? null : btn.dataset.tag;
-            renderBar();
-            renderPage(1);
-        });
-    }
-
-    /* Klick auf Tag auf einer Card */
-    grid.addEventListener('click', function(e) {
-        var btn = e.target.closest('.tag--clickable');
-        if (!btn) return;
-        e.preventDefault();
-        var tag = btn.dataset.filterTag;
-        activeTag = activeTag === tag ? null : tag;
-        renderBar();
-        renderPage(1);
+    document.addEventListener('click', function() {
+        btn.setAttribute('aria-expanded', 'false');
+        menu.hidden = true;
     });
+}
 
-    /* Klick auf Pagination */
-    if (pagination) {
-        pagination.addEventListener('click', function(e) {
-            var btn = e.target.closest('.pagination-btn');
-            if (!btn) return;
-            renderPage(parseInt(btn.dataset.page, 10));
+/* ─── Clickable Cards ─── */
+function initClickableCards() {
+    document.querySelectorAll('.project-card[data-href]').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('a, button, .tag')) return;
+            window.location.href = card.dataset.href;
         });
-    }
-
-    renderPage(1);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     initNav();
     initMobileMenu();
+    initDevDropdown();
     initScrollReveal();
     initTocHighlight();
     initCodeCopy();
     initGalleryLightbox();
-    initTagFilter();
+    initClickableCards();
     if (typeof hljs !== 'undefined') {
         document.querySelectorAll('pre code').forEach(function(block) {
             hljs.highlightElement(block);

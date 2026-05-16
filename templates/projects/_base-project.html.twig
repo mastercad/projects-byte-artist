@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{#
+  registryProject (vom Controller) ist die einzige Quelle für:
+  slug, title, tags, status, github_url, icon
+  Das Child-Template definiert nur: tagline, intro, docs_url, links
+#}
+{% set project = (project ?? {})|merge(registryProject ?? {}) %}
+
 {% block title %}{{ project.title }} | byte-artist.de{% endblock %}
-{% block meta_description %}{{ project.tagline }}{% endblock %}
+{% block meta_description %}{{ project.tagline ?? project.title }}{% endblock %}
 
 {% block nav_extra %}
     <li><a href="{{ path('home') }}">← Alle Projekte</a></li>
@@ -19,11 +26,13 @@
             {# ────────────────── HAUPTINHALT ────────────────── #}
             <div class="doc-content">
 
-                {# ── Einleitung ── #}
+                {# ── Einleitung — optional; wird nur gerendert wenn project.intro gesetzt ist ── #}
+                {% if project.intro is defined and project.intro %}
                 <div class="prose">
                     <h2 id="overview">Überblick</h2>
                     <p>{{ project.intro }}</p>
                 </div>
+                {% endif %}
 
                 {# ── Content-Blöcke — die Child-Template steuert die Reihenfolge vollständig ── #}
                 {% block doc_content %}{% endblock %}

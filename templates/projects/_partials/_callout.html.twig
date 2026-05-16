@@ -9,6 +9,6 @@
     <span class="callout-icon"><i class="{{ icons[type] ?? icons.info }}"></i></span>
     <div class="callout-body">
         {% if title is defined and title %}<strong>{{ title }}</strong>{% endif %}
-        {{ text }}
+        {{ text|raw }}
     </div>
 </div>

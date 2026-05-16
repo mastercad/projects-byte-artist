@@ -27,6 +27,16 @@
                 <ul class="nav-links">
                     <li><a href="{{ path('home') }}"{% if app.request.attributes.get('_route') == 'home' %} class="active"{% endif %}>Übersicht</a></li>
                     {% block nav_extra %}{% endblock %}
+                    {% if app.debug %}
+                    <li class="nav-dev-dropdown">
+                        <button class="nav-dev-btn" aria-expanded="false">
+                            Dev <i class="fas fa-chevron-down nav-dev-caret"></i>
+                        </button>
+                        <ul class="nav-dev-menu" hidden>
+                            <li><a href="{{ path('dev_icons') }}">Icons Browser</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
                 </ul>
 
                 <a class="nav-back" href="https://byte-artist.de" target="_blank" rel="noopener">

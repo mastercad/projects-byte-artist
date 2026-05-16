@@ -1,0 +1,55 @@
+{#
+  Partial: _downloads.html.twig
+  Plattformspezifische Download-Buttons, gruppiert nach Betriebssystem.
+
+  Verwendung:
+    {% include 'projects/_partials/_downloads.html.twig' with { downloads: [...] } %}
+
+  downloads[] = {
+    os:    'windows' | 'linux' | 'macos' | 'source',   – Betriebssystem (für Icon + Gruppierung)
+    label: string,                                       – z. B. 'Windows 10/11 — Installer (.exe)'
+    url:   string,                                       – Download-URL
+    type:  string,                                       – Badge-Text: 'installer' | 'portable' | 'appimage'
+                                                         –            | 'deb' | 'rpm' | 'tarball' | 'source' | ...
+    size:  string|null,                                  – Dateigröße, z. B. '48 MB' (optional)
+  }
+
+  Beispiel:
+    {% include 'projects/_partials/_downloads.html.twig' with { downloads: [
+        { os: 'windows', label: 'Windows 10/11 — Installer (.exe)', url: '...', type: 'installer', size: '52 MB' },
+        { os: 'windows', label: 'Windows — Portable (.zip)',        url: '...', type: 'portable',  size: '48 MB' },
+        { os: 'linux',   label: 'Linux — AppImage (x86_64)',        url: '...', type: 'appimage',  size: '61 MB' },
+        { os: 'linux',   label: 'Linux — DEB-Paket',                url: '...', type: 'deb',       size: '44 MB' },
+        { os: 'macos',   label: 'macOS 12+ — DMG (Universal)',      url: '...', type: 'installer', size: '58 MB' },
+        { os: 'source',  label: 'Quellcode (GitHub)',               url: '...', type: 'source' },
+    ] } %}
+#}
+{% set os_icons = {
+    windows: 'fab fa-windows',
+    linux:   'fab fa-linux',
+    macos:   'fab fa-apple',
+    source:  'fab fa-github',
+    file:    'fas fa-file-code',
+} %}
+
+<div class="downloads">
+    {% for entry in downloads %}
+        <a class="download-item" href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">
+            <span class="download-item-icon">
+                <i class="{{ os_icons[entry.os] ?? 'fas fa-download' }}"></i>
+            </span>
+            <span class="download-item-body">
+                <span class="download-item-label">{{ entry.label }}</span>
+                <span class="download-item-meta">
+                    {% if entry.type is defined and entry.type %}
+                        <span class="download-item-type">{{ entry.type }}</span>
+                    {% endif %}
+                    {% if entry.size is defined and entry.size %}
+                        <span class="download-item-size">{{ entry.size }}</span>
+                    {% endif %}
+                </span>
+            </span>
+            <span class="download-item-arrow"><i class="fas fa-download"></i></span>
+        </a>
+    {% endfor %}
+</div>

@@ -22,10 +22,21 @@
 
     {# ── Projekte Grid ── #}
     <div class="section">
-        <div class="tag-filter-bar" id="tag-filter-bar" hidden></div>
-        <div class="cards-grid" id="projects-grid">
+
+        {# ── Tag-Filter-Bar (server-seitig) ── #}
+        {% if activeTag %}
+        <div class="tag-filter-bar">
+            <a class="tag-filter" href="{{ path('home') }}">✕ Alle anzeigen</a>
+            {% for t in allTags %}
+                <a class="tag-filter{% if t == activeTag %} tag-filter--active{% endif %}"
+                   href="{{ path('home') }}?tag={{ t|url_encode }}">{{ t }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="cards-grid">
             {% for project in projects %}
-                <article class="project-card animate-on-scroll" data-tags="{{ project.tags|join(',') }}">
+                <article class="project-card animate-on-scroll" data-href="{{ path('project', { slug: project.slug }) }}">
                     <div class="card-body">
                         <div class="card-icon"><i class="{{ project.icon }}"></i></div>
                         <h2 class="card-title">
@@ -35,7 +46,7 @@
                         <div class="tags mt-2">
                             <span class="status-badge status-badge--{{ project.status }}">{{ project.status }}</span>
                             {% for tag in project.tags %}
-                                <button class="tag tag--clickable" data-filter-tag="{{ tag }}">{{ tag }}</button>
+                                <a class="tag" href="{{ path('home') }}?tag={{ tag|url_encode }}">{{ tag }}</a>
                             {% endfor %}
                         </div>
                     </div>
@@ -51,10 +62,20 @@
                     </div>
                 </article>
             {% else %}
-                <p style="color:var(--text-2);">Noch keine Projekte vorhanden.</p>
+                <p style="color:var(--text-2);">Keine Projekte gefunden.</p>
             {% endfor %}
         </div>
-        <nav class="pagination" id="pagination" aria-label="Seitennavigation" hidden></nav>
+
+        {# ── Pagination (server-seitig) ── #}
+        {% if totalPages > 1 %}
+        <nav class="pagination" aria-label="Seitennavigation">
+            {% for p in 1..totalPages %}
+                <a class="pagination-btn{% if p == page %} active{% endif %}"
+                   href="{{ path('home') }}?{% if activeTag %}tag={{ activeTag|url_encode }}&{% endif %}page={{ p }}">{{ p }}</a>
+            {% endfor %}
+        </nav>
+        {% endif %}
+
     </div>
 
 </main>

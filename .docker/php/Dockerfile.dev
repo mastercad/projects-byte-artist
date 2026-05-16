@@ -1,0 +1,25 @@
+# ─── Dev-Image: kein App-Code eingebaut, alles via Bind-Mount ────────────────
+FROM php:8.3-fpm-alpine
+
+RUN apk add --no-cache \
+        icu-libs \
+        libzip \
+    && apk add --no-cache --virtual .build-deps \
+        icu-dev \
+        libzip-dev \
+    && docker-php-ext-install -j$(nproc) intl zip opcache \
+    && apk del .build-deps \
+    && rm -rf /var/cache/apk/*
+
+COPY .docker/php/php.dev.ini     /usr/local/etc/php/conf.d/app.ini
+COPY .docker/php/opcache.dev.ini /usr/local/etc/php/conf.d/opcache.ini
+
+WORKDIR /var/www/html
+
+# var/ wird als named volume eingehängt – Verzeichnis schon vorbereiten
+RUN mkdir -p var/cache var/log \
+    && chown -R www-data:www-data var/
+
+USER www-data
+
+EXPOSE 9000

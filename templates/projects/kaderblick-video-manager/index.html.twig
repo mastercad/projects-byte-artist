@@ -1,0 +1,396 @@
+{% extends 'projects/_base-project.html.twig' %}
+
+{% set project = {
+    tagline:  'Vom Rohvideo bis auf YouTube und in kaderblick.de — vollautomatisch, ohne Technik-Kenntnisse',
+    icon_img: '/assets/img/kaderblick-video-manager/kaderblick_workflow_appicon.svg',
+    docs_url: null,
+    intro:    'Kaderblick Video Manager nimmt euch die gesamte Video-Nachbereitung ab: Aufnahmen einsammeln, in ein sauberes Format umwandeln, optional mit Vereinslogo und Spielinformationen versehen und direkt auf YouTube hochladen und diesen Upload in kaderblick.de zum Spiel hinterlegen — alles in einem Programm, das ohne Kommandozeile und ohne IT-Kenntnisse auskommt.'
+} %}
+
+{% set downloads = [
+    { os: 'windows', label: 'Windows — Portable (.zip)',       url: 'https://github.com/mastercad/Kaderblick-Video-Manager/releases/latest/download/kaderblick-video-manager-windows-x64.zip',         type: 'portable',  size: '347 MB' },
+    { os: 'macos',   label: 'macOS — Portable (.zip, arm64)', url: 'https://github.com/mastercad/Kaderblick-Video-Manager/releases/latest/download/kaderblick-video-manager-macos-arm64.zip',          type: 'portable',  size: '409 MB' },
+    { os: 'linux',   label: 'Linux — tar.gz Teil 1 von 2',   url: 'https://github.com/mastercad/Kaderblick-Video-Manager/releases/latest/download/kaderblick-video-manager-linux-x64.tar.gz.part-00', type: 'tarball',   size: '1,77 GB' },
+    { os: 'linux',   label: 'Linux — tar.gz Teil 2 von 2',   url: 'https://github.com/mastercad/Kaderblick-Video-Manager/releases/latest/download/kaderblick-video-manager-linux-x64.tar.gz.part-01', type: 'tarball',   size: '921 MB' },
+    { os: 'linux',   label: 'Linux — Zusammensetzungsanleitung (.txt)', url: 'https://github.com/mastercad/Kaderblick-Video-Manager/releases/latest/download/kaderblick-video-manager-linux-x64.tar.gz.parts.txt', type: 'source' },
+    { os: 'file',   label: 'Beispiel-Workflow (.json)',               url: '/downloads/kaderblick-video-manager/workflow.json', type: 'source' },
+] %}
+
+{% set toc = [
+    { id: 'features',      label: 'Was kann die App?' },
+    { id: 'screenshots',   label: 'So sieht es aus' },
+    { id: 'download',      label: 'Download' },
+    { id: 'schnellstart',  label: 'Erste Schritte' },
+    { id: 'workflow',      label: 'Einen Workflow anlegen' },
+    { id: 'canvas',        label: '→ Der Workflow-Editor' },
+    { id: 'knoten',        label: '→ Verfügbare Knoten' },
+    { id: 'starten',       label: 'Starten & Beobachten' },
+    { id: 'pi-kamera',     label: 'Pi-Kamera einrichten' },
+    { id: 'youtube',       label: 'YouTube einrichten' },
+    { id: 'kaderblick',    label: 'Kaderblick einrichten' },
+    { id: 'einstellungen', label: 'Einstellungen' },
+    { id: 'szenarien',     label: 'Typische Beispiele' },
+] %}
+
+{% set features = [
+    { icon: 'fas fa-folder-open',  title: 'Jede Videoquelle',         desc: 'Einzelne Dateien, einen ganzen Ordner oder Aufnahmen direkt von einer Raspberry-Pi-Kamera — die App holt das Material, wo es ist.' },
+    { icon: 'fas fa-sliders',      title: 'Qualität mit einem Klick', desc: 'Fertige Profile von „Schnell" bis „Archivqualität" nehmen euch die technischen Einstellungen ab.' },
+    { icon: 'fas fa-photo-film',   title: 'Automatischer Vorspann',   desc: 'Vereinslogo, Heim- und Gastmannschaft, Datum und Spielzeit werden automatisch als Intro vor jedes Video gesetzt.' },
+    { icon: 'fab fa-youtube',      title: 'Direkt auf YouTube',       desc: 'Die fertigen Videos landen automatisch mit richtigem Titel und in der richtigen Playlist auf eurem YouTube-Kanal.' },
+    { icon: 'fas fa-globe',        title: 'Kaderblick-Verknüpfung',   desc: 'Nach dem Upload wird das Video dem richtigen Spiel auf kaderblick.de automatisch zugeordnet.' },
+    { icon: 'fas fa-download',     title: 'Pi-Kamera-Download',       desc: 'Die App verbindet sich mit euren Raspberry-Pi-Kameras und lädt alle Aufnahmen auf Knopfdruck herunter.' },
+    { icon: 'fas fa-rotate-right', title: 'Unterbrechungsschutz',     desc: 'Strom weg oder Rechner abgestürzt? Beim nächsten Start macht die App genau da weiter, wo sie aufgehört hat.' },
+    { icon: 'fas fa-layer-group',  title: 'Mehrere Workflows',        desc: 'Legt einen Workflow für jede Kamera oder Mannschaft an — und startet alle auf einmal mit einem einzigen Klick.' },
+] %}
+
+{% set install_steps = [
+    {
+        title: 'Programm herunterladen',
+        text:  'Auf der GitHub-Seite unter „Releases" das passende Archiv für euer Betriebssystem herunterladen — es gibt fertige Pakete für Windows, Linux und macOS. Das Archiv einfach entpacken, keine Installation notwendig.',
+    },
+    {
+        title: 'Programm starten',
+        text:  'Im entpackten Ordner die Anwendungsdatei doppelklicken. Beim ersten Start öffnet sich das Hauptfenster.',
+    },
+    {
+        title: 'Einstellungen einrichten',
+        text:  'Im Menü „Einstellungen" eure Kameras, den Qualitätsmodus, den YouTube-Kanal und ggf. den Kaderblick-Zugang hinterlegen. Das macht ihr einmalig — danach bleibt alles gespeichert.',
+    },
+    {
+        title: 'Ersten Workflow anlegen und starten',
+        text:  'Auf „＋ Neuer Workflow" klicken. Der grafische Workflow-Editor öffnet sich. Von dort Knoten in den Canvas ziehen, verbinden, Einstellungen konfigurieren und auf „Übernehmen" klicken. Danach im Hauptfenster auf „▶ Starten" drücken — die App erledigt den Rest.',
+    },
+] %}
+
+{% block doc_content %}
+
+    {# ── Was kann die App? ── #}
+    <div class="prose">
+        <h2 id="features">Was kann die App?</h2>
+        <p>Mit dem Kaderblick Video Manager legt ihr einmalig fest, was mit euren Spielvideos passieren soll — alles andere erledigt das Programm von selbst.</p>
+    </div>
+    {% include 'projects/_partials/_feature-grid.html.twig' with { features: features } %}
+
+    {# ── So sieht es aus ── #}
+    <div class="prose">
+        <h2 id="screenshots">So sieht die App aus</h2>
+        <p>Das Hauptfenster zeigt oben die Werkzeugleiste, in der Mitte eine Tabelle mit allen angelegten Workflows und unten das laufende Protokoll — ihr seht jederzeit, was die App gerade tut.</p>
+    </div>
+
+    {% include 'projects/_partials/_screenshot.html.twig' with { screenshot: {
+        src:     '/assets/img/kaderblick-video-manager/hauptseite.png',
+        alt:     'Kaderblick Video Manager — Hauptfenster',
+        caption: 'Das Hauptfenster: oben die Aktionsleiste, darunter alle Workflows mit aktuellem Status und Fortschrittsbalken, ganz unten das Protokoll.'
+    } } %}
+
+    {# ── Download ── #}
+    <div class="prose">
+        <h2 id="download">Download</h2>
+        <p>Die App kommt als fertiges Paket ohne Installer — einfach herunterladen, entpacken und starten.</p>
+    </div>
+    {% include 'projects/_partials/_downloads.html.twig' with { downloads: downloads } %}
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'info',
+        title: 'Linux: zwei Teile zusammenführen',
+        text:  'Das Linux-Archiv ist wegen der Dateigröße auf zwei Teile aufgeteilt. Beide Teile herunterladen, dann mit <code>cat kaderblick-video-manager-linux-x64.tar.gz.part-* > kaderblick-video-manager-linux-x64.tar.gz && tar -xzf kaderblick-video-manager-linux-x64.tar.gz</code> zusammensetzen und entpacken.'
+    } %}
+
+    {# ── Erste Schritte ── #}
+    <div class="prose">
+        <h2 id="schnellstart">Erste Schritte — so startet ihr</h2>
+        <p>Das Programm braucht keine Installation. Archiv herunterladen, entpacken, starten — fertig.</p>
+    </div>
+    {% include 'projects/_partials/_steps.html.twig' with { steps: install_steps } %}
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'tip',
+        title: 'Tipp: Workflow speichern',
+        text:  'Über „Speichern" in der Werkzeugleiste (oder Strg+E) können alle angelegten Workflows als Datei gesichert werden — so kann man bei einem Neustart oder auf einem anderen Rechner genau dort weitermachen, wo man aufgehört hat.'
+    } %}
+
+    {# ── Workflow anlegen ── #}
+    <div class="prose">
+        <h2 id="workflow">Einen Workflow anlegen</h2>
+        <p>
+            Ein <strong>Workflow</strong> beschreibt, was die App mit einem bestimmten Satz Videos tun soll.
+            Ihr könnt beliebig viele Workflows anlegen — zum Beispiel einen pro Kamera oder einen für Jugend- und einen für Herrenspiele.
+        </p>
+        <p>
+            Klickt auf <strong>„＋ Neuer Workflow"</strong> in der Werkzeugleiste.
+            Es öffnet sich der grafische Workflow-Editor.
+        </p>
+
+        <h3 id="canvas">Der Workflow-Editor</h3>
+        <p>Der Editor besteht aus drei Bereichen nebeneinander:</p>
+        <ul>
+            <li>
+                <strong>Links — Knoten-Palette:</strong>
+                Eine Liste aller verfügbaren Knoten-Typen, nach Kategorie sortiert.
+                Einen Knoten einfach per Drag &amp; Drop in die Mitte ziehen, um ihn in den Workflow aufzunehmen.
+                Unterhalb der Liste befinden sich die Schaltflächen
+                „Auswahl entfernen", „Ab Auswahl zurücksetzen" und „Auto-Layout".
+            </li>
+            <li>
+                <strong>Mitte — Canvas:</strong>
+                Die grafische Zeichenfläche. Hier werden die Knoten frei platziert und durch
+                Verbindungslinien miteinander verknüpft. Die Verbindungen bestimmen die
+                tatsächliche Reihenfolge der Verarbeitung — nicht die Position auf dem Canvas.
+                Knoten lassen sich per Maus frei verschieben.
+            </li>
+            <li>
+                <strong>Rechts — Inspektor:</strong>
+                Sobald ihr einen Knoten auf dem Canvas anklickt, erscheinen hier seine
+                Einstellungen. Jeder Knoten-Typ hat ein eigenes Einstellungs-Panel.
+                Darunter befindet sich der Bereich „Workflow" mit dem Namen des Workflows
+                und allgemeinen Optionen.
+            </li>
+        </ul>
+        <p>
+            Am unteren Rand des Editors gibt es die Schaltflächen <strong>„Übernehmen"</strong>
+            (speichert und schließt) und <strong>„Abbrechen"</strong>.
+        </p>
+
+        <h3 id="knoten">Verfügbare Knoten</h3>
+        <p>
+            Jeder Knoten steht für einen konkreten Verarbeitungsschritt.
+            Knoten werden von links (Quellen) nach rechts (Ziele) miteinander verbunden — der Workflow läuft
+            dann in genau dieser Reihenfolge ab.
+        </p>
+
+        <h4>Quellen — woher kommt das Video?</h4>
+        <ul>
+            <li><strong>Dateien</strong> — einzelne Videodateien direkt von der Festplatte oder einem USB-Stick auswählen. Pro Datei lassen sich YouTube-Titel und Playlist individuell eintragen.</li>
+            <li><strong>Ordner-Scan</strong> — einen Ordner angeben; die App findet alle passenden Videodateien darin automatisch anhand eines Datei-Musters (z. B. <code>*.mp4</code>).</li>
+            <li><strong>Pi-Download</strong> — Aufnahmen direkt von einer Raspberry-Pi-Kamera im Netzwerk laden. Optional werden die Dateien danach auf der Kamera gelöscht.</li>
+        </ul>
+        <p>Ein Workflow kann auch mehrere Quell-Knoten gleichzeitig enthalten — etwa zwei Pi-Kameras, die parallel ausgelesen werden.</p>
+
+        <h4>Verarbeitung — was passiert mit den Videos?</h4>
+        <ul>
+            <li><strong>Konvertierung</strong> — wandelt das Video in ein anderes Format um. Encoder, Qualitätsprofil (Schnell / Ausgewogen / Qualität / …), Auflösung und Audio-Einstellungen sind hier konfigurierbar.</li>
+            <li><strong>Zusammenführen (Merge)</strong> — fasst mehrere Quell-Videos zu einem einzigen Video zusammen.</li>
+            <li><strong>Titelkarte</strong> — setzt automatisch ein Intro-Bild vor jedes Video: Vereinslogo, Heim- und Gastmannschaft, Datum, Dauer und Farben sind frei einstellbar.</li>
+            <li><strong>YT-Version</strong> — erzeugt eine zweite, speziell auf YouTubes Encoder-Anforderungen optimierte Videodatei, die dann für den Upload verwendet wird.</li>
+            <li><strong>Quick-Check</strong> — schnelle Lesbarkeits- und Kompatibilitätsprüfung. Hat drei Ausgänge: <em>OK</em>, <em>reparierbar</em> und <em>irreparabel</em> — an jeden Ausgang kann ein anderer Folge-Knoten angeschlossen werden.</li>
+            <li><strong>Deep-Scan</strong> — vollständiger Tiefenscan inkl. Dekodierlauf und Zeitstempel-Prüfung. Ebenfalls mit drei Ausgängen.</li>
+            <li><strong>Reparatur</strong> — bereinigt eine fehlerhafte Videodatei und baut sie neu auf.</li>
+            <li><strong>Cleanup</strong> — entfernt alte Zwischenergebnisse vor einem neuen Lauf.</li>
+            <li><strong>Stop / Log</strong> — beendet diesen Zweig des Workflows und schreibt einen Abschluss-Logeintrag. Nützlich z. B. als Endpunkt des „irreparabel"-Zweigs.</li>
+        </ul>
+
+        <h4>Ziele — wohin kommen die fertigen Videos?</h4>
+        <ul>
+            <li><strong>YouTube Upload</strong> — lädt das fertige Video auf euren YouTube-Kanal hoch. Standard-Titel und Playlist sind im Inspektor-Panel einstellbar; bei Datei-Knoten lassen sich Titel und Playlist pro Video individuell festlegen.</li>
+            <li><strong>Kaderblick</strong> — trägt das Video nach dem YouTube-Upload automatisch beim richtigen Spiel auf kaderblick.de ein. Kameratyp und Videotyp werden als Auswahlliste angezeigt (werden automatisch aus kaderblick.de geladen, sofern ein API-Token hinterlegt ist).</li>
+        </ul>
+    </div>
+
+    {% include 'projects/_partials/_screenshot.html.twig' with { screenshot: {
+        src:     '/assets/img/kaderblick-video-manager/workflow_ansicht.png',
+        alt:     'Grafischer Workflow-Editor mit Palette, Canvas und Inspektor',
+        caption: 'Der Workflow-Editor: links die Knoten-Palette, in der Mitte der Canvas mit verknüpften Knoten, rechts der Inspektor mit den Einstellungen des ausgewählten Knotens.'
+    } } %}
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'warning',
+        title: 'Voraussetzung für YouTube-Upload',
+        text:  'Damit die App auf euren YouTube-Kanal hochladen darf, muss einmalig eine Verbindung zu eurem Google-Konto hergestellt werden. Die dafür nötigen Zugangsdaten tragt ihr unter <strong>Einstellungen → YouTube</strong> ein. Beim ersten Upload öffnet sich automatisch ein Browser-Fenster, in dem ihr euch einloggt — danach merkt sich die App eure Anmeldedaten.'
+    } %}
+
+    {# ── Starten & Beobachten ── #}
+    <div class="prose">
+        <h2 id="starten">Starten und den Fortschritt beobachten</h2>
+        <p>
+            Wenn alle Workflows eingerichtet sind, einfach auf <strong>„▶ Starten"</strong> klicken.
+            Ihr könnt auch einzelne Workflows markieren — dann startet nur die Auswahl.
+        </p>
+        <p>In der Tabelle seht ihr pro Workflow:</p>
+        <ul>
+            <li><strong>Status</strong> — was die App gerade macht (z. B. „Konvertiere …" oder „YouTube-Upload …")</li>
+            <li><strong>Fortschritt</strong> — zwei Balken: einer für den aktuellen Einzelschritt, einer für den Gesamtfortschritt</li>
+            <li><strong>Laufzeit</strong> — wie lange der Workflow schon läuft</li>
+        </ul>
+        <p>
+            Im Protokoll-Bereich unten erscheinen alle Details zum laufenden Vorgang.
+            Über <strong>„■ Abbrechen"</strong> kann ein laufender Workflow jederzeit gestoppt werden —
+            beim nächsten Start macht die App dort weiter, wo sie aufgehört hat.
+        </p>
+        <p>
+            Die Option <strong>„Rechner herunterfahren"</strong> in der Werkzeugleiste lässt den Rechner
+            automatisch ausschalten, sobald alle Workflows abgeschlossen sind — praktisch bei langen Nacht-Läufen.
+        </p>
+    </div>
+
+    {# ── Pi-Kamera einrichten ── #}
+    <div class="prose">
+        <h2 id="pi-kamera">Pi-Kamera einrichten und nutzen</h2>
+        <p>
+            Wer Raspberry-Pi-Kameras am Spielfeld verwendet, kann diese direkt aus dem Programm
+            heraus ansprechen — kein manuelles Umkopieren nötig.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_steps.html.twig' with { steps: [
+        {
+            title: 'Kamera in den Einstellungen anlegen',
+            text:  'Menü → Einstellungen → Kameras öffnen und für jede Pi-Kamera einen Eintrag anlegen: Name, IP-Adresse, Benutzername und Passwort (oder SSH-Schlüssel). Den Pfad auf der Kamera, unter dem die Aufnahmen gespeichert werden, ebenfalls eintragen. Diese Einrichtung macht ihr nur einmalig.'
+        },
+        {
+            title: 'Workflow mit Quelle „Pi-Kamera" anlegen',
+            text:  'Im Assistenten (Schritt 1) die Karte „📷 Pi-Kamera" wählen und die gewünschte Kamera aus der Liste auswählen.'
+        },
+        {
+            title: '„Dateien von Kamera laden" klicken',
+            text:  'Die App verbindet sich mit der Kamera und zeigt alle vorhandenen Aufnahmen in einer Liste. Für jede Datei lassen sich YouTube-Titel und Playlist individuell eintragen.'
+        },
+        {
+            title: 'Auswahl treffen',
+            text:  'Ihr könnt einzelne Dateien ab- oder auswählen — nur die markierten Einträge werden heruntergeladen und verarbeitet.'
+        },
+        {
+            title: 'Workflow starten',
+            text:  'Die App lädt die gewählten Aufnahmen herunter und verarbeitet sie wie jeden anderen Workflow. Optional löscht sie danach die heruntergeladenen Dateien auf der Kamera, damit der Speicher für das nächste Spiel frei ist.'
+        },
+    ] } %}
+
+    {% include 'projects/_partials/_screenshot.html.twig' with { screenshot: {
+        src:     '/assets/img/kaderblick-video-manager/source-pi-dateiliste.png',
+        alt:     'Pi-Kamera-Modus mit geladener Dateiliste',
+        caption: 'Geladene Aufnahmen einer Pi-Kamera — für jede Datei lassen sich YouTube-Titel und Playlist vorab eintragen.'
+    } } %}
+
+    {# ── YouTube einrichten ── #}
+    <div class="prose">
+        <h2 id="youtube">YouTube-Upload einrichten</h2>
+        <p>
+            Der automatische YouTube-Upload erfordert eine einmalige Einrichtung, damit die App die Erlaubnis
+            bekommt, auf euren Kanal hochzuladen. Das klingt komplizierter als es ist:
+        </p>
+        <ol>
+            <li>In der Google Cloud Console (kostenlos) ein Projekt anlegen und die YouTube Data API aktivieren.</li>
+            <li>Eine OAuth-Client-ID erstellen und die heruntergeladene Datei als <code>client_secret.json</code> in den <code>config/</code>-Ordner der App legen.</li>
+            <li>Beim ersten Upload öffnet sich automatisch ein Browser-Fenster — dort einloggen und der App Zugriff erlauben. Die App speichert die Anmeldedaten danach dauerhaft.</li>
+        </ol>
+        <p>
+            Eine ausführliche Schritt-für-Schritt-Anleitung gibt es in der
+            <a href="https://github.com/mastercad/Kaderblick-Video-Manager/blob/main/docs/youtube_credentials.md" target="_blank" rel="noopener noreferrer">YouTube-Credentials-Dokumentation</a>.
+        </p>
+    </div>
+
+    {# ── Kaderblick einrichten ── #}
+    <div class="prose">
+        <h2 id="kaderblick">Kaderblick einrichten</h2>
+        <p>
+            Damit die App Spielvideos automatisch auf kaderblick.de eintragen kann, braucht sie
+            Zugriff auf euren Kaderblick-Account. Die Verbindung läuft über einen persönlichen
+            API-Token — den holt ihr euch einmalig aus eurem Kaderblick-Profil.
+        </p>
+        <ol>
+            <li>
+                Auf <a href="https://kaderblick.de" target="_blank" rel="noopener noreferrer">kaderblick.de</a>
+                einloggen und oben rechts auf euren Namen klicken → <strong>Profil</strong> → Bereich
+                <strong>API-Token</strong>. Den dort angezeigten Token kopieren.
+            </li>
+            <li>
+                In der App das Menü <strong>Einstellungen → Kaderblick</strong> öffnen.
+            </li>
+            <li>
+                Im Feld <strong>Base-URL</strong> eintragen: <code>https://api.kaderblick.de</code><br>
+                Bei <strong>Auth-Modus</strong> den Radio-Button <strong>„Bearer-Token"</strong> auswählen.<br>
+                Im Feld <strong>Bearer-Token</strong> den kopierten Token einfügen und auf „Speichern" klicken.
+            </li>
+        </ol>
+        <p>
+            Sobald der Token hinterlegt ist, lädt die App beim nächsten Öffnen des Workflow-Editors
+            automatisch alle verfügbaren <strong>Kameratypen</strong> und <strong>Videotypen</strong>
+            von kaderblick.de — ihr seht diese dann als Auswahllisten in Schritt&nbsp;4.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_screenshot.html.twig' with { screenshot: {
+        src:     '/assets/img/kaderblick-video-manager/einstellungen_kaderblick.png',
+        alt:     'Einstellungen für die Kaderblick-API-Verbindung mit geladenen Kameratypen und Videotypen',
+        caption: 'Einstellungen für die Kaderblick-API-Verbindung: Base-URL, Auth-Modus, Bearer-Token. Sobald der Token hinterlegt ist, werden automatisch alle Kameratypen und Videotypen von kaderblick.de geladen und stehen im Workflow-Editor zur Auswahl bereit.'
+    } } %}
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'tip',
+        title: 'Token verloren oder abgelaufen?',
+        text:  'Einfach auf kaderblick.de unter Profil → API-Token einen neuen Token generieren und in den Einstellungen ersetzen. Alte Token werden dabei automatisch ungültig.'
+    } %}
+
+    {# ── Einstellungen ── #}
+    <div class="prose">
+        <h2 id="einstellungen">Einstellungen im Überblick</h2>
+        <p>
+            Über das Menü <strong>„Einstellungen"</strong> erreicht ihr sechs Bereiche.
+            Die meisten davon müsst ihr nur einmalig einrichten.
+        </p>
+    </div>
+    {% include 'projects/_partials/_config-table.html.twig' with { rows: [
+        { option: 'Video',         type: '',  default: '', desc: 'Standard-Qualitätsprofil, Encoder-Auswahl (CPU oder GPU), Bildauflösung, Dateiformat und ob vorhandene Ausgabedateien überschrieben werden sollen.' },
+        { option: 'Audio',         type: '',  default: '', desc: 'Ob die Audio-Spur im fertigen Video enthalten sein soll, wie stark die Lautstärke angehoben wird und mit welcher Audio-Qualität gespeichert wird.' },
+        { option: 'YouTube',       type: '',  default: '', desc: 'Standard-Qualität für die YouTube-Version, maximale Bitrate und Audio-Einstellungen für den Upload.' },
+        { option: 'Kaderblick',    type: '',  default: '', desc: 'Base-URL (https://api.kaderblick.de), Auth-Modus (JWT oder Bearer-Token) und der Bearer-Token für die API-Verbindung. Der Token wird auf kaderblick.de unter Profil → API-Token erzeugt und ermöglicht das automatische Laden von Kameratypen und Videotypen sowie die Spielverknüpfung nach dem Upload.' },
+        { option: 'Kameras',       type: '',  default: '', desc: 'Alle Raspberry-Pi-Kameras mit Name, IP-Adresse, Login-Daten und dem Pfad, unter dem die Aufnahmen auf der Kamera liegen.' },
+        { option: 'Allgemein',     type: '',  default: '', desc: 'Ob der letzte Workflow-Stand beim Programmstart automatisch wiederhergestellt wird, ein gemeinsamer Basisordner und globale Spieldaten (Heimmannschaft, Wettbewerb) als Voreinstellung für alle Workflows.' },
+    ] } %}
+
+    {# ── Typische Beispiele ── #}
+    <div class="prose">
+        <h2 id="szenarien">Typische Beispiele</h2>
+
+        <h3>Beispiel 1: Ein Spiel, eine Kameraperspektive</h3>
+        <p>
+            Ihr habt nach dem Spiel eine einzige MP4-Datei auf dem USB-Stick.
+            Ziel: konvertieren, Titelkarte drauf, auf YouTube hochladen.
+        </p>
+        <ol>
+            <li>„＋ Neuer Workflow" klicken</li>
+            <li>Schritt 1 → „Dateien auswählen" → Datei vom USB-Stick wählen</li>
+            <li>Schritt 2 → Profil „Ausgewogen" wählen</li>
+            <li>Schritt 3 → Titelkarte aktivieren, Logo, Mannschaftsnamen und Datum eintragen</li>
+            <li>Schritt 4 → YouTube-Upload aktivieren, Titel und Playlist eintragen</li>
+            <li>„Starten" — fertig</li>
+        </ol>
+
+        <h3>Beispiel 2: Zwei Halbzeiten als separate Dateien</h3>
+        <p>
+            Die Kamera hat automatisch nach 45 Minuten eine neue Datei angefangen.
+            Ihr wollt beide Hälften einzeln auf YouTube hochladen, jeweils mit passender Titelkarte.
+        </p>
+        <ol>
+            <li>Schritt 1 → „Dateien auswählen" → beide Dateien hinzufügen</li>
+            <li>In der Dateiliste auf das 🎬-Symbol bei der ersten Datei klicken → Titel „1. Halbzeit" und Titelkarten-Untertitel „1. Halbzeit" eintragen</li>
+            <li>Dasselbe für die zweite Datei mit „2. Halbzeit"</li>
+            <li>Titelkarte und Upload wie in Beispiel 1 einrichten</li>
+        </ol>
+
+        <h3>Beispiel 3: Zwei Pi-Kameras gleichzeitig</h3>
+        <p>
+            Am Spielfeld stehen zwei Raspberry-Pi-Kameras. Nach dem Spiel sollen beide
+            automatisch ausgelesen und verarbeitet werden.
+        </p>
+        <ol>
+            <li>In „Einstellungen → Kameras" beide Geräte mit IP und Zugangsdaten anlegen (einmalig)</li>
+            <li>Ersten Workflow für Kamera 1 anlegen, Quelle „Pi-Kamera", Gerät 1 wählen, Dateien laden und Titel/Playlist eintragen</li>
+            <li>Zweiten Workflow für Kamera 2 genauso anlegen</li>
+            <li>Beide Workflows in der Liste markieren und gemeinsam starten</li>
+        </ol>
+
+        <h3>Beispiel 4: Ordner-Kamera (Action-Cam, GoPro o. ä.)</h3>
+        <p>
+            Die Kamera speichert viele kurze Clips in einem Ordner auf der SD-Karte.
+            Ihr wollt alle Clips auf einmal verarbeiten, ohne sie einzeln auswählen zu müssen.
+        </p>
+        <ol>
+            <li>Schritt 1 → „Ordner scannen" → Ordner der SD-Karte wählen</li>
+            <li>Datei-Muster auf <code>*.mp4</code> lassen (oder anpassen, falls die Kamera ein anderes Format nutzt)</li>
+            <li>Zielordner auf dem Rechner wählen, wo die fertigen Videos gespeichert werden sollen</li>
+            <li>Optional: „Quelldateien nach Verarbeitung verschieben" aktivieren, um die SD-Karte gleich aufzuräumen</li>
+        </ol>
+    </div>
+
+{% endblock %}
+
