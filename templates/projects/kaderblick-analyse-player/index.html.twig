@@ -1,0 +1,420 @@
+{% extends 'projects/_base-project.html.twig' %}
+
+{% set project = {
+    tagline:  'Fußball-Videos gemeinsam analysieren — Szenen anspringen, Filter anwenden, Session sichern',
+    icon_img: '/assets/img/kaderblick-analyse-player/kaderblick_analyse_player_appicon.svg',
+    docs_url: null,
+    intro:    'Der Kaderblick Analyse Player ist ein Desktop-Programm für die gemeinsame Videoanalyse im Team. Ihr ladet eure Spielvideos und eine CSV-Segmentdatei — und könnt mit einem Klick direkt zu jeder gespeicherten Szene springen. Live-Filter, Segmentmodus, Einzelwiederholung und ein eingebauter Segment-Editor machen aus der Spielvideo-Besprechung eine professionelle Trainingseinheit — ohne IT-Kenntnisse, ohne Installation.'
+} %}
+
+{% set downloads = [
+    { os: 'windows', label: 'Windows — Installer (.exe)',        url: 'https://github.com/mastercad/Kaderblick-Analyse-Player/releases/latest/download/kaderblick-analyse-player-setup-x64.exe',           type: 'installer', size: '204 MB' },
+    { os: 'windows', label: 'Windows — Portable (.exe)',         url: 'https://github.com/mastercad/Kaderblick-Analyse-Player/releases/latest/download/kaderblick-analyse-player-portable-x64.exe',         type: 'portable',  size: '203 MB' },
+    { os: 'macos',   label: 'macOS — Apple Silicon (.dmg)',      url: 'https://github.com/mastercad/Kaderblick-Analyse-Player/releases/latest/download/kaderblick-analyse-player-mac-arm64.dmg',             type: 'installer', size: '207 MB' },
+    { os: 'linux',   label: 'Linux — AppImage (alle Distros)',   url: 'https://github.com/mastercad/Kaderblick-Analyse-Player/releases/latest/download/kaderblick-analyse-player-linux-x86_64.AppImage',    type: 'portable',  size: '223 MB' },
+    { os: 'linux',   label: 'Linux — .deb (Debian / Ubuntu)',    url: 'https://github.com/mastercad/Kaderblick-Analyse-Player/releases/latest/download/kaderblick-analyse-player-linux-amd64.deb',          type: 'installer', size: '175 MB' },
+    { os: 'file',    label: 'Beispiel-Segmentdatei (.csv)',      url: '/downloads/kaderblick-analyse-player/beispiel-segmente.csv', type: 'source' },
+] %}
+
+{% set toc = [
+    { id: 'features',         label: 'Was kann die App?' },
+    { id: 'screenshots',      label: 'So sieht es aus' },
+    { id: 'download',         label: 'Download' },
+    { id: 'schnellstart',     label: 'Erste Schritte' },
+    { id: 'video-laden',      label: '→ Videos laden' },
+    { id: 'csv-laden',        label: '→ CSV-Segmentdatei laden' },
+    { id: 'segmente',         label: '→ Szenen anspringen' },
+    { id: 'segmentmodus',     label: 'Segmentmodus & Wiederholung' },
+    { id: 'filter',           label: 'Live-Filter & Presets' },
+    { id: 'zoom',             label: 'Zoom' },
+    { id: 'mehrere-videos',   label: 'Mehrere Videos' },
+    { id: 'online-video',     label: 'Online-Video (YouTube/Vimeo)' },
+    { id: 'segment-editor',   label: 'Segment-Editor' },
+    { id: 'session',          label: 'Session sichern & wiederherstellen' },
+    { id: 'csv-format',       label: 'CSV-Format im Detail' },
+    { id: 'tastatur',         label: 'Tastaturkürzel' },
+] %}
+
+{% set features = [
+    { icon: 'fas fa-list',          title: 'Szenen auf Knopfdruck',        desc: 'CSV-Segmentdatei laden und sofort per Klick zu jeder gespeicherten Szene springen — kein manuelles Vor- und Zurückspulen.' },
+    { icon: 'fas fa-film',          title: 'Segmentmodus',                 desc: 'Nur die markierten Szenen werden automatisch nacheinander abgespielt — perfekt für eine strukturierte Besprechung.' },
+    { icon: 'fas fa-repeat',        title: 'Einzelwiederholung',           desc: 'Eine Szene endlos in der Schleife abspielen — für genaue Analyse einer bestimmten Spielsituation.' },
+    { icon: 'fas fa-sliders',       title: 'Live-Filter & Presets',        desc: 'Helligkeit, Kontrast, Sättigung und sechs weitere Bildfilter in Echtzeit einstellen und als Preset speichern.' },
+    { icon: 'fas fa-magnifying-glass-plus', title: 'Zoom',                desc: 'In das Video hineinzoomen und einen bestimmten Bereich des Bildes vergrößert darstellen.' },
+    { icon: 'fas fa-photo-film',    title: 'Mehrere Videos gleichzeitig',  desc: 'Mehrere Videodateien laden, per Drag &amp; Drop umordnen und gemeinsam mit einer Segmentdatei verwenden.' },
+    { icon: 'fab fa-youtube',       title: 'Online-Video',                 desc: 'Statt einer lokalen Datei einfach einen YouTube- oder Vimeo-Link eingeben — der Player streamt das Video direkt.' },
+    { icon: 'fas fa-pen-to-square', title: 'Segment-Editor',              desc: 'Direkt in der App neue Szenen anlegen, bearbeiten und als CSV exportieren — kein externes Tabellenprogramm nötig.' },
+    { icon: 'fas fa-floppy-disk',   title: 'Session sichern',             desc: 'Videos, CSV, Filter und Presets als JSON-Datei exportieren und bei der nächsten Besprechung mit einem Klick alles wiederherstellen.' },
+] %}
+
+{% block doc_content %}
+
+    {# ── Was kann die App? ── #}
+    <div class="prose">
+        <h2 id="features">Was kann die App?</h2>
+        <p>Der Kaderblick Analyse Player nimmt die Technik aus der Videoanalyse heraus — ihr konzentriert euch auf das Spiel, nicht auf das Programm.</p>
+    </div>
+    {% include 'projects/_partials/_feature-grid.html.twig' with { features: features } %}
+
+    {# ── So sieht es aus ── #}
+    <div class="prose">
+        <h2 id="screenshots">So sieht die App aus</h2>
+        <p>Links die Videoliste und die Segmentliste, in der Mitte der Videoplayer mit Zeitleiste und Steuerleiste.</p>
+    </div>
+
+    {% include 'projects/_partials/_screenshot.html.twig' with { screenshot: {
+        src:     '/assets/img/kaderblick-analyse-player/app_screen.png',
+        alt:     'Kaderblick Analyse Player — Hauptansicht',
+        caption: 'Die Hauptansicht: links die geladenen Videos und die Segmentliste, rechts der Player mit Zeitleiste. Die Segmentmarker im Zeitleisten-Bereich zeigen auf einen Blick, wo die gespeicherten Szenen liegen. (Screenshot folgt)'
+    } } %}
+
+    {# ── Download ── #}
+    <div class="prose">
+        <h2 id="download">Download</h2>
+        <p>Die App steht für Windows, macOS (Apple Silicon) und Linux bereit. Wählt einfach das passende Paket für euer Betriebssystem.</p>
+    </div>
+    {% include 'projects/_partials/_downloads.html.twig' with { downloads: downloads } %}
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'info',
+        title: 'Windows: Installer oder Portable?',
+        text:  '<strong>Installer</strong> installiert das Programm fest auf dem Rechner und legt eine Verknüpfung auf dem Desktop an — empfohlen für den Hauptrechner im Verein. <strong>Portable</strong> braucht keine Installation und kann direkt vom USB-Stick gestartet werden — praktisch für den Laptop bei Auswärtsbesprechungen.'
+    } %}
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'info',
+        title: 'Linux: AppImage oder .deb?',
+        text:  '<strong>AppImage</strong> läuft auf nahezu jeder Linux-Distribution ohne Installation — einfach herunterladen, ausführbar machen (<code>chmod +x</code>) und starten. <strong>.deb</strong> installiert sich über den Paketmanager und integriert sich ins System (Startmenü, Dateiverknüpfungen) — für Ubuntu und Debian empfohlen.'
+    } %}
+
+    {# ── Erste Schritte ── #}
+    <div class="prose">
+        <h2 id="schnellstart">Erste Schritte — so startet ihr</h2>
+        <p>Die App braucht keine komplizierte Einrichtung. In drei Schritten seid ihr bereit:</p>
+    </div>
+
+    {% include 'projects/_partials/_steps.html.twig' with { steps: [
+        {
+            title: 'Programm herunterladen und starten',
+            text:  'Das passende Paket für euer Betriebssystem herunterladen. Unter Windows: Installer ausführen oder die Portable-EXE direkt starten. Unter macOS: DMG öffnen und die App ins Programme-Verzeichnis ziehen. Unter Linux: AppImage ausführbar machen und starten, oder die DEB-Datei installieren. Beim ersten Start öffnet sich sofort der Player — keine weitere Einrichtung nötig.',
+        },
+        {
+            title: 'Videodateien laden',
+            text:  'Auf „+ Video hinzufügen" klicken und die Spielvideodateien aus eurem Datei-Explorer auswählen. Ihr könnt mehrere Videos gleichzeitig laden — zum Beispiel die erste und zweite Halbzeit.',
+        },
+        {
+            title: 'CSV-Segmentdatei laden und losspielen',
+            text:  'Auf „CSV laden" klicken und die Segmentdatei auswählen. Die App zeigt sofort die Anzahl der gefundenen Szenen an. Dann einfach auf eine Szene in der Segmentliste klicken — der Player springt direkt zur richtigen Stelle im Video.',
+        },
+    ] } %}
+
+    {# ── Videos laden ── #}
+    <div class="prose">
+        <h2 id="video-laden">Videos laden</h2>
+        <p>
+            Klickt in der Bibliotheksleiste auf <strong>„+ Video hinzufügen"</strong> und wählt eine oder mehrere Videodateien aus.
+            Die Dateien erscheinen als Liste im linken Bereich. Per Drag &amp; Drop lässt sich die Reihenfolge anpassen —
+            das ist wichtig, wenn ihr erste und zweite Halbzeit als separate Dateien habt.
+        </p>
+        <p>
+            Alternativ könnt ihr auch einen <strong>YouTube- oder Vimeo-Link</strong> eingeben — mehr dazu unter
+            <a href="#online-video">Online-Video</a>.
+        </p>
+        <p>
+            Die App unterstützt alle gängigen Videoformate: MP4, MKV, MOV, AVI und viele weitere.
+            Bei Dateiformaten, die nicht direkt abgespielt werden können, bietet die App automatisch
+            einen Echtzeit-Streaming-Modus über ffmpeg an.
+        </p>
+    </div>
+
+    {# ── CSV-Segmentdatei laden ── #}
+    <div class="prose">
+        <h2 id="csv-laden">CSV-Segmentdatei laden</h2>
+        <p>
+            Klickt auf <strong>„CSV laden"</strong> und wählt eure Segmentdatei aus.
+            Die App gleicht automatisch ab, welche Szenen zu den geladenen Videos passen —
+            über dem Ladeknopf erscheint die Anzahl der erkannten Szenen.
+        </p>
+        <p>
+            Eine <strong>Segmentdatei</strong> ist eine einfache Textdatei im CSV-Format, die ihr zum Beispiel
+            mit der zugehörigen Analysetool-App oder mit einem Tabellenprogramm wie LibreOffice Calc anlegt.
+            Sie enthält für jede Szene: den Dateinamen des Videos, den Startzeitpunkt, die Dauer und einen Titel.
+            Eine ausführliche Beschreibung des Formats findet ihr weiter unten unter
+            <a href="#csv-format">CSV-Format im Detail</a>. Eine fertige Beispieldatei steht oben zum Download bereit.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'tip',
+        title: 'Tipp: Dateiname reicht aus',
+        text:  'In der CSV-Datei muss nicht der vollständige Pfad zum Video stehen — der reine Dateiname (z. B. <code>Halbzeit_1.mp4</code>) reicht aus. Die App sucht den passenden Eintrag unter den geladenen Videos selbst heraus.'
+    } %}
+
+    {# ── Szenen anspringen ── #}
+    <div class="prose">
+        <h2 id="segmente">Szenen anspringen</h2>
+        <p>
+            Sobald eine CSV-Segmentdatei geladen ist, erscheint im linken Bereich die <strong>Segmentliste</strong>.
+            Jeder Eintrag zeigt den Titel der Szene, den Startzeitpunkt und die Dauer.
+            Hat die Szene einen Untertitel, erscheint er als zweite Zeile unter dem Titel.
+        </p>
+        <p>
+            Einfach auf eine Szene klicken — der Player springt sofort zur richtigen Stelle im Video und
+            fängt an zu spielen. In der Zeitleiste am unteren Rand des Players sind alle Szenen als
+            farbige Markierungen eingetragen, damit ihr auf einen Blick seht, wo die nächsten Stellen liegen.
+        </p>
+        <p>
+            Mit den Pfeiltasten <kbd>←</kbd> und <kbd>→</kbd> springt ihr zur vorherigen bzw. nächsten Szene,
+            ohne die Maus anfassen zu müssen.
+        </p>
+    </div>
+
+    {# ── Segmentmodus & Wiederholung ── #}
+    <div class="prose">
+        <h2 id="segmentmodus">Segmentmodus &amp; Einzelwiederholung</h2>
+
+        <h3>Segmentmodus — Szenen automatisch hintereinander abspielen</h3>
+        <p>
+            Taste <kbd>N</kbd> oder die entsprechende Schaltfläche in der Steuerleiste drücken, um den
+            <strong>Segmentmodus</strong> ein- oder auszuschalten.
+        </p>
+        <p>
+            Im Segmentmodus spielt der Player <em>nur</em> die in der CSV definierten Szenen ab —
+            eine nach der anderen, automatisch. Am Ende der letzten Szene hält er an.
+            Das ist ideal für eine moderierte Besprechung: ihr drückt Play und könnt
+            den Fokus vollständig auf die Inhalte legen, ohne manuell zur nächsten Szene zu springen.
+        </p>
+
+        <h3>Einzelwiederholung — eine Szene in der Schleife</h3>
+        <p>
+            Taste <kbd>R</kbd> oder die Schaltfläche in der Steuerleiste drücken, um die
+            <strong>Einzelwiederholung</strong> ein- oder auszuschalten.
+        </p>
+        <p>
+            Die aktuell aktive Szene wird dann immer wieder von vorne abgespielt — so lange, bis ihr
+            die Wiederholung ausschaltet oder zu einer anderen Szene wechselt.
+            Besonders nützlich bei Toren, Zweikämpfen oder Standardsituationen, die das Team
+            mehrmals sehen soll.
+        </p>
+
+        {% include 'projects/_partials/_callout.html.twig' with {
+            type:  'tip',
+            title: 'Segmentmodus und Wiederholung kombinieren',
+            text:  'Beide Modi lassen sich gleichzeitig aktivieren: Der Player spielt dann alle Szenen nacheinander ab — und wiederholt jede Szene einzeln, bevor er zur nächsten wechselt.'
+        } %}
+    </div>
+
+    {# ── Live-Filter & Presets ── #}
+    <div class="prose">
+        <h2 id="filter">Live-Filter &amp; Presets</h2>
+        <p>
+            Taste <kbd>F</kbd> oder die Filter-Schaltfläche in der Steuerleiste öffnet das <strong>Filter-Panel</strong>.
+            Acht Bildfilter stehen zur Verfügung und wirken in Echtzeit auf das laufende Video:
+        </p>
+        <ul>
+            <li><strong>Helligkeit</strong> — das Bild aufhellen oder abdunkeln</li>
+            <li><strong>Kontrast</strong> — den Unterschied zwischen hellen und dunklen Bereichen verstärken</li>
+            <li><strong>Sättigung</strong> — Farben kräftiger oder blasser erscheinen lassen</li>
+            <li><strong>Weichzeichner</strong> — das Bild leicht unscharf machen (z. B. um Spielernamen zu verdecken)</li>
+            <li><strong>Graustufen</strong> — das Bild schwarzweiß darstellen</li>
+            <li><strong>Farbton</strong> — alle Farben im Bild verschieben</li>
+            <li><strong>Invertierung</strong> — die Farben umkehren</li>
+            <li><strong>Sepia</strong> — einen warmen Braun-Ton über das Bild legen</li>
+        </ul>
+        <p>
+            Alle Regler lassen sich jederzeit auf die Standardwerte zurücksetzen.
+        </p>
+
+        <h3>Presets — Filtereinstellungen speichern und laden</h3>
+        <p>
+            Habt ihr eine hilfreiche Kombination gefunden (z. B. erhöhter Kontrast und etwas mehr Helligkeit
+            für dunkle Hallenvideos), könnt ihr diese als <strong>Preset</strong> speichern:
+        </p>
+        <ol>
+            <li>Filter nach Wunsch einstellen</li>
+            <li>Im Preset-Bereich einen Namen eingeben und auf <strong>„Speichern"</strong> klicken</li>
+            <li>Das Preset erscheint in der Liste und kann ab sofort mit einem Klick geladen werden</li>
+        </ol>
+        <p>
+            Presets lassen sich auch <strong>exportieren</strong> (als JSON-Datei) und <strong>importieren</strong> —
+            so könnt ihr eure bevorzugten Filter-Profile mit anderen Trainern teilen oder auf
+            einem anderen Rechner nutzen.
+            Die App bringt außerdem einige fertige Presets direkt mit.
+        </p>
+        <p>
+            Wenn ihr an einem Preset etwas verändert habt, ohne es zu speichern, erscheint im Preset-Bereich
+            der Hinweis <strong>„Nicht gespeichert"</strong>, damit ihr keine Änderungen unbeabsichtigt verliert.
+        </p>
+    </div>
+
+    {# ── Zoom ── #}
+    <div class="prose">
+        <h2 id="zoom">Zoom — in das Video hineinzoomen</h2>
+        <p>
+            Über den <strong>Zoom-Regler</strong> in der Steuerleiste könnt ihr in das Video hineinzoomen.
+            Das ist hilfreich, wenn ihr eine bestimmte Stelle auf dem Spielfeld — zum Beispiel die
+            Laufwege der Abwehrreihe oder eine Zweikampf-Situation — vergrößert darstellen wollt.
+        </p>
+        <p>
+            Das Video bleibt dabei zentriert; die Wiedergabe läuft normal weiter.
+            Zum Zurücksetzen den Regler einfach auf die Ausgangsposition schieben.
+        </p>
+    </div>
+
+    {# ── Mehrere Videos ── #}
+    <div class="prose">
+        <h2 id="mehrere-videos">Mehrere Videos gleichzeitig verwenden</h2>
+        <p>
+            Ihr könnt mehrere Videodateien auf einmal laden — zum Beispiel die erste und zweite Halbzeit
+            als getrennte Dateien, oder Aufnahmen von verschiedenen Kameraperspektiven.
+        </p>
+        <p>
+            In der Videoliste links seht ihr alle geladenen Videos. Per <strong>Drag &amp; Drop</strong>
+            lässt sich die Reihenfolge anpassen. Das ist wichtig, wenn eure CSV-Segmentdatei
+            Szenen aus verschiedenen Dateien enthält — die App wählt automatisch das richtige Video
+            anhand des Dateinamens aus.
+        </p>
+        <p>
+            Einzelne Videos lassen sich über das Papierkorb-Symbol aus der Liste entfernen,
+            ohne die anderen zu schließen.
+        </p>
+    </div>
+
+    {# ── Online-Video ── #}
+    <div class="prose">
+        <h2 id="online-video">Online-Video — YouTube oder Vimeo direkt abspielen</h2>
+        <p>
+            Statt einer lokalen Datei könnt ihr auch einen <strong>YouTube- oder Vimeo-Link</strong> verwenden.
+            Klickt auf das entsprechende Symbol in der Bibliotheksleiste, gebt die URL ein und
+            bestätigt — der Player lädt das Video direkt aus dem Internet und zeigt es an.
+        </p>
+        <p>
+            Das funktioniert genauso wie mit lokalen Dateien: ihr könnt eine CSV-Segmentdatei laden,
+            Szenen anspringen und Filter anwenden. Voraussetzung ist natürlich eine
+            stabile Internetverbindung.
+        </p>
+        <p>
+            Online-Videos lassen sich auch mit lokalen Videodateien kombinieren — zum Beispiel
+            einen öffentlichen YouTube-Clip als Referenz neben der eigenen Spielaufnahme.
+        </p>
+    </div>
+
+    {# ── Segment-Editor ── #}
+    <div class="prose">
+        <h2 id="segment-editor">Segment-Editor — Szenen selbst anlegen</h2>
+        <p>
+            Ihr müsst keine externe App oder ein Tabellenprogramm öffnen, um Szenen zu erstellen.
+            Der eingebaute <strong>Segment-Editor</strong> lässt euch direkt in der App arbeiten:
+        </p>
+        <ol>
+            <li>Video laden und zur gewünschten Stelle spulen</li>
+            <li>Im Segment-Editor auf <strong>„+ Neue Szene"</strong> klicken — der aktuelle Zeitpunkt wird als Startpunkt übernommen</li>
+            <li>Dauer, Titel und optionalen Untertitel eintragen</li>
+            <li>Beliebig viele weitere Szenen hinzufügen und in der Liste anpassen</li>
+            <li>Auf <strong>„Exportieren"</strong> klicken — die App speichert alle Szenen als CSV-Datei, die ihr beim nächsten Mal sofort wieder laden könnt</li>
+        </ol>
+        <p>
+            Bereits vorhandene Szenen aus einer geladenen CSV lassen sich im Editor auch nachträglich
+            bearbeiten oder löschen.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'tip',
+        title: 'Zusammenarbeit: wer erstellt die CSV?',
+        text:  'Typischerweise erstellt der Videoanalyst oder Trainer die CSV-Segmentdatei vor der Besprechung — entweder mit dem Segment-Editor direkt in der App oder mit einem Tabellenprogramm. Alle anderen Teilnehmer brauchen nur die fertige CSV und die Videodateien.'
+    } %}
+
+    {# ── Session sichern & wiederherstellen ── #}
+    <div class="prose">
+        <h2 id="session">Session sichern &amp; wiederherstellen</h2>
+        <p>
+            Habt ihr Videos, CSV und Filter-Presets für eine Besprechung zusammengestellt,
+            könnt ihr den gesamten Zustand als <strong>Session</strong> speichern —
+            und beim nächsten Start genau dort weitermachen, wo ihr aufgehört habt.
+        </p>
+
+        <h3>Session exportieren</h3>
+        <p>
+            Klickt auf <strong>„Session exportieren"</strong> in der Werkzeugleiste.
+            Die App speichert eine JSON-Datei mit allen Informationen:
+            welche Videos geladen sind, welche CSV-Datei verwendet wurde,
+            welche Filter aktiv sind und welche Presets gespeichert wurden.
+        </p>
+
+        <h3>Session importieren</h3>
+        <p>
+            Beim nächsten Start der App erscheint automatisch ein Dialog, der fragt,
+            ob die letzte Session wiederhergestellt werden soll.
+            Alternativ könnt ihr über <strong>„Session importieren"</strong> eine gespeicherte JSON-Datei laden —
+            auch eine von einem anderen Rechner.
+        </p>
+        <p>
+            Sessions lassen sich auch <strong>teilen</strong>: schickt die JSON-Datei an einen anderen Trainer,
+            der dann mit demselben Video und denselben Presets in dieselbe Besprechung einsteigen kann.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'info',
+        title: 'Hinweis zu Dateipfaden',
+        text:  'Die Session-Datei speichert den Pfad zu den Videos auf dem jeweiligen Rechner. Wenn ihr die Session auf einem anderen Gerät nutzt, müssen die Videodateien dort an genau demselben Ort liegen — oder ihr ladet die Videos nach dem Wiederherstellen neu aus eurem Datei-Explorer.'
+    } %}
+
+    {# ── CSV-Format im Detail ── #}
+    <div class="prose">
+        <h2 id="csv-format">CSV-Format im Detail</h2>
+        <p>
+            Eine Segmentdatei ist eine einfache Textdatei, die ihr mit jedem Tabellenprogramm
+            (LibreOffice Calc, Excel, …) oder einem Texteditor erstellen könnt.
+            Sie endet auf <code>.csv</code> und hat folgende Spalten:
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_config-table.html.twig' with { rows: [
+        { option: 'videoname',       type: 'Text',   default: '(Pflicht)',   desc: 'Dateiname des Videos (z. B. <code>Halbzeit_1.mp4</code>) oder der vollständige Pfad. Nur der Dateiname reicht — die App findet das passende Video automatisch unter den geladenen Dateien.' },
+        { option: 'start_minute',    type: 'Zahl',   default: '(Pflicht)',   desc: 'Startzeitpunkt der Szene in Minuten. Nachkommastellen sind erlaubt — zum Beispiel steht <code>16.5</code> für 16 Minuten und 30 Sekunden.' },
+        { option: 'length_seconds',  type: 'Zahl',   default: '(Pflicht)',   desc: 'Dauer der Szene in Sekunden.' },
+        { option: 'title',           type: 'Text',   default: '(Pflicht)',   desc: 'Beschriftung der Szene in der Segmentliste, zum Beispiel „Tor 1:0" oder „Freistoß links".' },
+        { option: 'sub_title',       type: 'Text',   default: '(leer)',      desc: 'Optionaler Untertitel, der kleiner unter dem Titel angezeigt wird — z. B. eine genauere Beschreibung der Situation.' },
+        { option: 'audio',           type: '0 oder 1', default: '1',          desc: '<code>1</code> = Szene wird mit Ton abgespielt. <code>0</code> = Ton ist während dieser Szene stumm geschaltet — nützlich z. B. bei Trainergesprächen auf der Aufnahme.' },
+    ] } %}
+
+    <div class="prose">
+        <p>Die erste Zeile der Datei muss genau diese Spaltennamen enthalten. Beispiel:</p>
+        <pre><code>videoname,start_minute,length_seconds,title,sub_title,audio
+Halbzeit_1.mp4,3.5,8,Torschuss links,,1
+Halbzeit_1.mp4,12.0,15,Tor Musterheim,Flanke von rechts,1
+Halbzeit_2.mp4,18.2,20,Tor Mustergast,Konter,1</code></pre>
+        <p>
+            Eine fertige Beispieldatei mit sechs Szenen steht weiter oben im Abschnitt
+            <a href="#download">Download</a> bereit.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'tip',
+        title: 'Tipp: Komma im Titel',
+        text:  'Falls ein Titel oder Untertitel selbst ein Komma enthält, das Feld in Anführungszeichen einschließen — zum Beispiel: <code>"Freistoß, gefährlich"</code>. Das ist Standard bei CSV-Dateien.'
+    } %}
+
+    {# ── Tastaturkürzel ── #}
+    <div class="prose">
+        <h2 id="tastatur">Tastaturkürzel</h2>
+        <p>
+            Der Player lässt sich vollständig über die Tastatur bedienen — praktisch beim Beamer-Einsatz,
+            wenn die Maus schwer erreichbar ist.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_config-table.html.twig' with { rows: [
+        { option: 'Leertaste',    type: '',  default: '',  desc: 'Wiedergabe starten oder pausieren.' },
+        { option: '← (Pfeil links)',  type: '',  default: '',  desc: 'Zur vorherigen Szene springen.' },
+        { option: '→ (Pfeil rechts)', type: '',  default: '',  desc: 'Zur nächsten Szene springen.' },
+        { option: 'N',            type: '',  default: '',  desc: 'Segmentmodus ein- oder ausschalten.' },
+        { option: 'R',            type: '',  default: '',  desc: 'Einzelwiederholung ein- oder ausschalten.' },
+        { option: 'F',            type: '',  default: '',  desc: 'Filter-Panel öffnen oder schließen.' },
+        { option: 'F11',          type: '',  default: '',  desc: 'Vollbild ein- oder ausschalten.' },
+    ] } %}
+
+{% endblock %}

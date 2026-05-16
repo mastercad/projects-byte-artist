@@ -1,0 +1,440 @@
+{% extends 'projects/_base-project.html.twig' %}
+
+{% set project = {
+    tagline:  'Spielszenen schneiden, Titelkarten einblenden und das fertige Analysevideo auf YouTube hochladen',
+    icon_img: '/assets/img/kaderblick-video-combiner/kaderblick_schnitt_appicon.svg',
+    docs_url: null,
+    intro:    'Der Kaderblick Video Combiner verwandelt eure rohen Spielaufnahmen in ein professionelles Analysevideo — vollautomatisch. Ihr gebt in einer Schnittliste an, welche Szenen aus welchen Videos ihr wollt, und das Programm schneidet, fügt Titelkarten mit eurem Vereinslogo ein und lädt das fertige Video direkt auf YouTube hoch. Kein Videoschnitt-Knowhow nötig.'
+} %}
+
+{% set toc = [
+    { id: 'features',          label: 'Was kann die App?' },
+    { id: 'screenshots',       label: 'So sieht es aus' },
+    { id: 'download',          label: 'Download' },
+    { id: 'voraussetzungen',   label: 'Voraussetzungen' },
+    { id: 'installation',      label: 'Installation' },
+    { id: 'schnellstart',      label: 'Erste Schritte' },
+    { id: 'videos-hinzufuegen',label: '→ Videos hinzufügen' },
+    { id: 'segmente-eingeben', label: '→ Szenen eingeben' },
+    { id: 'titelkarten',       label: 'Titelkarten & Vereinslogo' },
+    { id: 'video-erstellen',   label: 'Video erstellen' },
+    { id: 'erweiterte-optionen', label: 'Erweiterte Optionen' },
+    { id: 'youtube',           label: 'YouTube-Upload' },
+    { id: 'mehrere-spieltage', label: 'Mehrere Spieltage kombinieren' },
+    { id: 'cache',             label: 'Cache & Wiederverwendung' },
+    { id: 'csv-format',        label: 'CSV-Format im Detail' },
+    { id: 'csv-validator',     label: 'CSV prüfen' },
+    { id: 'gpu',               label: 'GPU-Beschleunigung' },
+    { id: 'cli',               label: 'Kommandozeile (CLI)' },
+] %}
+
+{% set features = [
+    { icon: 'fas fa-scissors',      title: 'Szenen schneiden',              desc: 'Aus beliebig vielen langen Spielvideos genau die gewünschten Zeitabschnitte herausschneiden — per einfacher Tabelle ohne Videobearbeitungs-Kenntnisse.' },
+    { icon: 'fas fa-id-card',       title: 'Titelkarten mit Vereinslogo',   desc: 'Jede Szene erhält automatisch eine kurze Titeleinblendung mit eurem Vereinslogo, einem Titel und einem Untertitel — professionell und einheitlich.' },
+    { icon: 'fas fa-film',          title: 'Alles in einem Video',          desc: 'Alle geschnittenen Szenen werden zu einem einzigen Analysevideo zusammengefügt — inklusive optionaler Übergangsblende zwischen den Szenen.' },
+    { icon: 'fab fa-youtube',       title: 'YouTube-Upload mit Kapiteln',   desc: 'Das fertige Video wird direkt auf euren YouTube-Kanal hochgeladen. Kapitelmarken werden automatisch aus den Szenen-Titeln erzeugt, damit Zuschauer direkt zu jeder Szene springen können.' },
+    { icon: 'fas fa-bolt',          title: 'GPU-Beschleunigung',            desc: 'Ist eine NVIDIA-Grafikkarte vorhanden, nutzt das Programm sie automatisch — das macht die Verarbeitung bis zu fünfmal schneller als ohne GPU.' },
+    { icon: 'fas fa-calendar-days', title: 'Mehrere Spieltage kombinieren', desc: 'Szenen aus verschiedenen Spieltagen lassen sich mischen. Der Dateiname des fertigen Videos wird automatisch aus allen enthaltenen Spieltagsdaten zusammengesetzt.' },
+    { icon: 'fas fa-rotate',        title: 'Intelligenter Cache',           desc: 'Bereits geschnittene Szenen werden gespeichert und beim nächsten Durchlauf wiederverwendet — ihr spart Zeit, wenn ihr die Schnittliste nachträglich anpasst.' },
+    { icon: 'fas fa-check-double',  title: 'CSV-Validator',                 desc: 'Ein eingebautes Prüfwerkzeug überprüft eure Schnittliste auf Fehler — fehlende Videos, ungültige Zeiten oder falsch formatierte Einträge werden sofort erkannt.' },
+    { icon: 'fas fa-copy',          title: 'Stream-Copy-Modus',             desc: 'Wenn alle Quellvideos die gleiche Auflösung, Framerate und den gleichen Codec haben, werden die Szenen ohne erneutes Kodieren zusammengesetzt — maximale Qualität, minimale Rechenzeit.' },
+    { icon: 'fas fa-terminal',      title: 'Kommandozeile (CLI)',            desc: 'Wer möchte, kann das Programm auch ohne grafische Oberfläche über die Kommandozeile steuern — hilfreich für automatisierte Abläufe oder die Einbindung in bestehende Workflows.' },
+] %}
+
+{% block doc_content %}
+
+    {# ── Was kann die App? ── #}
+    <div class="prose">
+        <h2 id="features">Was kann die App?</h2>
+        <p>
+            Der Kaderblick Video Combiner übernimmt die gesamte technische Arbeit: vom Schneiden einzelner Szenen über das Einfügen professioneller Titelkarten bis hin zum Upload auf YouTube.
+            Ihr konzentriert euch auf das, was zählt — welche Szenen ihr zeigen möchtet.
+        </p>
+    </div>
+    {% include 'projects/_partials/_feature-grid.html.twig' with { features: features } %}
+
+    {# ── So sieht es aus ── #}
+    <div class="prose">
+        <h2 id="screenshots">So sieht die App aus</h2>
+        <p>
+            Oben die Videoliste mit euren Quellaufnahmen, darunter die Schnittliste mit allen eingetragenen Szenen — und unten der Bereich zum Starten der Verarbeitung.
+        </p>
+    </div>
+    {% include 'projects/_partials/_screenshot.html.twig' with { screenshot: {
+        src:     '/assets/img/kaderblick-video-combiner/app_screen.png',
+        alt:     'Kaderblick Video Combiner — Hauptansicht',
+        caption: 'Die Hauptansicht: oben die Videoliste, darunter die Schnittliste. (Screenshot folgt)'
+    } } %}
+
+    {# ── Download ── #}
+    <div class="prose">
+        <h2 id="download">Download</h2>
+    </div>
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'info',
+        title: 'Download demnächst verfügbar',
+        text:  'Der Kaderblick Video Combiner befindet sich derzeit in aktiver Entwicklung. Releases folgen in Kürze. Den aktuellen Entwicklungsstand findet ihr schon jetzt auf <a href="https://github.com/mastercad/Kaderblick-Video-Combiner" target="_blank" rel="noopener">GitHub</a>.'
+    } %}
+
+    {# ── Voraussetzungen ── #}
+    <div class="prose">
+        <h2 id="voraussetzungen">Voraussetzungen</h2>
+        <p>Bevor ihr das Programm starten könnt, müssen zwei Dinge auf eurem Rechner installiert sein:</p>
+
+        <h3>Python 3.10 oder neuer</h3>
+        <p>
+            Python ist die Programmiersprache, in der der Video Combiner geschrieben ist.
+            Ihr müsst Python installieren, aber ihr braucht keinerlei Programmierkenntnisse.
+        </p>
+        <ul>
+            <li><strong>Windows:</strong> <a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">python.org</a> → „Download Python 3.x" → Installer ausführen.<br>
+                <strong>Wichtig:</strong> Beim Installationsassistenten das Häkchen bei <em>„Add Python to PATH"</em> setzen, bevor ihr auf „Install Now" klickt.</li>
+            <li><strong>macOS:</strong> <a href="https://www.python.org/downloads/macos/" target="_blank" rel="noopener">python.org</a> → Installer ausführen.</li>
+            <li><strong>Linux (Ubuntu / Debian):</strong> <code>sudo apt install python3 python3-pip python3-venv</code></li>
+        </ul>
+
+        <h3>FFmpeg</h3>
+        <p>FFmpeg ist das Werkzeug, das im Hintergrund den eigentlichen Videoschnitt erledigt. Es muss separat installiert werden.</p>
+        <ul>
+            <li><strong>Windows:</strong> <a href="https://ffmpeg.org/download.html" target="_blank" rel="noopener">ffmpeg.org</a> → „Windows builds" herunterladen → Entpacken → Den <code>bin</code>-Ordner in den System-Pfad (PATH) eintragen. (Anleitung findet ihr z. B. <a href="https://www.wikihow.com/Install-FFmpeg-on-Windows" target="_blank" rel="noopener">hier</a>.)</li>
+            <li><strong>macOS:</strong> <code>brew install ffmpeg</code> (benötigt <a href="https://brew.sh" target="_blank" rel="noopener">Homebrew</a>)</li>
+            <li><strong>Linux (Ubuntu / Debian):</strong> <code>sudo apt install ffmpeg</code></li>
+        </ul>
+        <p>Ob FFmpeg korrekt installiert ist, prüft ihr mit: <code>ffmpeg -version</code> (in der Eingabeaufforderung / dem Terminal).</p>
+    </div>
+
+    {# ── Installation ── #}
+    <div class="prose">
+        <h2 id="installation">Installation</h2>
+        <p>
+            Die folgenden Schritte müsst ihr nur einmalig durchführen. Danach startet das Programm mit einem einzigen Befehl.
+        </p>
+
+        <h3>1. Quellcode herunterladen</h3>
+        <p>
+            Ladet das Programm von <a href="https://github.com/mastercad/Kaderblick-Video-Combiner" target="_blank" rel="noopener">GitHub</a> herunter:
+            Auf der GitHub-Seite auf den grünen Button <strong>„Code"</strong> klicken → <strong>„Download ZIP"</strong> → ZIP entpacken.
+        </p>
+        <p>Wer Git kennt, kann auch per Kommandozeile klonen:</p>
+        <pre><code>git clone https://github.com/mastercad/Kaderblick-Video-Combiner.git</code></pre>
+
+        <h3>2. In das Programmverzeichnis wechseln</h3>
+        <p>Öffnet eine Eingabeaufforderung (Windows: <kbd>Win</kbd> + <kbd>R</kbd> → <code>cmd</code>) bzw. ein Terminal (macOS / Linux) und wechselt in den entpackten Ordner:</p>
+        <pre><code>cd Pfad/zum/Kaderblick-Video-Combiner</code></pre>
+
+        <h3>3. Abhängigkeiten installieren</h3>
+        <p>Alle benötigten Python-Pakete werden mit einem Befehl installiert:</p>
+        <pre><code>pip install -r requirements.txt</code></pre>
+        <p>(Auf manchen Systemen muss es <code>pip3</code> statt <code>pip</code> heißen.)</p>
+
+        <h3>4. Programm starten</h3>
+        <pre><code>python main.py</code></pre>
+        <p>Die grafische Oberfläche öffnet sich. Ab jetzt reicht immer dieser eine Befehl im Programmordner, um das Programm zu starten.</p>
+    </div>
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'tip',
+        title: 'Tipp: Startverknüpfung anlegen',
+        text:  'Legt euch eine kleine Textdatei (<code>start.bat</code> unter Windows, <code>start.sh</code> unter Linux/macOS) mit dem Inhalt <code>python main.py</code> im Programmordner an. Einen Doppelklick darauf startet das Programm, ohne dass ihr jedes Mal die Eingabeaufforderung öffnen müsst.'
+    } %}
+
+    {# ── Erste Schritte ── #}
+    <div class="prose">
+        <h2 id="schnellstart">Erste Schritte — so startet ihr</h2>
+        <p>
+            Beim ersten Start seht ihr die Hauptoberfläche: oben eine Videoliste, darunter die Schnittliste. Beides ist zunächst leer.
+            Das Prinzip ist einfach: ihr sagt dem Programm, <em>welche Videos</em> ihr habt, und <em>welche Zeitbereiche</em> ihr daraus haben möchtet.
+        </p>
+    </div>
+
+    {# ── Videos hinzufügen ── #}
+    <div class="prose">
+        <h3 id="videos-hinzufuegen">Videos hinzufügen</h3>
+        <p>
+            Videos werden über den <strong>„+"-Button</strong> neben der Videoliste hinzugefügt.
+            Ein Datei-Dialog öffnet sich, in dem ihr eine oder mehrere Videodateien von beliebigen Speicherorten auswählen könnt —
+            lokale Festplatte, externe Festplatte, USB-Stick oder Netzlaufwerk.
+        </p>
+        <p>
+            Mit dem <strong>„−"-Button</strong> entfernt ihr ein Video wieder aus der Liste.
+        </p>
+        <p>
+            Legt ihr Videos in den Unterordner <code>input/</code> im Programmverzeichnis, werden sie beim nächsten Start automatisch in der Liste angezeigt — ohne dass ihr sie manuell hinzufügen müsst.
+            Das ist praktisch, wenn ihr immer die gleichen Aufnahmen verwendet. Pflicht ist das aber nicht.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'info',
+        title: 'Unterstützte Videoformate',
+        text:  'Das Programm verarbeitet alle Formate, die FFmpeg kennt — insbesondere <strong>MP4, MOV und MKV</strong>. HEVC/H.265, 4K-Videos und 10-Bit-Material werden nativ unterstützt. DJI-Aufnahmen (Osmo Action, Osmo Pocket) werden direkt erkannt.'
+    } %}
+
+    {# ── Szenen eingeben ── #}
+    <div class="prose">
+        <h3 id="segmente-eingeben">Szenen eingeben</h3>
+        <p>
+            Jede Zeile in der Schnittliste beschreibt eine Szene. Für jede Szene gebt ihr an:
+        </p>
+        <ul>
+            <li><strong>Video:</strong> Aus welcher Aufnahme soll die Szene kommen?</li>
+            <li><strong>Startzeit:</strong> Ab welcher Minute/Sekunde soll die Szene beginnen?</li>
+            <li><strong>Länge:</strong> Wie viele Sekunden soll die Szene dauern?</li>
+            <li><strong>Titel:</strong> Zum Beispiel „Tor des Tages" oder „Konter in Minute 23"</li>
+            <li><strong>Untertitel:</strong> Zum Beispiel „1. Halbzeit, Minute 34" (optional)</li>
+            <li><strong>Ton:</strong> Soll die Szene mit oder ohne Originalton erscheinen?</li>
+        </ul>
+        <p>
+            Neue Zeilen fügt ihr mit dem <strong>„+ Szene hinzufügen"</strong>-Button hinzu.
+            Bestehende Zeilen lassen sich direkt in der Tabelle bearbeiten oder löschen.
+        </p>
+
+        <h4>Zeitbereich-Hilfe</h4>
+        <p>
+            Wenn ihr Start- und Endzeit einer Szene wählt, öffnet sich ein kleines Hilfsfenster:
+            Ihr gebt Start- und Endzeit ein, und die Länge in Sekunden wird automatisch berechnet.
+            Das erspart das manuelle Rechnen.
+        </p>
+
+        <h4>Schnittliste speichern und laden</h4>
+        <p>
+            Eure Schnittliste wird als CSV-Datei gespeichert. Über <strong>„Datei öffnen"</strong> ladet ihr eine gespeicherte Liste, über <strong>„Speichern"</strong> sichert ihr eure Arbeit.
+            Das Programm merkt sich die zuletzt verwendete Datei und öffnet sie beim nächsten Start automatisch wieder.
+        </p>
+    </div>
+
+    {# ── Titelkarten ── #}
+    <div class="prose">
+        <h2 id="titelkarten">Titelkarten &amp; Vereinslogo</h2>
+        <p>
+            Vor jede Szene fügt das Programm automatisch eine kurze Titeleinblendung ein:
+            Das Vereinslogo erscheint groß in der Bildmitte, darunter der Titel und der Untertitel der Szene.
+        </p>
+        <p>
+            Damit euer Logo erscheint, legt ihr die Datei <code>teamlogo.png</code> in den Ordner <code>input/</code>.
+            Das Bild sollte möglichst quadratisch sein und eine gute Auflösung haben (z. B. 500 × 500 Pixel).
+        </p>
+        <p>
+            Fehlt das Logo, erscheint nur Text auf der Titelkarte — das Programm läuft in jedem Fall weiter.
+        </p>
+        <p>
+            Wer ein anderes Logo verwenden möchte, kann den Pfad über die Schaltfläche <strong>„Logo auswählen"</strong> in der GUI festlegen.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'info',
+        title: 'DJI-Videos: Titel automatisch aus Datum',
+        text:  'Habt ihr DJI-Aufnahmen (Dateiname beginnt mit <code>DJI_YYYYMMDD...</code>) und keinen Untertitel eingetragen, wird der Untertitel der Titelkarte automatisch aus dem Aufnahmedatum erzeugt — zum Beispiel „28.02.2026".'
+    } %}
+
+    {# ── Video erstellen ── #}
+    <div class="prose">
+        <h2 id="video-erstellen">Video erstellen</h2>
+        <p>
+            Sobald eure Schnittliste fertig ist, klickt ihr auf <strong>„Starten"</strong>.
+            Das Programm arbeitet dann in mehreren Schritten:
+        </p>
+        <ol>
+            <li>Jede Szene wird aus dem Quellvideo herausgeschnitten.</li>
+            <li>Für jede Szene wird eine Titelkarte erstellt.</li>
+            <li>Alle Titelkarten und Szenen werden in der Reihenfolge eurer Schnittliste zusammengefügt.</li>
+            <li>Das fertige Video landet im Ordner <code>output/</code> — zum Beispiel als <code>Spielanalyse_28_02_2026.mp4</code>.</li>
+            <li>Zusätzlich wird eine Datei <code>yt_chapters.txt</code> erzeugt, die die YouTube-Kapitelmarken enthält.</li>
+        </ol>
+        <p>
+            Während der Verarbeitung zeigt das Programm den Fortschritt und eine Zeitschätzung an.
+            Alle laufenden Prozesse können jederzeit sauber abgebrochen werden — bereits fertige Zwischendateien bleiben erhalten.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_stats.html.twig' with { stats: [
+        { label: 'Mit GPU (NVIDIA)',     value: '~1,5× Echtzeit',  sub: '10 Min. Video → ~7 Min.' },
+        { label: 'Ohne GPU (CPU)',        value: '~0,3× Echtzeit',  sub: '10 Min. Video → ~30 Min.' },
+        { label: 'Unterstützte Formate', value: 'MP4 · MOV · MKV', sub: 'alle FFmpeg-Formate' },
+    ] } %}
+
+    {# ── Erweiterte Optionen ── #}
+    <div class="prose">
+        <h2 id="erweiterte-optionen">Erweiterte Optionen</h2>
+        <p>
+            Über den Bereich <strong>„Erweiterte Optionen"</strong> in der GUI lassen sich einzelne Verhaltensweisen des Programms anpassen:
+        </p>
+    </div>
+    {% include 'projects/_partials/_config-table.html.twig' with { rows: [
+        { option: 'Kein Ton',                  type: 'Häkchen', default: 'aus', desc: 'Alle Szenen werden ohne Originalton in das Ausgabevideo übernommen.' },
+        { option: 'Verlustlose Ausgabe',        type: 'Häkchen', default: 'aus', desc: 'Das Video wird nicht neu kodiert, sondern im Originalformat behalten — größere Datei, kein Qualitätsverlust. Nützlich, wenn ihr das Video noch weiterbearbeiten wollt.' },
+        { option: 'Kein Bitrate-Limit',         type: 'Häkchen', default: 'aus', desc: 'Standardmäßig hält das Programm die von YouTube empfohlenen Bitraten ein. Mit dieser Option wird kein Limit gesetzt — für lokale Archivierung ohne Upload-Gedanken.' },
+        { option: 'Szenen zusammenfügen',       type: 'Häkchen', default: 'an',  desc: 'Alle Szenen werden zu einem einzigen Video zusammengefügt. Wenn ihr nur die Einzelschnitte ohne Zusammenfügen wollt, könnt ihr dies hier deaktivieren.' },
+        { option: 'Übergangsblende',            type: 'Häkchen', default: 'aus', desc: 'Zwischen je zwei Szenen (nach den Titelkarten) wird eine kurze Schwarzblende eingefügt.' },
+        { option: 'PC nach Verarbeitung herunterfahren', type: 'Häkchen', default: 'aus', desc: 'Praktisch für lange Verarbeitungen über Nacht: der Rechner fährt automatisch herunter, wenn das Programm fertig ist.' },
+        { option: 'YouTube-Upload aktivieren',  type: 'Häkchen', default: 'an',  desc: 'Das fertige Video wird automatisch auf YouTube hochgeladen. Muss einmalig eingerichtet werden (siehe YouTube-Upload).' },
+    ] } %}
+
+    {# ── YouTube-Upload ── #}
+    <div class="prose">
+        <h2 id="youtube">YouTube-Upload</h2>
+        <p>
+            Das Programm kann das fertige Video direkt auf euren YouTube-Kanal hochladen.
+            Dabei werden automatisch Titel, Beschreibung mit Kapitelmarken, Playlist und Datenschutzeinstellung gesetzt.
+        </p>
+
+        <h3>Einmalige Einrichtung</h3>
+        <p>
+            Für den YouTube-Upload benötigt ihr ein Google-API-Konto. Diese Einrichtung ist einmalig erforderlich und in der Datei
+            <code>docs/YOUTUBE_SETUP.md</code> im Programmordner ausführlich beschrieben.
+            Danach speichert das Programm eure Zugangsdaten sicher lokal, und alle weiteren Uploads laufen vollautomatisch.
+        </p>
+
+        <h3>Upload-Einstellungen</h3>
+    </div>
+    {% include 'projects/_partials/_config-table.html.twig' with { rows: [
+        { option: 'Videotitel',      type: 'Textfeld', default: 'automatisch', desc: 'Wird aus dem Ausgabedateinamen abgeleitet (z. B. „Spielanalyse 28.02.2026"). Kann manuell überschrieben werden.' },
+        { option: 'Playlist',        type: 'Textfeld', default: 'leer',        desc: 'Name oder ID einer bestehenden Playlist. Wenn die Playlist noch nicht existiert, wird sie automatisch erstellt.' },
+        { option: 'Datenschutz',     type: 'Auswahl',  default: 'Nicht gelistet', desc: '„Öffentlich", „Nicht gelistet" oder „Privat". Nicht gelistet ist empfohlen, solange das Video noch nicht fertig kommentiert ist.' },
+        { option: 'Tags',            type: 'Textfeld', default: 'leer',        desc: 'Kommagetrennte Schlagwörter für das YouTube-Video.' },
+        { option: 'Kapitelmarken',   type: 'automatisch', default: '—',        desc: 'YouTube-Kapitel werden automatisch aus den Szenen-Titeln erzeugt und in die Videobeschreibung eingefügt.' },
+    ] } %}
+
+    <div class="prose">
+        <h3>YouTube-Kapitelmarken</h3>
+        <p>
+            Jede Szene erscheint als eigenes Kapitel im YouTube-Video.
+            Zuschauer können damit direkt zu einer bestimmten Spielsituation springen — kein Suchen im Fortschrittsbalken.
+            Die fertige Kapitelliste wird auch als Textdatei <code>output/yt_chapters.txt</code> gespeichert, sodass ihr sie bei Bedarf manuell anpassen und einfügen könnt.
+        </p>
+    </div>
+
+    {# ── Mehrere Spieltage ── #}
+    <div class="prose">
+        <h2 id="mehrere-spieltage">Mehrere Spieltage kombinieren</h2>
+        <p>
+            Es ist kein Problem, Szenen aus verschiedenen Spieltagen in einer Schnittliste zu kombinieren.
+            Das Programm erkennt automatisch alle enthaltenen Spieltagsdaten aus den Dateinamen der Quellvideos.
+        </p>
+        <p>
+            Der Name des Ausgabevideos wird dann automatisch aus allen vorkommenden Daten zusammengesetzt — zum Beispiel:
+            <code>Spielanalyse_28_02_2026_07_03_2026.mp4</code> für eine Zusammenschnitt aus zwei Spieltagen.
+        </p>
+        <p>
+            Wollt ihr einen anderen Videotitel verwenden, könnt ihr ihn unter den erweiterten Optionen im Abschnitt „YouTube-Upload" → „Videotitel" manuell festlegen.
+        </p>
+    </div>
+
+    {# ── Cache ── #}
+    <div class="prose">
+        <h2 id="cache">Cache &amp; Wiederverwendung</h2>
+        <p>
+            Jede fertig geschnittene Szene und jede erstellte Titelkarte werden im Ordner <code>output/segments/</code> bzw. <code>output/text_clips/</code> zwischengespeichert.
+        </p>
+        <p>
+            Wenn ihr die Schnittliste ändert — z. B. eine Szene umbenennt oder eine neue hinzufügt — werden nur die veränderten oder neuen Szenen erneut verarbeitet.
+            Alle anderen werden direkt aus dem Cache übernommen. Das spart erheblich Zeit.
+        </p>
+        <p>
+            Möchtet ihr den Cache leeren (z. B. weil ihr den Videoschnitt komplett neu beginnen wollt), könnt ihr einfach den Inhalt des <code>output/segments/</code>-Ordners löschen.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_callout.html.twig' with {
+        type:  'tip',
+        title: 'Cache bei Fehlern',
+        text:  'Wenn eine Szene im fertigen Video nicht korrekt aussieht, löscht ihre die entsprechende Datei aus <code>output/segments/</code> und startet die Verarbeitung erneut. Das Programm erstellt nur die fehlende Datei neu.'
+    } %}
+
+    {# ── CSV-Format ── #}
+    <div class="prose">
+        <h2 id="csv-format">CSV-Format im Detail</h2>
+        <p>
+            Die Schnittliste ist eine einfache CSV-Datei (Komma-getrennte Tabelle), die ihr auch mit Excel oder LibreOffice bearbeiten könnt.
+            Die Datei hat folgende Spalten:
+        </p>
+    </div>
+    {% include 'projects/_partials/_config-table.html.twig' with { rows: [
+        { option: 'videoname',     type: 'Dateipfad', default: '—',   desc: 'Pfad zur Videodatei. Für Videos im input/-Ordner reicht der relative Pfad: input/meinvideo.mp4' },
+        { option: 'start_minute',  type: 'Zahl',      default: '0',   desc: 'Startzeit der Szene in Minuten (ganzzahlig). 0 = Anfang des Videos.' },
+        { option: 'length_seconds',type: 'Zahl',      default: '—',   desc: 'Länge der Szene in Sekunden (ganzzahlig). Zum Beispiel 90 für eineinhalb Minuten.' },
+        { option: 'title',         type: 'Text',      default: 'leer',desc: 'Titel der Szene — erscheint auf der Titelkarte und als YouTube-Kapitelname.' },
+        { option: 'sub_title',     type: 'Text',      default: 'leer',desc: 'Untertitel der Szene — erscheint kleiner unterhalb des Titels auf der Titelkarte. Optional.' },
+        { option: 'audio',         type: '0 oder 1',  default: '1',   desc: '1 = Originalton der Szene wird übernommen, 0 = Szene erscheint ohne Ton.' },
+    ] } %}
+
+    <div class="prose">
+        <p>
+            <strong>Beispiel-CSV:</strong> Ladet euch eine fertige Beispieldatei mit sechs Szenen herunter — damit seht ihr sofort, wie das Format aussieht.
+        </p>
+    </div>
+
+    {% include 'projects/_partials/_downloads.html.twig' with { downloads: [
+        { os: 'file', label: 'Beispiel-Schnittliste (segments.csv)', url: '/downloads/kaderblick-video-combiner/beispiel-segmente.csv', type: 'source' },
+    ] } %}
+
+    {# ── CSV-Validator ── #}
+    <div class="prose">
+        <h2 id="csv-validator">CSV prüfen</h2>
+        <p>
+            Das Programm enthält einen eingebauten CSV-Prüfer, den ihr über den Button <strong>„CSV prüfen"</strong> starten könnt.
+            Er überprüft eure Schnittliste auf häufige Fehler:
+        </p>
+        <ul>
+            <li>Fehlt eine Videodatei auf dem Laufwerk?</li>
+            <li>Ist die Start- oder Längenangabe leer oder nicht-numerisch?</li>
+            <li>Enthält eine Zeile zu viele oder zu wenige Spalten?</li>
+            <li>Ist die Audioflagge (0 oder 1) korrekt gesetzt?</li>
+        </ul>
+        <p>
+            Gefundene Probleme werden mit Zeilennummer und konkretem Hinweis ausgegeben —
+            so könnt ihr Tippfehler in der Schnittliste schnell finden, bevor ihr eine lange Verarbeitung startet.
+        </p>
+        <p>
+            Wer möchte, kann den Validator auch separat aufrufen — der Programmordner enthält die Datei <code>validate_csv.py</code>, die über die Kommandozeile gestartet werden kann.
+        </p>
+    </div>
+
+    {# ── GPU ── #}
+    <div class="prose">
+        <h2 id="gpu">GPU-Beschleunigung</h2>
+        <p>
+            Das Programm erkennt beim Start automatisch, ob eine NVIDIA-Grafikkarte (mit NVENC-Unterstützung) vorhanden ist.
+            Ist das der Fall, wird die Grafikkarte für das Kodieren des Videos verwendet — das ist deutlich schneller als die reine CPU-Verarbeitung.
+        </p>
+        <p>
+            Ist keine unterstützte Grafikkarte vorhanden, weicht das Programm automatisch auf die CPU aus.
+            <strong>Ihr müsst nichts einstellen</strong> — das passiert im Hintergrund.
+        </p>
+        <p>
+            Als Richtwert: Ein 10-Minuten-Video (reines Kodieren, ohne Extraktion und Upload) dauert mit GPU etwa 7 Minuten, ohne GPU etwa 30 Minuten.
+        </p>
+        <p>
+            Aktuell unterstützte GPU-Beschleunigung: <strong>NVIDIA NVENC (h264)</strong>.
+        </p>
+    </div>
+
+    {# ── CLI ── #}
+    <div class="prose">
+        <h2 id="cli">Kommandozeile (CLI)</h2>
+        <p>
+            Das Programm kann alternativ zur grafischen Oberfläche auch vollständig über die Kommandozeile gesteuert werden — ohne Fenster und Mausbedienung.
+            Das ist praktisch für die automatisierte Verarbeitung mehrerer Spiele hintereinander oder die Einbindung in bestehende Workflows.
+        </p>
+        <p>Starten mit der <code>--cli</code>-Option:</p>
+        <pre><code>python main.py --cli</code></pre>
+        <p>Die wichtigsten Parameter:</p>
+    </div>
+    {% include 'projects/_partials/_config-table.html.twig' with { rows: [
+        { option: '--csv, -c',       type: 'Dateipfad', default: 'segments.csv', desc: 'Schnittlisten-CSV, die verarbeitet werden soll.' },
+        { option: '--input, -i',     type: 'Ordner',    default: 'input',        desc: 'Ordner mit den Quellvideos.' },
+        { option: '--output, -o',    type: 'Dateipfad', default: 'automatisch',  desc: 'Ausgabedatei. Standard: automatisch aus Spieltag-Datum.' },
+        { option: '--workers, -w',   type: 'Zahl',      default: '4',            desc: 'Anzahl paralleler CPU-Prozesse (für schnellere Extraktion auf Mehrkernsystemen).' },
+        { option: '--no-upload',     type: 'Schalter',  default: 'aus',          desc: 'YouTube-Upload überspringen, auch wenn er in der Konfiguration aktiviert ist.' },
+        { option: '--no-youtube-opt',type: 'Schalter',  default: 'aus',          desc: 'YouTube-Optimierungen deaktivieren (kein Bitrate-Limit, kein faststart).' },
+        { option: '--clean-cache',   type: 'Schalter',  default: 'aus',          desc: 'Vorhandene Zwischendateien löschen und alles neu verarbeiten.' },
+        { option: '--shutdown',      type: 'Schalter',  default: 'aus',          desc: 'Rechner nach abgeschlossener Verarbeitung herunterfahren.' },
+    ] } %}
+
+    <div class="prose">
+        <p>Alle verfügbaren Parameter anzeigen:</p>
+        <pre><code>python main.py --cli --help</code></pre>
+    </div>
+
+{% endblock %}

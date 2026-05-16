@@ -44,6 +44,7 @@ final class ProjectRegistry
             'github_url'  => null,
             'dev_only'    => true,
         ],
+
         // ── Echte Projekte ────────────────────────────────────────────
         [
             'slug'        => 'kaderblick-video-manager',
@@ -54,6 +55,25 @@ final class ProjectRegistry
             'tags'        => ['Python 3.11', 'PySide 6', 'Kaderblick', 'Automatisierung', 'Workflow'],
             'github_url'  => 'https://github.com/mastercad/kaderblick-video-manager',
         ],
+        [
+            'slug'        => 'kaderblick-analyse-player',
+            'title'       => 'Kaderblick Analyse Player',
+            'description' => 'Desktop-Player für Videoanalyse im Fußball: CSV-Segmentdatei laden, Szenen anspringen, Live-Filter anwenden und Session sichern.',
+            'icon'        => 'fas fa-play-circle',
+            'status'      => 'stable',
+            'tags'        => ['Electron', 'React', 'TypeScript', 'Kaderblick', 'Videoanalyse'],
+            'github_url'  => 'https://github.com/mastercad/Kaderblick-Analyse-Player',
+        ],
+        [
+            'slug'        => 'kaderblick-video-combiner',
+            'title'       => 'Kaderblick Video Combiner',
+            'description' => 'Schneide Szenen aus langen Spielaufzeichnungen, füge Titelkarten ein und lade das fertige Analysevideo direkt auf YouTube hoch.',
+            'icon'        => 'fas fa-film',
+            'status'      => 'wip',
+            'tags'        => ['Python 3.10', 'PyQt5', 'FFmpeg', 'YouTube API', 'Kaderblick', 'Videobearbeitung'],
+            'github_url'  => 'https://github.com/mastercad/Kaderblick-Video-Combiner',
+        ],
+
         // ── Unveröffentlichte Projekte (status: 'draft') ──────────────
         // Projekte mit status 'draft' erscheinen weder im Listing noch
         // sind sie per direkter URL in der prod-Umgebung erreichbar.
