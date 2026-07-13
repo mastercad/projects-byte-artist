@@ -51,7 +51,7 @@ jobs:
       # ── Tags / Labels ────────────────────────────────────────────────────
       - name: PHP image metadata
         id: meta-php
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ env.PHP_IMAGE }}
           tags: |
@@ -62,7 +62,7 @@ jobs:
 
       - name: nginx image metadata
         id: meta-nginx
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ env.NGINX_IMAGE }}
           tags: |
