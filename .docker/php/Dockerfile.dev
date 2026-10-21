@@ -1,5 +1,5 @@
 # ─── Dev-Image: kein App-Code eingebaut, alles via Bind-Mount ────────────────
-FROM php:8.3-fpm-alpine
+FROM php:8.5.12-fpm-alpine
 
 RUN apk add --no-cache \
         icu-libs \
@@ -7,7 +7,7 @@ RUN apk add --no-cache \
     && apk add --no-cache --virtual .build-deps \
         icu-dev \
         libzip-dev \
-    && docker-php-ext-install -j$(nproc) intl zip opcache \
+    && docker-php-ext-install -j$(nproc) intl zip \
     && apk del .build-deps \
     && rm -rf /var/cache/apk/*
 

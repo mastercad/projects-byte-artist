@@ -12,7 +12,7 @@ RUN composer install \
         --no-scripts
 
 # ─── Stage 2: PHP-FPM Runtime ─────────────────────────────────────────────────
-FROM php:8.3-fpm-alpine AS app
+FROM php:8.5.12-fpm-alpine AS app
 
 # Nur die minimal nötigen PHP-Extensions
 RUN apk add --no-cache \
@@ -21,7 +21,7 @@ RUN apk add --no-cache \
     && apk add --no-cache --virtual .build-deps \
         icu-dev \
         libzip-dev \
-    && docker-php-ext-install -j$(nproc) intl zip opcache \
+    && docker-php-ext-install -j$(nproc) intl zip \
     && apk del .build-deps \
     && rm -rf /var/cache/apk/*
 
